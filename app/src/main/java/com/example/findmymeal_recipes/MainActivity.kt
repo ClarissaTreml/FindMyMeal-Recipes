@@ -3,41 +3,35 @@ package com.example.findmymeal_recipes
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.findmymeal_recipes.navigation.AppNavigation
+import com.example.findmymeal_recipes.screens.home.HomeScreen
 import com.example.findmymeal_recipes.ui.theme.FindMyMealRecipesTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FindMyMealRecipesTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Find My Meal")
-                }
+            MyApp {
+                AppNavigation()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun MyApp (content: @Composable () -> Unit){
+    FindMyMealRecipesTheme{
+        content()
+    }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    FindMyMealRecipesTheme {
-        Greeting("Android")
+    MyApp {
+        AppNavigation()
     }
 }
