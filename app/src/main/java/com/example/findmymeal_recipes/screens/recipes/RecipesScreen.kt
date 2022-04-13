@@ -11,8 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.findmymeal_recipes.models.Recipe
+import com.example.findmymeal_recipes.models.getRecipes
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
+import com.example.findmymeal_recipes.widgets.RecipeCards
 
 @Composable
 fun RecipesScreen(navController: NavController) {
@@ -67,11 +70,18 @@ fun RecipesScreen(navController: NavController) {
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
 
-                Column() {
-                    Text(text = "Recipes Screen")
+                Column {
+                    Content()
                 }
             }
+
         }
 
     }
+}
+
+@Composable
+fun Content() {
+    RecipeCards(recipe = getRecipes()[0])
+    RecipeCards(recipe = getRecipes()[1])
 }

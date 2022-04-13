@@ -40,8 +40,8 @@ fun getRecipes(): List<Recipe> {
             id = "2",
             name = "Pancakes",
             images = listOf(
-                "https://www.inspiredtaste.net/24593/essential-pancake-recipe/",
-            ),
+                "https://www.einfachbacken.de/sites/einfachbacken.de/files/styles/1500_1130/public/2020-08/american_pancakes.jpg?h=4521fff0&itok=o7lZn-O0",
+                ),
             difficulty = "Super Easy",
             description = "A pancake is a flat cake, often thin and round, prepared from a starch-based batter that may contain eggs, milk and butter and cooked on a hot surface such as a griddle or frying pan, " +
                     "often frying with oil or butter. It is a type of batter bread.\n",
