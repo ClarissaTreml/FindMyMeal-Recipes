@@ -13,11 +13,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
+import com.example.findmymeal_recipes.ui.theme.Header
 
 @Composable
 fun ShoppingListScreen(navController: NavController) {
     Scaffold(topBar = {
-        TopAppBar() {
+        TopAppBar(backgroundColor = Header) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

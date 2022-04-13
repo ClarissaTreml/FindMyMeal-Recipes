@@ -8,16 +8,18 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
+import com.example.findmymeal_recipes.ui.theme.Header
 
 @Composable
 fun IngredientsScreen(navController: NavController) {
     Scaffold(topBar = {
-        TopAppBar() {
+        TopAppBar(backgroundColor = Header) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -69,7 +71,9 @@ fun IngredientsScreen(navController: NavController) {
 
                 Column() {
                     Text(text = "Ingredients Screen")
-                    Button(onClick = { navController.navigate(route = AppScreens.ChosenScreen.name) }) {
+                    Button(
+                        onClick = { navController.navigate(route = AppScreens.ChosenScreen.name) },
+                        colors = ButtonDefaults.buttonColors(Header)) {
                         Text(text = "Find Me")
                     }
                 }

@@ -6,5 +6,6 @@ enum class AppScreens {
     FavoriteScreen,
     IngredientsScreen,
     RecipesScreen,
-    ShoppingListScreen
+    ShoppingListScreen,
+    DetailScreen,
 }
