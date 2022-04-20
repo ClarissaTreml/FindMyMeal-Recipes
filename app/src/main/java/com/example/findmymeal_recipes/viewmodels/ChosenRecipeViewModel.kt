@@ -1,4 +1,8 @@
 package com.example.findmymeal_recipes.viewmodels
 
-class ChosenRecipeViewModel {
+import androidx.lifecycle.ViewModel
+
+class ChosenRecipeViewModel : ViewModel() {
+
+
 }

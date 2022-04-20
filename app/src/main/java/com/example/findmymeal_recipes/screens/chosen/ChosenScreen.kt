@@ -17,7 +17,7 @@ import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 
 @Composable
-fun ChosenScreen(navController: NavController){
+fun ChosenScreen(navController: NavController) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
             Row(
@@ -29,19 +29,23 @@ fun ChosenScreen(navController: NavController){
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = "Arrow back",
-                    modifier = Modifier.padding(0.dp, 12.dp).clickable { navController.popBackStack() })
+                    modifier = Modifier
+                        .padding(0.dp, 12.dp)
+                        .clickable { navController.popBackStack() })
 
                 Spacer(modifier = Modifier.width(20.dp))
 
                 IconButton(modifier = Modifier.width(60.dp),
                     onClick = { navController.navigate(route = AppScreens.RecipesScreen.name) }) {
-                    Text(text = "Recipes", modifier = Modifier.fillMaxWidth())}
+                    Text(text = "Recipes", modifier = Modifier.fillMaxWidth())
+                }
 
                 Spacer(modifier = Modifier.width(20.dp))
 
                 IconButton(modifier = Modifier.width(100.dp),
                     onClick = { navController.navigate(route = AppScreens.ShoppingListScreen.name) }) {
-                    Text(text = "Shopping-List", modifier = Modifier.fillMaxWidth())}
+                    Text(text = "Shopping-List", modifier = Modifier.fillMaxWidth())
+                }
 
                 Spacer(modifier = Modifier.width(20.dp))
 
@@ -75,12 +79,16 @@ fun ChosenScreen(navController: NavController){
                     textAlign = TextAlign.Center,
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
-
-                Column() {
-                    Text(text = "Chosen Screen")
-                }
+                Content()
             }
         }
     }
 
+}
+
+@Composable
+fun Content() {
+    Column() {
+        Text(text = "Chosen Screen")
+    }
 }

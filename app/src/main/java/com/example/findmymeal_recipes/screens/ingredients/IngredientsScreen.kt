@@ -69,16 +69,30 @@ fun IngredientsScreen(navController: NavController) {
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
 
-                Column() {
-                    Text(text = "Ingredients Screen")
-                    Button(
-                        onClick = { navController.navigate(route = AppScreens.ChosenScreen.name) },
-                        colors = ButtonDefaults.buttonColors(Header)) {
-                        Text(text = "Find Me")
-                    }
-                }
+                Content(navController = navController)
             }
         }
     }
+}
 
+@Composable
+fun Content(navController: NavController) {
+    Column() {
+        Text(text = "Ingredients Screen")
+
+        Column() {
+            Row() {
+                Text(text = "Vegetables", style = MaterialTheme.typography.h5)
+
+
+            }
+        }
+
+        Button(
+            onClick = { navController.navigate(route = AppScreens.ChosenScreen.name) },
+            colors = ButtonDefaults.buttonColors(Header)
+        ) {
+            Text(text = "Find Me")
+        }
+    }
 }
