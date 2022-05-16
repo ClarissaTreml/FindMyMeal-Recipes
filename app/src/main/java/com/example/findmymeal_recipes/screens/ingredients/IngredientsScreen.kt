@@ -28,8 +28,7 @@ import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 fun IngredientsScreen(
     navController: NavController = rememberNavController(),
     viewModel: ChoseIngredientsViewModel = viewModel(),
-    //isClicked: Boolean
-){
+) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
             Row(
@@ -81,11 +80,13 @@ fun IngredientsScreen(
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
 
-                Content(navController = navController,
+                Content(
+                    navController = navController,
                     ingredientList = getIngredients(),
-                    onAddClick = { ingredient ->  viewModel.addIngredient(ingredient)},
-                    onDeleteClick = { ingredient ->  viewModel.removeIngredient(ingredient)},
-                    isClicked = { ingredient ->  viewModel.isClicked(ingredient)}
+                    onAddClick = { ingredient -> viewModel.addIngredient(ingredient) },
+                    onDeleteClick = { ingredient -> viewModel.removeIngredient(ingredient) },
+                    //isClicked = { ingredient -> viewModel.isClicked(ingredient) },
+                    isColored = { ingredient -> viewModel.isClicked(ingredient) },
                 )
             }
         }
@@ -93,55 +94,75 @@ fun IngredientsScreen(
 }
 
 @Composable
-fun Content(navController: NavController,
-            ingredientList: List<Ingredients>,
-            onAddClick: (Ingredients) -> Unit,
-            onDeleteClick: (Ingredients) -> Unit,
-            isClicked: @Composable (Ingredients) -> Boolean = {false},
-            ) {
-    Column(Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally) {
+fun Content(
+    navController: NavController,
+    ingredientList: List<Ingredients>,
+    onAddClick: (Ingredients) -> Unit,
+    onDeleteClick: (Ingredients) -> Unit,
+    isColored: @Composable (Ingredients) -> Boolean = { false },
+) {
+    Column(
+        Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
 
         Column() {
-            Text(text = "Vegetables", style = MaterialTheme.typography.h5, )
+            Text(text = "Vegetables", style = MaterialTheme.typography.h5)
             Spacer(modifier = Modifier.height(50.dp))
             LazyColumn() {
                 items(ingredientList) { ingredient ->
-                    Card(modifier = Modifier
-                        .width(100.dp)
-                        .height(30.dp)
-                        .padding(0.dp, 0.dp, 0.dp, 10.dp),
+                    Card(
+                        modifier = Modifier
+                            .width(100.dp)
+                            .height(30.dp)
+                            .padding(0.dp, 0.dp, 0.dp, 10.dp),
                         elevation = 5.dp,
                         backgroundColor = Color.White
                     ) {
-                        Row() {
-                            if (isClicked) {
-                                IconButton(
-                                    onClick = { onAddClick(ingredient) },
-                                    Modifier.background(Color.Blue)
-                                ) {
-                                    Text(text = ingredient.ingredient)
-                                }
-                            } else {
-                                IconButton(
-                                    onClick = { onDeleteClick(ingredient) }
-                                    ) {
-                                    Text(text = ingredient.ingredient)
-                                }
-
-                            }
-                            Spacer(modifier = Modifier.width(10.dp))
-                        }
+                        Click(
+                            isColored = isColored(ingredient),
+                            onAddClick = { ingredient -> onAddClick(ingredient) },
+                            onDeleteClick = { ingredient -> onDeleteClick(ingredient) },
+                            ingredient = ingredient
+                        )
                     }
                 }
             }
         }
-        Spacer(modifier = Modifier.height(50.dp))
-        Button(
-            onClick = { navController.navigate(route = AppScreens.ChosenScreen.name) },
-            colors = ButtonDefaults.buttonColors(Header),
-        ) {
-            Text(text = "Find Me")
-        }
+    }
+    Spacer(modifier = Modifier.height(50.dp))
+    Button(
+        onClick = { navController.navigate(route = AppScreens.ChosenScreen.name) },
+        colors = ButtonDefaults.buttonColors(Header),
+    ) {
+        Text(text = "Find Me")
     }
 }
+
+
+@Composable
+fun Click(
+    isColored: Boolean = false, onAddClick: (Ingredients) -> Unit,
+    onDeleteClick: (Ingredients) -> Unit, ingredient: Ingredients
+) {
+
+    if (isColored) {
+        IconButton(
+            onClick = { onDeleteClick(ingredient) },
+            Modifier.background(Color.Green)
+        ) {
+            Text(text = ingredient.ingredient)
+        }
+    } else {
+        IconButton(
+            onClick = { onAddClick(ingredient) },
+            //Modifier.background(Color.Blue)
+        ) {
+            Text(text = ingredient.ingredient)
+        }
+    }
+    Spacer(modifier = Modifier.width(10.dp))
+
+}
+
+//TODO: FIND ME -> Rezept finden nach Ingredient-Auswahl

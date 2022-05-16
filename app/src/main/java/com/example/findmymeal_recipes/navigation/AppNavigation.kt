@@ -29,7 +29,7 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
             DetailScreen(navController = navController)}
 
         composable(route = AppScreens.IngredientsScreen.name) {
-            IngredientsScreen(navController = navController)
+            IngredientsScreen(navController = navController, viewModel = ingredientsViewModel)
         }
 
         composable(route = AppScreens.RecipesScreen.name) {

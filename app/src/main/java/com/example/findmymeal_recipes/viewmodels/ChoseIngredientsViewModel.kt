@@ -11,22 +11,23 @@ class ChoseIngredientsViewModel : ViewModel() {
     val chosenIngredients: List<Ingredients>
         get() = _chosenIngredients
 
-    fun addIngredient(ingredient: Ingredients){
-        if(!exists(ingredient = ingredient)){
+    fun addIngredient(ingredient: Ingredients) {
+        if (!exists(ingredient = ingredient)) {
             _chosenIngredients.add(ingredient)
             Log.d("ADDED", "${_chosenIngredients.last()}")
         }
     }
 
-    fun removeIngredient(ingredient: Ingredients){
+    fun removeIngredient(ingredient: Ingredients) {
         _chosenIngredients.remove(ingredient)
+        Log.d("Removed", "${_chosenIngredients.last()}")
     }
 
-    private fun exists(ingredient: Ingredients) : Boolean {
-        return _chosenIngredients.any {ingredients -> ingredients == ingredient }
+    private fun exists(ingredient: Ingredients): Boolean {
+        return _chosenIngredients.any { ingredients -> ingredients == ingredient }
     }
 
-    fun isClicked(ingredient: Ingredients) : Boolean{
+    fun isClicked(ingredient: Ingredients): Boolean {
         return exists(ingredient = ingredient)
     }
 }
