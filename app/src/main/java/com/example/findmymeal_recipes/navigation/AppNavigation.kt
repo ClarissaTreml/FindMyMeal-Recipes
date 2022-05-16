@@ -1,6 +1,7 @@
 package com.example.findmymeal_recipes.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,9 +13,12 @@ import com.example.findmymeal_recipes.screens.home.HomeScreen
 import com.example.findmymeal_recipes.screens.ingredients.IngredientsScreen
 import com.example.findmymeal_recipes.screens.recipes.RecipesScreen
 import com.example.findmymeal_recipes.screens.shoppinglist.ShoppingListScreen
+import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 
 @Composable
 fun AppNavigation(navController: NavHostController = rememberNavController()) {
+    val ingredientsViewModel: ChoseIngredientsViewModel = viewModel()
+    ingredientsViewModel.chosenIngredients
 
     NavHost(navController = navController, startDestination = AppScreens.HomeScreen.name) {
         composable(route = AppScreens.HomeScreen.name) {
