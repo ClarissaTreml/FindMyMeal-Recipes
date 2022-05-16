@@ -90,5 +90,7 @@ fun ChosenScreen(navController: NavController) {
 fun Content() {
     Column() {
         Text(text = "Chosen Screen")
+
+
     }
 }

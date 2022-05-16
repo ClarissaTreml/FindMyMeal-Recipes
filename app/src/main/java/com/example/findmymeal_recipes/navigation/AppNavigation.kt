@@ -14,29 +14,35 @@ import com.example.findmymeal_recipes.screens.recipes.RecipesScreen
 import com.example.findmymeal_recipes.screens.shoppinglist.ShoppingListScreen
 
 @Composable
-fun AppNavigation(navController: NavHostController = rememberNavController()){
+fun AppNavigation(navController: NavHostController = rememberNavController()) {
 
     NavHost(navController = navController, startDestination = AppScreens.HomeScreen.name) {
-        composable(route = AppScreens.HomeScreen.name){
-            HomeScreen(navController = navController)}
+        composable(route = AppScreens.HomeScreen.name) {
+            HomeScreen(navController = navController)
+        }
 
         composable(route = AppScreens.DetailScreen.name){
             DetailScreen(navController = navController)}
 
-        composable(route = AppScreens.IngredientsScreen.name){
-            IngredientsScreen(navController = navController)}
+        composable(route = AppScreens.IngredientsScreen.name) {
+            IngredientsScreen(navController = navController)
+        }
 
-        composable(route = AppScreens.RecipesScreen.name){
-            RecipesScreen(navController = navController)}
+        composable(route = AppScreens.RecipesScreen.name) {
+            RecipesScreen(navController = navController)
+        }
 
-        composable(route = AppScreens.ShoppingListScreen.name){
-            ShoppingListScreen(navController = navController)}
+        composable(route = AppScreens.ShoppingListScreen.name) {
+            ShoppingListScreen(navController = navController)
+        }
 
-        composable(route = AppScreens.ChosenScreen.name){
-            ChosenScreen(navController = navController)}
+        composable(route = AppScreens.ChosenScreen.name) {
+            ChosenScreen(navController = navController)
+        }
 
-        composable(route = AppScreens.FavoriteScreen.name){
-            FavoriteScreen(navController = navController)}
+        composable(route = AppScreens.FavoriteScreen.name) {
+            FavoriteScreen(navController = navController)
+        }
     }
 
 }

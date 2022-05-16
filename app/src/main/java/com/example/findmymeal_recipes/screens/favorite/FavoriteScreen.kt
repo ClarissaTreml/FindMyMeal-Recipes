@@ -16,7 +16,7 @@ import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 
 @Composable
-fun FavoriteScreen(navController: NavController){
+fun FavoriteScreen(navController: NavController) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
             Row(

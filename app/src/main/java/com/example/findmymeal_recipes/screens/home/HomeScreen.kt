@@ -37,36 +37,50 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                 style = MaterialTheme.typography.h3, textAlign = TextAlign.Center
             )
 
-            Column(modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth()
-                .padding(0.dp, 50.dp),
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth()
+                    .padding(0.dp, 50.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                IconButton(modifier = Modifier.fillMaxWidth().background(Color.White),
+                IconButton(modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White),
                     onClick = { navController.navigate(route = AppScreens.IngredientsScreen.name) }) {
-                    Text(text = "Choose Ingredients", textAlign = TextAlign.Center, style = MaterialTheme.typography.h5)
+                    Text(
+                        text = "Choose Ingredients",
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.h5
+                    )
                 }
                 Spacer(modifier = Modifier.height(10.dp))
 
-                IconButton(modifier = Modifier.fillMaxWidth().background(Color.White),
-                    onClick = { navController.navigate(route = AppScreens.RecipesScreen.name)  }) {
-                    Text(text = "Show Recipes", textAlign = TextAlign.Center, style = MaterialTheme.typography.h5)
+                IconButton(modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White),
+                    onClick = { navController.navigate(route = AppScreens.RecipesScreen.name) }) {
+                    Text(
+                        text = "Show Recipes",
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.h5
+                    )
                 }
                 Spacer(modifier = Modifier.height(10.dp))
 
 
-                IconButton(modifier = Modifier.fillMaxWidth().background(Color.White),
-                    onClick = { navController.navigate(route = AppScreens.ShoppingListScreen.name)  }) {
-                    Text(text = "Shopping List", textAlign = TextAlign.Center, style = MaterialTheme.typography.h5)
+                IconButton(modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White),
+                    onClick = { navController.navigate(route = AppScreens.ShoppingListScreen.name) }) {
+                    Text(
+                        text = "Shopping List",
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.h5
+                    )
                 }
             }
-
         }
-
-
     }
-
-
 }
 

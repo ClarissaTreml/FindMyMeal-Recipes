@@ -21,12 +21,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyApp (content: @Composable () -> Unit){
-    FindMyMealRecipesTheme{
+fun MyApp(content: @Composable () -> Unit) {
+    FindMyMealRecipesTheme {
         content()
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable

@@ -5,7 +5,6 @@ data class Ingredients(
     val checked: Boolean
 )
 
-
 fun getIngredients(): List<Ingredients> {
     return listOf(
         Ingredients(ingredient = "tomato", checked = false),
