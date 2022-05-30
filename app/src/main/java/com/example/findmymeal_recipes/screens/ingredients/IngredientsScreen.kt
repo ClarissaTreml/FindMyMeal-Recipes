@@ -107,7 +107,7 @@ fun Content(
     ) {
 
         Column() {
-            Text(text = "Vegetables", style = MaterialTheme.typography.h5)
+            Text(text = "Ingredients", style = MaterialTheme.typography.h5)
             Spacer(modifier = Modifier.height(50.dp))
             LazyColumn() {
                 items(ingredientList) { ingredient ->
@@ -164,5 +164,3 @@ fun Click(
     Spacer(modifier = Modifier.width(10.dp))
 
 }
-
-//TODO: FIND ME -> Rezept finden nach Ingredient-Auswahl

@@ -54,6 +54,24 @@ fun getRecipes(): List<Recipe> {
                 "honey"
             ),
             steps = "Mix it ALL TOGETHER"
-        )
+        ),
+        Recipe(
+            id = "3",
+            name = "Vegetable Stew",
+            images = listOf(
+                "https://hips.hearstapps.com/vidthumb/images/flourless-chocolate-cake-horizontal-1549916637.png?crop=0.668xw:1.00xh;0.151xw,0&resize=768:*",
+            ),
+            difficulty = "Easy",
+            description = "bla bla bla",
+            duration = "1h 30m",
+            category = "Lunch",
+            ingredients = listOf(
+                "tomato",
+                "potato",
+                "mushroom",
+                "carrot"
+            ),
+            steps = "Mix it ALL TOGETHER"
+        ),
     )
 }

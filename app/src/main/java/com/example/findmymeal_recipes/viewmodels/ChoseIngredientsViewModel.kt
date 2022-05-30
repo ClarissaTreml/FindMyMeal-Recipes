@@ -30,4 +30,5 @@ class ChoseIngredientsViewModel : ViewModel() {
     fun isClicked(ingredient: Ingredients): Boolean {
         return exists(ingredient = ingredient)
     }
+
 }
