@@ -1,15 +1,9 @@
 package com.example.findmymeal_recipes.models
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "Recipe")
+
 data class Recipe(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long? = null,
-    //val id: String,
-
+    val id: String,
     val name: String,
     val images: List<String>,
     val difficulty: String, //Stars //Numbers(as String)
@@ -21,11 +15,11 @@ data class Recipe(
     //Portion
 )
 
-/*
+
 fun getRecipes(): List<Recipe> {
     return listOf(
         Recipe(
-            //id = ,
+            id = "1",
             name = "Chocolate Cake",
             images = listOf(
                 "https://hips.hearstapps.com/vidthumb/images/flourless-chocolate-cake-horizontal-1549916637.png?crop=0.668xw:1.00xh;0.151xw,0&resize=768:*",
@@ -46,7 +40,7 @@ fun getRecipes(): List<Recipe> {
             steps = "Mix it ALL TOGETHER"
         ),
         Recipe(
-            //id = "2",
+            id = "2",
             name = "Pancakes",
             images = listOf(
                 "https://www.einfachbacken.de/sites/einfachbacken.de/files/styles/1500_1130/public/2020-08/american_pancakes.jpg?h=4521fff0&itok=o7lZn-O0",
@@ -65,7 +59,7 @@ fun getRecipes(): List<Recipe> {
             steps = "Mix it ALL TOGETHER"
         ),
         Recipe(
-            //id = "3",
+            id = "3",
             name = "Vegetable Stew",
             images = listOf(
                 "https://hips.hearstapps.com/vidthumb/images/flourless-chocolate-cake-horizontal-1549916637.png?crop=0.668xw:1.00xh;0.151xw,0&resize=768:*",
@@ -83,4 +77,4 @@ fun getRecipes(): List<Recipe> {
             steps = "Mix it ALL TOGETHER"
         ),
     )
-}*/
+}
