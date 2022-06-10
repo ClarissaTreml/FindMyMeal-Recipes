@@ -9,6 +9,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -17,17 +19,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.findmymeal_recipes.models.Ingredients
 import com.example.findmymeal_recipes.models.Recipe
-import com.example.findmymeal_recipes.models.getRecipes
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
+import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 
 @Composable
 fun ChosenScreen(navController: NavController,
-                 viewModel: ChoseIngredientsViewModel = viewModel(),
-                 //recipe: Recipe,
-                recipe: List<Recipe> = getRecipes(),
+                 viewModelC: ChoseIngredientsViewModel = viewModel(),
+                 viewModelR: RecipeViewModel = viewModel()
                 )
 {
     Scaffold(topBar = {
@@ -91,28 +92,28 @@ fun ChosenScreen(navController: NavController,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
-                Content(
-                    viewModel.chosenIngredients,
-                    recipe = recipe,
+                val recipes: List<Recipe> by viewModelR.recipes.collectAsState()
 
-                    //recipe = getRecipes()[0],
+                Content(
+                    viewModelC.chosenIngredients,
+                    recipe = recipes
                 )
             }
         }
     }
-
 }
 
 @Composable
 fun Content(
     ingredientsList: List<Ingredients>,
     //recipeIngredients: List<Recipe>,
-    recipe: List<Recipe> = getRecipes()
+    recipe: List<Recipe> // = getRecipe()
 ) {
     Text(text = "Chosen Screen")
     LazyColumn() {
         items(items = ingredientsList) { ingredient ->
-            Text(text = ingredient.ingredient) 
+            Text(text = ingredient.ingredient)
+
          }
     }
     LazyColumn() {

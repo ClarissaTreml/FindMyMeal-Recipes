@@ -28,6 +28,9 @@ import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BackColor
 import com.example.findmymeal_recipes.ui.theme.FrontColor
 
+// TODO: Können nicht auf recipe. zugreifen.
+//  Recipes müssen noch in Datenbank rein.
+
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RecipeCards(
@@ -69,7 +72,7 @@ fun RecipeCards(
             ) {
                 Row(horizontalArrangement = Arrangement.End) {
                     IconButton(
-                        onClick = { onItemClick(recipe.id)}) {
+                        onClick = { onItemClick(recipe.id.toString())}) {       // TODO: ID required String but we have LONG !!!!!!
                         Image(
                             painterResource(R.drawable.fork),
                             contentScale = ContentScale.Crop,

@@ -6,21 +6,26 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.findmymeal_recipes.models.Recipe
-import com.example.findmymeal_recipes.models.getRecipes
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.DetailRecipeCard
 
 @Composable
 fun DetailScreen(
-    navController: NavController) {
+    navController: NavController,
+    viewModel: RecipeViewModel = viewModel()
+) {
 
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
@@ -73,9 +78,10 @@ fun DetailScreen(
                     textAlign = TextAlign.Center,
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
+                val recipes: List<Recipe> by viewModel.recipes.collectAsState()
 
                 Column() {
-                    DetailRecipeCard(recipe = getRecipes()[0])
+                    DetailRecipeCard(recipe = recipes[0])      //DetailRecipeCard(recipe = getRecipes()[0])
                 }
             }
         }
