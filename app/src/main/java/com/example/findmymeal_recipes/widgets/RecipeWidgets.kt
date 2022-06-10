@@ -28,15 +28,12 @@ import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BackColor
 import com.example.findmymeal_recipes.ui.theme.FrontColor
 
-// TODO: Können nicht auf recipe. zugreifen.
-//  Recipes müssen noch in Datenbank rein.
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RecipeCards(
     recipe: Recipe,
     onItemClick: (String) -> Unit = {},
-    ) {
+) {
 
     var cardFace by remember {
         mutableStateOf(CardFace.Front)
@@ -72,11 +69,12 @@ fun RecipeCards(
             ) {
                 Row(horizontalArrangement = Arrangement.End) {
                     IconButton(
-                        onClick = { onItemClick(recipe.id.toString())}) {       // TODO: ID required String but we have LONG !!!!!!
+                        onClick = { onItemClick(recipe.id) }) {
                         Image(
                             painterResource(R.drawable.fork),
                             contentScale = ContentScale.Crop,
-                            contentDescription = "Fork")
+                            contentDescription = "Fork"
+                        )
                     }
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -118,7 +116,7 @@ fun RecipeCards(
 }
 
 @Composable
-fun DetailRecipeCard(recipe: Recipe){
+fun DetailRecipeCard(recipe: Recipe) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = recipe.name,
@@ -151,7 +149,7 @@ fun DetailRecipeCard(recipe: Recipe){
             style = MaterialTheme.typography.body1
         )
 
-        LazyColumn{
+        LazyColumn {
             items(items = recipe.ingredients) { ingredient ->
                 Text(
                     text = ingredient,

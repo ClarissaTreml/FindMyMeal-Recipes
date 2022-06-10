@@ -9,8 +9,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -19,18 +17,21 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.findmymeal_recipes.models.Ingredients
 import com.example.findmymeal_recipes.models.Recipe
+import com.example.findmymeal_recipes.models.getRecipes
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
-import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
+import com.example.findmymeal_recipes.widgets.RecipeCards
 
 @Composable
-fun ChosenScreen(navController: NavController,
-                 viewModelC: ChoseIngredientsViewModel = viewModel(),
-                 viewModelR: RecipeViewModel = viewModel()
-                )
-{
+fun ChosenScreen(
+    navController: NavController,
+    viewModel: ChoseIngredientsViewModel = viewModel(),
+    //recipe: Recipe,
+    recipe: List<Recipe> = getRecipes(),
+) {
+
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
             Row(
@@ -92,37 +93,41 @@ fun ChosenScreen(navController: NavController,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
-                val recipes: List<Recipe> by viewModelR.recipes.collectAsState()
-
                 Content(
-                    viewModelC.chosenIngredients,
-                    recipe = recipes
+                    ingredientsList = viewModel.chosenIngredients,
+                    recipe = recipe,
+                    onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") }
+
+                    //recipe = getRecipes()[0],
                 )
             }
         }
     }
+
 }
 
 @Composable
 fun Content(
     ingredientsList: List<Ingredients>,
-    //recipeIngredients: List<Recipe>,
-    recipe: List<Recipe> // = getRecipe()
+    recipe: List<Recipe>,
+    onItemClick: (String) -> Unit = {}
 ) {
     Text(text = "Chosen Screen")
+
     LazyColumn() {
         items(items = ingredientsList) { ingredient ->
-            Text(text = ingredient.ingredient)
-
-         }
-    }
-    LazyColumn() {
-        //items(items = recipeIngredients) { ingredient ->
-        //   Text(text = ingredient.)
-        items(items = recipe) { ingredient ->
-            Text(text = ingredient.ingredients[0])
+            for (i in 0..2) {
+                for (j in 0..3) {
+                    // show no duplicate recipes
+                    if (recipe[i].ingredients[j] == ingredient.ingredient) {
+                        Text(text = "same")
+                        RecipeCards(recipe = recipe[i], onItemClick = onItemClick)
+                    }
+                }
+            }
         }
-        //TODO: Alle Ingredients von der Liste ausgeben, nicht nur die ersten.
-        // Nach Ingredients Auswahl Rezepte anzeigen lassen.
     }
+
+    Spacer(modifier = Modifier.height(20.dp))
+
 }
