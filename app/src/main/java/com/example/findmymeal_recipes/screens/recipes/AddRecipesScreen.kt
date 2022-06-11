@@ -2,8 +2,6 @@ package com.example.findmymeal_recipes.screens.recipes
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -13,16 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.findmymeal_recipes.models.Recipe
-import com.example.findmymeal_recipes.models.getRecipes
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.widgets.AddRecipe
-import com.example.findmymeal_recipes.widgets.RecipeCards
 
 @Composable
-fun RecipesScreen(navController: NavController) {
+fun AddRecipesScreen(navController: NavController) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
             Row(
@@ -46,7 +41,7 @@ fun RecipesScreen(navController: NavController) {
                 Spacer(modifier = Modifier.width(20.dp))
 
                 IconButton(modifier = Modifier.width(100.dp),
-                    onClick = {navController.navigate(route = AppScreens.AddRecipesScreen.name)}) {
+                    onClick = {}) {
                     Text(text = "Add Recipe", modifier = Modifier.fillMaxWidth())
                 }
 
@@ -81,23 +76,14 @@ fun RecipesScreen(navController: NavController) {
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
 
-                Content(
-                    recipe = getRecipes(),
-                    onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") })
+                Content()
             }
         }
     }
 }
 
-@Composable
-fun Content(
-    recipe: List<Recipe>,
-    onItemClick: (String) -> Unit = {}
-) {
 
-    LazyColumn {
-        items(items = recipe) { recipe ->
-            RecipeCards(recipe = recipe, onItemClick = onItemClick)
-        }
-    }
+@Composable
+fun Content() {
+    AddRecipe()
 }

@@ -13,6 +13,7 @@ import com.example.findmymeal_recipes.screens.detail.DetailScreen
 import com.example.findmymeal_recipes.screens.favorite.FavoriteScreen
 import com.example.findmymeal_recipes.screens.home.HomeScreen
 import com.example.findmymeal_recipes.screens.ingredients.IngredientsScreen
+import com.example.findmymeal_recipes.screens.recipes.AddRecipesScreen
 import com.example.findmymeal_recipes.screens.recipes.RecipesScreen
 import com.example.findmymeal_recipes.screens.shoppinglist.ShoppingListScreen
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
@@ -58,6 +59,11 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
         composable(route = AppScreens.FavoriteScreen.name) {
             FavoriteScreen(navController = navController)
         }
+
+        composable(route = AppScreens.AddRecipesScreen.name) {
+            AddRecipesScreen(navController = navController)
+        }
+
     }
 
 }

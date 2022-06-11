@@ -8,4 +8,5 @@ enum class AppScreens {
     RecipesScreen,
     ShoppingListScreen,
     DetailScreen,
+    AddRecipesScreen,
 }

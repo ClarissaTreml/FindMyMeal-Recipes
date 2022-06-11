@@ -162,5 +162,4 @@ fun Click(
         }
     }
     Spacer(modifier = Modifier.width(10.dp))
-
 }

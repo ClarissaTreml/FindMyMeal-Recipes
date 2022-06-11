@@ -5,10 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.runtime.*
@@ -51,7 +48,7 @@ fun RecipeCards(
                 Image(
                     painter = rememberAsyncImagePainter(
                         model = ImageRequest.Builder(LocalContext.current)
-                            .data(recipe.images[0])
+                            .data(recipe.images)
                             .crossfade(true)
                             .build()
                     ),
@@ -165,3 +162,61 @@ fun DetailRecipeCard(recipe: Recipe) {
         )
     }
 }
+
+@Composable
+fun AddRecipe(
+    //onAddClick: (Recipe) --> Unit = {}
+){
+
+    var id by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
+    var images by remember { mutableStateOf("") }
+    var difficulty by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
+    var duration by remember { mutableStateOf("") }
+    var category by remember { mutableStateOf("") }
+    var ingredients by remember { mutableStateOf(mutableListOf<Recipe>()) }
+    var steps by remember { mutableStateOf("") }
+    //var recipe by remember { mutableStateListOf<Recipe>()}
+
+
+    OutlinedTextField(value = id, onValueChange = {value -> id = value },
+        label = { Text(text = "id")})
+    OutlinedTextField(value = name, onValueChange = {value -> name = value },
+        label = { Text(text = "name")})
+    OutlinedTextField(value = images, onValueChange = {value -> images = value },
+        label = { Text(text = "images")})
+    OutlinedTextField(value = difficulty, onValueChange = {value -> difficulty = value },
+        label = { Text(text = "difficulty")})
+    OutlinedTextField(value = description, onValueChange = {value -> description = value },
+        label = { Text(text = "description")})
+    OutlinedTextField(value = duration, onValueChange = {value -> duration = value },
+        label = { Text(text = "duration")})
+    OutlinedTextField(value = category, onValueChange = {value -> category = value },
+        label = { Text(text = "category")})
+    /*OutlinedTextField(value = ingredients, onValueChange = {value -> ingredients = value },
+        label = { Text(text = "ingredients")})*/
+    OutlinedTextField(value = steps, onValueChange = {value -> steps = value },
+        label = { Text(text = "steps")})
+
+
+
+    Button( onClick = { /*TODO*/ }) {
+        Text(text = "Add")
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
