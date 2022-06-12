@@ -10,21 +10,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.models.getRecipes
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.DetailRecipeCard
 
 @Composable
 fun DetailScreen(
     navController: NavController,
-    recipeId: String? = "0"
+    recipeId: String? = "0",
+    viewModel: RecipeViewModel = viewModel()
 ) {
 
-    val recipe = filterRecipe(recipeId = recipeId)
+    val recipe = filterRecipe(recipeId = recipeId, recipes = viewModel.getAllRecipes())
 
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
@@ -87,6 +90,10 @@ fun DetailScreen(
 }
 
 
+fun filterRecipe(recipeId: String?, recipes: List<Recipe>): Recipe {
+    return recipes.filter { recipe -> recipe.id == recipeId }[0]
+}
+/*
 fun filterRecipe(recipeId: String?): Recipe {
     return getRecipes().filter { recipe -> recipe.id == recipeId }[0]
-}
+}*/

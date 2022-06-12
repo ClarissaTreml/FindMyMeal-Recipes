@@ -39,7 +39,8 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
         ) { backStackEntry ->
             DetailScreen(
                 navController = navController,
-                recipeId = backStackEntry.arguments?.getString("recipeId")
+                recipeId = backStackEntry.arguments?.getString("recipeId"),
+                viewModel = recipeViewModel
             )
         }
 

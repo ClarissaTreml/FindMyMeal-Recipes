@@ -61,7 +61,7 @@ fun getRecipes(): List<Recipe> {
             id = "3",
             name = "Vegetable Stew",
             images =
-                "https://hips.hearstapps.com/vidthumb/images/flourless-chocolate-cake-horizontal-1549916637.png?crop=0.668xw:1.00xh;0.151xw,0&resize=768:*",
+                "https://vancouverwithlove.com/wp-content/uploads/2019/12/Easy-Vegetable-Stew-Vancouver-with-Love-4.jpg",
 
             difficulty = "Easy",
             description = "bla bla bla",
@@ -77,3 +77,13 @@ fun getRecipes(): List<Recipe> {
         ),
     )
 }
+
+//Rezepte zum Anlegen:
+
+/*
+Pizza: https://www.gutekueche.at/storage/media/recipe/47760/pizza-selbstgemacht.jpg
+*/
+
+/*
+Lasagne: https://www.gourmet-magazin.de/fileadmin/_processed_/d/e/csm_lasagne-1a_11cd711541.jpg
+ */
