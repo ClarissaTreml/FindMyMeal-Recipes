@@ -16,7 +16,6 @@ class RecipeViewModel : ViewModel() {
         )
     }
 
-
     val recipes: List<Recipe>
         get() = _recipes
 
@@ -26,10 +25,6 @@ class RecipeViewModel : ViewModel() {
 
     fun removeRecipe(recipe: Recipe) {
         _recipes.remove(recipe)
-    }
-
-    fun editRecipe(recipe: Recipe){
-        //_recipes.replaceAll { recipe }
     }
 
     fun getAllRecipes(): List<Recipe> {

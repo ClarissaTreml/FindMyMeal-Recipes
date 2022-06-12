@@ -25,7 +25,7 @@ fun EditRecipesScreen(
     recipeId: String? = "0"
 ) {
 
-    val recipe = filterRecipe(recipeId = recipeId, recipes = viewModel.getAllRecipes())
+    val oldRecipe = filterRecipe(recipeId = recipeId, recipes = viewModel.getAllRecipes())
 
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
@@ -95,8 +95,9 @@ fun EditRecipesScreen(
                     },
                     ingredients = viewModel.ingredientsRecipe,
                     //TODO
-                    onEditClickRecipe = { recipe -> viewModel.addRecipe(recipe) },
-                    recipe = recipe
+                    onAddClickRecipe = { newRecipe -> viewModel.addRecipe(newRecipe) },
+                    oldRecipe = oldRecipe,
+                    onDeleteClickRecipe = { oldRecipe -> viewModel.removeRecipe(oldRecipe) }
                 )
             }
         }

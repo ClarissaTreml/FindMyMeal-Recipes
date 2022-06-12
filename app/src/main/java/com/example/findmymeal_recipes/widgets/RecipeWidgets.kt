@@ -285,8 +285,9 @@ fun AddRecipe(
 fun EditRecipe(
     onAddClickIngredient: (String) -> Unit = {},
     ingredients: List<String> = listOf(),
-    onEditClickRecipe: (Recipe) -> Unit = {},
-    recipe: Recipe
+    onAddClickRecipe: (Recipe) -> Unit = {},
+    oldRecipe: Recipe,
+    onDeleteClickRecipe: (Recipe) -> Unit = {}
 ) {
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
@@ -301,19 +302,19 @@ fun EditRecipe(
         var ingredient by remember { mutableStateOf("") }
         var steps by remember { mutableStateOf("") }
 
-        OutlinedTextField(value = recipe.id, onValueChange = { value -> id = value },
+        OutlinedTextField(value = id, onValueChange = { id = oldRecipe.id },
             label = { Text(text = "id") })
-        OutlinedTextField(value = recipe.name, onValueChange = { value -> name = value },
+        OutlinedTextField(value = name, onValueChange = { value -> name = value},
             label = { Text(text = "name") })
-        OutlinedTextField(value = recipe.images, onValueChange = { value -> images = value },
+        OutlinedTextField(value = images, onValueChange = { value -> images = value },
             label = { Text(text = "images") })
-        OutlinedTextField(value = recipe.difficulty, onValueChange = { value -> difficulty = value },
+        OutlinedTextField(value = difficulty, onValueChange = { value -> difficulty = value },
             label = { Text(text = "difficulty") })
-        OutlinedTextField(value = recipe.description, onValueChange = { value -> description = value },
+        OutlinedTextField(value = description, onValueChange = { value -> description = value },
             label = { Text(text = "description") })
-        OutlinedTextField(value = recipe.duration, onValueChange = { value -> duration = value },
+        OutlinedTextField(value = duration, onValueChange = { value -> duration = value },
             label = { Text(text = "duration") })
-        OutlinedTextField(value = recipe.category, onValueChange = { value -> category = value },
+        OutlinedTextField(value = category, onValueChange = { value -> category = value },
             label = { Text(text = "category") })
 
         // TODO
@@ -336,7 +337,7 @@ fun EditRecipe(
 
         ViewIngredients(ingredients)
 
-        OutlinedTextField(value = recipe.steps, onValueChange = { value -> steps = value },
+        OutlinedTextField(value = steps, onValueChange = { value -> steps = value },
             label = { Text(text = "steps") })
 
         Button(
@@ -352,7 +353,9 @@ fun EditRecipe(
                         description, duration, category, ingredients, steps
                     )
 
-                    onEditClickRecipe(newRecipe)
+                    onDeleteClickRecipe(oldRecipe)
+                    onAddClickRecipe(newRecipe)
+
 
                 }
 
