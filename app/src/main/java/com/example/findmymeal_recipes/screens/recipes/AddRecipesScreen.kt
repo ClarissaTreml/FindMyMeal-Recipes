@@ -2,6 +2,8 @@ package com.example.findmymeal_recipes.screens.recipes
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -10,14 +12,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.AddRecipe
+import com.example.findmymeal_recipes.widgets.AddRecipeTest
+import com.example.findmymeal_recipes.widgets.ViewIngredients
 
 @Composable
-fun AddRecipesScreen(navController: NavController) {
+fun AddRecipesScreen(navController: NavController, viewModel: RecipeViewModel = viewModel()) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
             Row(
@@ -60,12 +66,14 @@ fun AddRecipesScreen(navController: NavController) {
             color = BgColor, modifier = Modifier
                 .fillMaxHeight()
                 .fillMaxWidth()
+
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
+                    .height(400.dp)
                     .padding(20.dp),
+
                 horizontalAlignment = Alignment.CenterHorizontally,
             )
             {
@@ -76,7 +84,10 @@ fun AddRecipesScreen(navController: NavController) {
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
 
-                Content()
+                AddRecipeTest(onAddClickIngredient = {
+                    ingredient -> viewModel.addIngredientsRecipe(ingredient)
+                }, ingredients = viewModel.ingredientsRecipe
+                , onSaveClickRecipe = { recipe -> viewModel.addRecipe(recipe) })
             }
         }
     }
@@ -85,5 +96,5 @@ fun AddRecipesScreen(navController: NavController) {
 
 @Composable
 fun Content() {
-    AddRecipe()
+
 }

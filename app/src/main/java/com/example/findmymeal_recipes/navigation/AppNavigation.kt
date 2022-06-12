@@ -17,11 +17,14 @@ import com.example.findmymeal_recipes.screens.recipes.AddRecipesScreen
 import com.example.findmymeal_recipes.screens.recipes.RecipesScreen
 import com.example.findmymeal_recipes.screens.shoppinglist.ShoppingListScreen
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
+import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 
 @Composable
 fun AppNavigation(navController: NavHostController = rememberNavController()) {
     val ingredientsViewModel: ChoseIngredientsViewModel = viewModel()
     ingredientsViewModel.chosenIngredients
+
+    val recipeViewModel: RecipeViewModel = viewModel()
 
     NavHost(navController = navController, startDestination = AppScreens.HomeScreen.name) {
         composable(route = AppScreens.HomeScreen.name) {
@@ -45,7 +48,7 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
         }
 
         composable(route = AppScreens.RecipesScreen.name) {
-            RecipesScreen(navController = navController)
+            RecipesScreen(navController = navController, viewModel = recipeViewModel)
         }
 
         composable(route = AppScreens.ShoppingListScreen.name) {
@@ -61,7 +64,7 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
         }
 
         composable(route = AppScreens.AddRecipesScreen.name) {
-            AddRecipesScreen(navController = navController)
+            AddRecipesScreen(navController = navController, viewModel = recipeViewModel)
         }
 
     }

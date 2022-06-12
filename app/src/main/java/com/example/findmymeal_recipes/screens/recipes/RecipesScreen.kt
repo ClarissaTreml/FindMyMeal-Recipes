@@ -12,17 +12,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.models.getRecipes
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
+import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.AddRecipe
 import com.example.findmymeal_recipes.widgets.RecipeCards
 
 @Composable
-fun RecipesScreen(navController: NavController) {
+fun RecipesScreen(navController: NavController, viewModel: RecipeViewModel = viewModel()) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
             Row(
@@ -82,7 +85,7 @@ fun RecipesScreen(navController: NavController) {
                 )
 
                 Content(
-                    recipe = getRecipes(),
+                    recipe = viewModel.recipes,
                     onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") })
             }
         }

@@ -11,7 +11,7 @@ data class Recipe(
     val duration: String,
     val category: String,
     val ingredients: List<String>,
-    val steps: String //ingredients with quantity
+    val steps: String,
     //Portion
 )
 
@@ -73,7 +73,7 @@ fun getRecipes(): List<Recipe> {
                 "mushroom",
                 "carrot"
             ),
-            steps = "Mix it ALL TOGETHER"
+            steps = "Mix it ALL TOGETHER",
         ),
     )
 }
