@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.findmymeal_recipes.models.Recipe
-import com.example.findmymeal_recipes.models.getRecipes
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
@@ -93,7 +92,3 @@ fun DetailScreen(
 fun filterRecipe(recipeId: String?, recipes: List<Recipe>): Recipe {
     return recipes.filter { recipe -> recipe.id == recipeId }[0]
 }
-/*
-fun filterRecipe(recipeId: String?): Recipe {
-    return getRecipes().filter { recipe -> recipe.id == recipeId }[0]
-}*/

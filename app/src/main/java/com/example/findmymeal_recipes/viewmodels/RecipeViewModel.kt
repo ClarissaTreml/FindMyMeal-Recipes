@@ -21,7 +21,6 @@ class RecipeViewModel : ViewModel() {
 
     fun addRecipe(recipe: Recipe) {
         _recipes.add(recipe)
-        Log.d("ADDED Recipe", _recipes.toString())
 
     }
 

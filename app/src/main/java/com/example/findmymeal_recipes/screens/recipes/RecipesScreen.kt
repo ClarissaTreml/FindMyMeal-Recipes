@@ -25,7 +25,10 @@ import com.example.findmymeal_recipes.widgets.AddRecipe
 import com.example.findmymeal_recipes.widgets.RecipeCards
 
 @Composable
-fun RecipesScreen(navController: NavController, viewModel: RecipeViewModel = viewModel()) {
+fun RecipesScreen(
+    navController: NavController, viewModel: RecipeViewModel = viewModel()
+
+) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
             Row(
@@ -49,7 +52,7 @@ fun RecipesScreen(navController: NavController, viewModel: RecipeViewModel = vie
                 Spacer(modifier = Modifier.width(20.dp))
 
                 IconButton(modifier = Modifier.width(100.dp),
-                    onClick = {navController.navigate(route = AppScreens.AddRecipesScreen.name)}) {
+                    onClick = { navController.navigate(route = AppScreens.AddRecipesScreen.name) }) {
                     Text(text = "Add Recipe", modifier = Modifier.fillMaxWidth())
                 }
 
@@ -86,7 +89,10 @@ fun RecipesScreen(navController: NavController, viewModel: RecipeViewModel = vie
 
                 Content(
                     recipe = viewModel.recipes,
-                    onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") })
+                    onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") },
+                    onDeleteClickRecipe = { recipe -> viewModel.removeRecipe(recipe) }
+
+                )
             }
         }
     }
@@ -95,12 +101,17 @@ fun RecipesScreen(navController: NavController, viewModel: RecipeViewModel = vie
 @Composable
 fun Content(
     recipe: List<Recipe>,
-    onItemClick: (String) -> Unit = {}
+    onItemClick: (String) -> Unit = {},
+    onDeleteClickRecipe: (Recipe) -> Unit = {}
 ) {
 
     LazyColumn {
         items(items = recipe) { recipe ->
-            RecipeCards(recipe = recipe, onItemClick = onItemClick)
+            RecipeCards(
+                recipe = recipe,
+                onItemClick = onItemClick,
+                onDeleteClickRecipe = onDeleteClickRecipe
+            )
         }
     }
 }

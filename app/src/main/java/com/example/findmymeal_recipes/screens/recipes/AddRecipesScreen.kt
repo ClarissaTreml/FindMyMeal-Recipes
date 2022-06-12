@@ -2,8 +2,6 @@ package com.example.findmymeal_recipes.screens.recipes
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -19,8 +17,6 @@ import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.AddRecipe
-import com.example.findmymeal_recipes.widgets.AddRecipeTest
-import com.example.findmymeal_recipes.widgets.ViewIngredients
 
 @Composable
 fun AddRecipesScreen(navController: NavController, viewModel: RecipeViewModel = viewModel()) {
@@ -84,7 +80,7 @@ fun AddRecipesScreen(navController: NavController, viewModel: RecipeViewModel = 
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
 
-                AddRecipeTest(onAddClickIngredient = {
+                AddRecipe(onAddClickIngredient = {
                     ingredient -> viewModel.addIngredientsRecipe(ingredient)
                 }, ingredients = viewModel.ingredientsRecipe
                 , onSaveClickRecipe = { recipe -> viewModel.addRecipe(recipe) })

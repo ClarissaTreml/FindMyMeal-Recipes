@@ -12,9 +12,12 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -32,6 +35,7 @@ import java.util.*
 fun RecipeCards(
     recipe: Recipe,
     onItemClick: (String) -> Unit = {},
+    onDeleteClickRecipe: (Recipe) -> Unit = {}
 ) {
 
     var cardFace by remember {
@@ -75,6 +79,14 @@ fun RecipeCards(
                             contentDescription = "Fork"
                         )
                     }
+                    IconButton(
+                        onClick = { onDeleteClickRecipe(recipe) },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Delete Button"
+                        )
+                    }
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
@@ -115,8 +127,19 @@ fun RecipeCards(
 }
 
 @Composable
-fun DetailRecipeCard(recipe: Recipe) {
+fun DetailRecipeCard(recipe: Recipe, onEditClick: (Recipe) -> Unit = {}) {
+
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+        IconButton(
+            onClick = { onEditClick(recipe) },
+        ) {
+            Icon(
+                imageVector = Icons.Default.Edit,
+                contentDescription = "Edit Button"
+            )
+        }
+
         Text(
             text = recipe.name,
             style = MaterialTheme.typography.h6,
@@ -169,51 +192,6 @@ fun DetailRecipeCard(recipe: Recipe) {
 }
 
 @Composable
-fun AddRecipe(
-    //onAddClick: (Recipe) --> Unit = {}
-) {
-
-    var id by remember { mutableStateOf("") }
-    var name by remember { mutableStateOf("") }
-    var images by remember { mutableStateOf("") }
-    var difficulty by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var duration by remember { mutableStateOf("") }
-    var category by remember { mutableStateOf("") }
-    var ingredients by remember { mutableStateOf(mutableListOf<Recipe>()) }
-    var steps by remember { mutableStateOf("") }
-    //var recipe by remember { mutableStateListOf<Recipe>()}
-
-
-    OutlinedTextField(value = id, onValueChange = { value -> id = value },
-        label = { Text(text = "id") })
-    OutlinedTextField(value = name, onValueChange = { value -> name = value },
-        label = { Text(text = "name") })
-    OutlinedTextField(value = images, onValueChange = { value -> images = value },
-        label = { Text(text = "images") })
-    OutlinedTextField(value = difficulty, onValueChange = { value -> difficulty = value },
-        label = { Text(text = "difficulty") })
-    OutlinedTextField(value = description, onValueChange = { value -> description = value },
-        label = { Text(text = "description") })
-    OutlinedTextField(value = duration, onValueChange = { value -> duration = value },
-        label = { Text(text = "duration") })
-    OutlinedTextField(value = category, onValueChange = { value -> category = value },
-        label = { Text(text = "category") })
-    /*OutlinedTextField(value = ingredients, onValueChange = {value -> ingredients = value },
-        label = { Text(text = "ingredients")})*/
-    OutlinedTextField(value = steps, onValueChange = { value -> steps = value },
-        label = { Text(text = "steps") })
-
-
-
-    Button(onClick = { /*TODO*/ }) {
-        Text(text = "Add")
-
-    }
-
-}
-
-@Composable
 fun ViewIngredients(
     ingredients: List<String> = listOf(),
 ) {
@@ -229,7 +207,7 @@ fun ViewIngredients(
 
 
 @Composable
-fun AddRecipeTest(
+fun AddRecipe(
     onAddClickIngredient: (String) -> Unit = {},
     ingredients: List<String> = listOf(),
     onSaveClickRecipe: (Recipe) -> Unit = {}
@@ -281,7 +259,6 @@ fun AddRecipeTest(
 
         ViewIngredients(ingredients)
 
-
         OutlinedTextField(value = steps, onValueChange = { value -> steps = value },
             label = { Text(text = "steps") })
 
@@ -306,9 +283,6 @@ fun AddRecipeTest(
 
             Text(text = "Add")
         }
-
-
-        //Button zum saven vom ganzen Rezept (ingredientslist = die vom Viewmodel)
     }
 
 }
@@ -317,34 +291,6 @@ fun AddRecipeTest(
 /*
 @Composable
 fun AddRecipeTest(onAddClick: (Recipe) -> Unit = {}) {
-    var id by remember { mutableStateOf("") }
-    var name by remember { mutableStateOf("") }
-    var images by remember { mutableStateOf("") }
-    var difficulty by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var duration by remember { mutableStateOf("") }
-    var category by remember { mutableStateOf("") }
-    var steps by remember { mutableStateOf("") }
-
-    OutlinedTextField(value = id, onValueChange = { value -> id = value },
-        label = { Text(text = "id") })
-    OutlinedTextField(value = name, onValueChange = { value -> name = value },
-        label = { Text(text = "name") })
-    OutlinedTextField(value = images, onValueChange = { value -> images = value },
-        label = { Text(text = "images") })
-    OutlinedTextField(value = difficulty, onValueChange = { value -> difficulty = value },
-        label = { Text(text = "difficulty") })
-    OutlinedTextField(value = description, onValueChange = { value -> description = value },
-        label = { Text(text = "description") })
-    OutlinedTextField(value = duration, onValueChange = { value -> duration = value },
-        label = { Text(text = "duration") })
-    OutlinedTextField(value = category, onValueChange = { value -> category = value },
-        label = { Text(text = "category") })
-    /*OutlinedTextField(value = ingredients, onValueChange = {value -> ingredients = value },
-        label = { Text(text = "ingredients")})*/
-    OutlinedTextField(value = steps, onValueChange = { value -> steps = value },
-        label = { Text(text = "steps") })
-
 
     //var ingredient by remember { mutableStateListOf<String>() }
 
@@ -357,7 +303,7 @@ fun AddRecipeTest(onAddClick: (Recipe) -> Unit = {}) {
     val data = remember {
         mutableStateListOf<String>()
     }
-    /*
+
     LazyColumn() {
         items(items = ingredient) { ing,index ->
             OutlinedTextField(
@@ -385,11 +331,11 @@ fun AddRecipeTest(onAddClick: (Recipe) -> Unit = {}) {
         }
     }
 
-     */
+
 
 
     //var text by remember { mutableStateOf("") }
-    /*TextField(
+    TextField(
         value = text,
         onValueChange = {
             onValueChange(it)
@@ -410,20 +356,9 @@ fun AddRecipeTest(onAddClick: (Recipe) -> Unit = {}) {
             unfocusedIndicatorColor = Color.Transparent
         ),
         textStyle = inputTextStyle
-    )*/
+    )
 
 
 }
 
 */
-
-
-
-
-
-
-
-
-
-
-
