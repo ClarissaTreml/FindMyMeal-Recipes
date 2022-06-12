@@ -1,9 +1,7 @@
 package com.example.findmymeal_recipes.widgets
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,7 +15,6 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -27,8 +24,6 @@ import coil.request.ImageRequest
 import com.example.findmymeal_recipes.R
 import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.ui.theme.BackColor
-import java.text.SimpleDateFormat
-import java.util.*
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -282,6 +277,88 @@ fun AddRecipe(
             }) {
 
             Text(text = "Add")
+        }
+    }
+
+}
+@Composable
+fun EditRecipe(
+    onAddClickIngredient: (String) -> Unit = {},
+    ingredients: List<String> = listOf(),
+    onEditClickRecipe: (Recipe) -> Unit = {},
+    recipe: Recipe
+) {
+
+    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+
+        var id by remember { mutableStateOf("") }
+        var name by remember { mutableStateOf("") }
+        var images by remember { mutableStateOf("") }
+        var difficulty by remember { mutableStateOf("") }
+        var description by remember { mutableStateOf("") }
+        var duration by remember { mutableStateOf("") }
+        var category by remember { mutableStateOf("") }
+        var ingredient by remember { mutableStateOf("") }
+        var steps by remember { mutableStateOf("") }
+
+        OutlinedTextField(value = recipe.id, onValueChange = { value -> id = value },
+            label = { Text(text = "id") })
+        OutlinedTextField(value = recipe.name, onValueChange = { value -> name = value },
+            label = { Text(text = "name") })
+        OutlinedTextField(value = recipe.images, onValueChange = { value -> images = value },
+            label = { Text(text = "images") })
+        OutlinedTextField(value = recipe.difficulty, onValueChange = { value -> difficulty = value },
+            label = { Text(text = "difficulty") })
+        OutlinedTextField(value = recipe.description, onValueChange = { value -> description = value },
+            label = { Text(text = "description") })
+        OutlinedTextField(value = recipe.duration, onValueChange = { value -> duration = value },
+            label = { Text(text = "duration") })
+        OutlinedTextField(value = recipe.category, onValueChange = { value -> category = value },
+            label = { Text(text = "category") })
+
+        // TODO
+        OutlinedTextField(
+            value = ingredient,
+            onValueChange = { value ->
+                ingredient = value
+            },
+            leadingIcon = {
+                IconButton(onClick = {
+                    onAddClickIngredient(ingredient)
+                }) {
+                    Icon(imageVector = Icons.Default.Add, contentDescription = "addIngredient")
+                }
+            },
+
+            label = { Text(text = "Ingredient") },
+            placeholder = { Text(text = "Enter your ingredient") },
+        )
+
+        ViewIngredients(ingredients)
+
+        OutlinedTextField(value = recipe.steps, onValueChange = { value -> steps = value },
+            label = { Text(text = "steps") })
+
+        Button(
+            modifier = Modifier.padding(16.dp),
+            onClick = {
+                if (id.isNotEmpty() && name.isNotEmpty() && images.isNotEmpty()
+                    && difficulty.isNotEmpty() && description.isNotEmpty() &&
+                    duration.isNotEmpty() && category.isNotEmpty() &&
+                    ingredient.isNotEmpty() && steps.isNotEmpty()
+                ) {
+                    val newRecipe = Recipe(
+                        id, name, images, difficulty,
+                        description, duration, category, ingredients, steps
+                    )
+
+                    onEditClickRecipe(newRecipe)
+
+                }
+
+            }) {
+
+            Text(text = "Edit")
         }
     }
 

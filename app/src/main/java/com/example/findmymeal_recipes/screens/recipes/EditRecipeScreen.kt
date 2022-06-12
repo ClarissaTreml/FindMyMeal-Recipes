@@ -1,4 +1,4 @@
-package com.example.findmymeal_recipes.screens.detail
+package com.example.findmymeal_recipes.screens.recipes
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,18 +12,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.navigation.AppScreens
+import com.example.findmymeal_recipes.screens.detail.filterRecipe
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
-import com.example.findmymeal_recipes.widgets.DetailRecipeCard
+import com.example.findmymeal_recipes.widgets.EditRecipe
 
 @Composable
-fun DetailScreen(
-    navController: NavController,
-    recipeId: String? = "0",
-    viewModel: RecipeViewModel = viewModel()
+fun EditRecipesScreen(
+    navController: NavController, viewModel: RecipeViewModel = viewModel(),
+    recipeId: String? = "0"
 ) {
 
     val recipe = filterRecipe(recipeId = recipeId, recipes = viewModel.getAllRecipes())
@@ -40,15 +39,20 @@ fun DetailScreen(
                     onClick = { navController.navigate(route = AppScreens.IngredientsScreen.name) }) {
                     Text(text = "Ingredients", modifier = Modifier.fillMaxWidth())
                 }
-
                 Spacer(modifier = Modifier.width(20.dp))
 
-                IconButton(modifier = Modifier.width(60.dp),
-                    onClick = { navController.navigate(route = AppScreens.RecipesScreen.name) }) {
-                    Text(text = "Recipes", modifier = Modifier.fillMaxWidth())
+                IconButton(modifier = Modifier.width(100.dp),
+                    onClick = { navController.navigate(route = AppScreens.ShoppingListScreen.name) }) {
+                    Text(text = "Shopping-List", modifier = Modifier.fillMaxWidth())
                 }
+                Spacer(modifier = Modifier.width(20.dp))
 
                 Spacer(modifier = Modifier.width(20.dp))
+
+                IconButton(modifier = Modifier.width(100.dp),
+                    onClick = {}) {
+                    Text(text = "Add Recipe", modifier = Modifier.fillMaxWidth())
+                }
 
                 Icon(
                     modifier = Modifier
@@ -58,18 +62,21 @@ fun DetailScreen(
                     contentDescription = "favorites"
                 )
             }
+
         }
     }) {
         Surface(
             color = BgColor, modifier = Modifier
                 .fillMaxHeight()
                 .fillMaxWidth()
+
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
+                    .height(400.dp)
                     .padding(20.dp),
+
                 horizontalAlignment = Alignment.CenterHorizontally,
             )
             {
@@ -80,17 +87,18 @@ fun DetailScreen(
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
 
-                Column {
-                    DetailRecipeCard(recipe = recipe, onEditClick = { recipeId ->
-                        navController.navigate(route = AppScreens.EditRecipeScreen.name + "/$recipeId")
-                    })
-                }
+                Text(text = "Edit Screen")
+
+                EditRecipe(
+                    onAddClickIngredient = { ingredient ->
+                        viewModel.addIngredientsRecipe(ingredient)
+                    },
+                    ingredients = viewModel.ingredientsRecipe,
+                    //TODO
+                    onEditClickRecipe = { recipe -> viewModel.addRecipe(recipe) },
+                    recipe = recipe
+                )
             }
         }
     }
-}
-
-
-fun filterRecipe(recipeId: String?, recipes: List<Recipe>): Recipe {
-    return recipes.filter { recipe -> recipe.id == recipeId }[0]
 }

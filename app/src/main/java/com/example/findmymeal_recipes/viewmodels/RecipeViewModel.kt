@@ -16,6 +16,7 @@ class RecipeViewModel : ViewModel() {
         )
     }
 
+
     val recipes: List<Recipe>
         get() = _recipes
 
