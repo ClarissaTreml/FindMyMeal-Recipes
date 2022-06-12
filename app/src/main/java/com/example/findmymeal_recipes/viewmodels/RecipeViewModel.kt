@@ -21,11 +21,14 @@ class RecipeViewModel : ViewModel() {
 
     fun addRecipe(recipe: Recipe) {
         _recipes.add(recipe)
-
     }
 
     fun removeRecipe(recipe: Recipe) {
         _recipes.remove(recipe)
+    }
+
+    fun editRecipe(recipe: Recipe){
+        //_recipes.replaceAll { recipe }
     }
 
     fun getAllRecipes(): List<Recipe> {

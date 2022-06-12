@@ -81,7 +81,9 @@ fun DetailScreen(
                 )
 
                 Column {
-                    DetailRecipeCard(recipe = recipe)
+                    DetailRecipeCard(recipe = recipe, onEditClick = {
+                        navController.navigate(route = AppScreens.AddRecipesScreen.name)
+                    })
                 }
             }
         }

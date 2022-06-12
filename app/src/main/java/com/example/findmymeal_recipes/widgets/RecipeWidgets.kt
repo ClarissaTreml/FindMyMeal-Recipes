@@ -127,12 +127,12 @@ fun RecipeCards(
 }
 
 @Composable
-fun DetailRecipeCard(recipe: Recipe, onEditClick: (Recipe) -> Unit = {}) {
+fun DetailRecipeCard(recipe: Recipe, onEditClick: (String) -> Unit = {}) {
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
         IconButton(
-            onClick = { onEditClick(recipe) },
+            onClick = { onEditClick(recipe.id) },
         ) {
             Icon(
                 imageVector = Icons.Default.Edit,
