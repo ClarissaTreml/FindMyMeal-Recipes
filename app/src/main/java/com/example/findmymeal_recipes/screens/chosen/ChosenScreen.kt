@@ -114,6 +114,7 @@ fun Content(
 ) {
     Text(text = "Chosen Screen")
 
+    // TODO
     LazyColumn() {
         items(items = ingredientsList) { ingredient ->
             for (i in 0..2) {

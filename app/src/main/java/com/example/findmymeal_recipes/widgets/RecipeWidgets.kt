@@ -292,29 +292,29 @@ fun EditRecipe(
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
 
-        var id by remember { mutableStateOf("") }
-        var name by remember { mutableStateOf("") }
-        var images by remember { mutableStateOf("") }
-        var difficulty by remember { mutableStateOf("") }
-        var description by remember { mutableStateOf("") }
-        var duration by remember { mutableStateOf("") }
-        var category by remember { mutableStateOf("") }
-        var ingredient by remember { mutableStateOf("") }
-        var steps by remember { mutableStateOf("") }
+        //var id by remember { mutableStateOf("") }
+        var name by remember { mutableStateOf(oldRecipe.name) }
+        var images by remember { mutableStateOf(oldRecipe.images) }
+        var difficulty by remember { mutableStateOf(oldRecipe.difficulty) }
+        var description by remember { mutableStateOf(oldRecipe.description) }
+        var duration by remember { mutableStateOf(oldRecipe.duration) }
+        var category by remember { mutableStateOf(oldRecipe.category) }
+        var ingredient by remember { mutableStateOf(" ") }
+        var steps by remember { mutableStateOf(oldRecipe.steps) }
 
-        OutlinedTextField(value = id, onValueChange = { id = oldRecipe.id },
-            label = { Text(text = "id") })
-        OutlinedTextField(value = name, onValueChange = { value -> name = value},
+        /*OutlinedTextField(value = id, onValueChange = { id = oldRecipe.id },
+            label = { Text(text = "id") })*/
+        OutlinedTextField(value = name, onValueChange = { name = it},
             label = { Text(text = "name") })
-        OutlinedTextField(value = images, onValueChange = { value -> images = value },
+        OutlinedTextField(value = images, onValueChange = { images = it },
             label = { Text(text = "images") })
-        OutlinedTextField(value = difficulty, onValueChange = { value -> difficulty = value },
+        OutlinedTextField(value = difficulty, onValueChange = { difficulty = it },
             label = { Text(text = "difficulty") })
-        OutlinedTextField(value = description, onValueChange = { value -> description = value },
+        OutlinedTextField(value = description, onValueChange = { description = it },
             label = { Text(text = "description") })
-        OutlinedTextField(value = duration, onValueChange = { value -> duration = value },
+        OutlinedTextField(value = duration, onValueChange = { duration = it },
             label = { Text(text = "duration") })
-        OutlinedTextField(value = category, onValueChange = { value -> category = value },
+        OutlinedTextField(value = category, onValueChange = { category = it },
             label = { Text(text = "category") })
 
         // TODO
@@ -337,19 +337,19 @@ fun EditRecipe(
 
         ViewIngredients(ingredients)
 
-        OutlinedTextField(value = steps, onValueChange = { value -> steps = value },
+        OutlinedTextField(value = steps, onValueChange = { steps = it },
             label = { Text(text = "steps") })
 
         Button(
             modifier = Modifier.padding(16.dp),
             onClick = {
-                if (id.isNotEmpty() && name.isNotEmpty() && images.isNotEmpty()
+                if (name.isNotEmpty() && images.isNotEmpty()
                     && difficulty.isNotEmpty() && description.isNotEmpty() &&
                     duration.isNotEmpty() && category.isNotEmpty() &&
                     ingredient.isNotEmpty() && steps.isNotEmpty()
                 ) {
                     val newRecipe = Recipe(
-                        id, name, images, difficulty,
+                        oldRecipe.id, name, images, difficulty,
                         description, duration, category, ingredients, steps
                     )
 
