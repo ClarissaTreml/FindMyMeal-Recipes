@@ -18,7 +18,6 @@ import com.example.findmymeal_recipes.ui.theme.BgColor
 @Preview(showBackground = true)
 @Composable
 fun HomeScreen(navController: NavController = rememberNavController()) {
-    // Kommentar
 
     Surface(
         color = BgColor, modifier = Modifier

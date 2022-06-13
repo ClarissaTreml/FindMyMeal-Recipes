@@ -11,12 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.viewmodels.FavoritesViewModel
 
 @Composable
-fun FavoriteScreen(navController: NavController) {
+fun FavoriteScreen(navController: NavController = rememberNavController(),
+                   viewModel: FavoritesViewModel
+) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
             Row(
@@ -65,7 +69,6 @@ fun FavoriteScreen(navController: NavController) {
                     textAlign = TextAlign.Center,
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
-
                 Column() {
                     Text(text = "Favorite Screen")
                 }

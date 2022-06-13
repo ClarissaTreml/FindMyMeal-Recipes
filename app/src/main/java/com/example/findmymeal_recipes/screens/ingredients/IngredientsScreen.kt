@@ -25,9 +25,8 @@ import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 
 @Composable
-fun IngredientsScreen(
-    navController: NavController = rememberNavController(),
-    viewModel: ChoseIngredientsViewModel = viewModel(),
+fun IngredientsScreen(navController: NavController = rememberNavController(),
+                      viewModel: ChoseIngredientsViewModel = viewModel(),
 ) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
@@ -94,12 +93,11 @@ fun IngredientsScreen(
 }
 
 @Composable
-fun Content(
-    navController: NavController,
-    ingredientList: List<Ingredients>,
-    onAddClick: (Ingredients) -> Unit,
-    onDeleteClick: (Ingredients) -> Unit,
-    isColored: @Composable (Ingredients) -> Boolean = { false },
+fun Content(navController: NavController,
+            ingredientList: List<Ingredients>,
+            onAddClick: (Ingredients) -> Unit,
+            onDeleteClick: (Ingredients) -> Unit,
+            isColored: @Composable (Ingredients) -> Boolean = { false },
 ) {
     Column(
         Modifier.fillMaxWidth(),
@@ -141,9 +139,10 @@ fun Content(
 
 
 @Composable
-fun Click(
-    isColored: Boolean = false, onAddClick: (Ingredients) -> Unit,
-    onDeleteClick: (Ingredients) -> Unit, ingredient: Ingredients
+fun Click(isColored: Boolean = false,
+          onAddClick: (Ingredients) -> Unit,
+          onDeleteClick: (Ingredients) -> Unit,
+          ingredient: Ingredients
 ) {
 
     if (isColored) {

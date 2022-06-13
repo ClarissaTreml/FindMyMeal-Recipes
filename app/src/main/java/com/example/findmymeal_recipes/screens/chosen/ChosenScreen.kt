@@ -23,16 +23,15 @@ import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
+import com.example.findmymeal_recipes.viewmodels.ShoppingListViewModel
 import com.example.findmymeal_recipes.widgets.RecipeCards
 
 @Composable
-fun ChosenScreen(
-    navController: NavController,
-    viewModelChosen: ChoseIngredientsViewModel = viewModel(),
-    //recipe: Recipe,
-    recipe: List<Recipe> = getRecipes(),
-    viewModelRecipe: RecipeViewModel = viewModel()
-
+fun ChosenScreen(navController: NavController,
+                 viewModelChosen: ChoseIngredientsViewModel = viewModel(),
+                 recipe: List<Recipe> = getRecipes(),
+                 viewModelRecipe: RecipeViewModel = viewModel(),
+                 viewModelShopping: ShoppingListViewModel = viewModel()
 ) {
 
     Scaffold(topBar = {
@@ -99,7 +98,8 @@ fun ChosenScreen(
                 Content(
                     ingredientsList = viewModelChosen.chosenIngredients,
                     recipe = viewModelRecipe.recipes,
-                    onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") }
+                    onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") },
+                    onAddClickShopping = {shoppingIngredient -> viewModelShopping.addShoppingIngredient(shoppingIngredient)}
 
                     //recipe = getRecipes()[0],
                 )
@@ -110,10 +110,10 @@ fun ChosenScreen(
 }
 
 @Composable
-fun Content(
-    ingredientsList: List<Ingredients>,
-    recipe: List<Recipe>,
-    onItemClick: (String) -> Unit = {}
+fun Content(ingredientsList: List<Ingredients>,
+            recipe: List<Recipe>,
+            onItemClick: (String) -> Unit = {},
+            onAddClickShopping: (String) -> Unit = {}
 ) {
     Text(text = "Chosen Screen")
 
@@ -125,6 +125,11 @@ fun Content(
                     if (recipe[i].ingredients[j] == ingredient.ingredient) {
                         Text(text = "same")
                         RecipeCards(recipe = recipe[i], onItemClick = onItemClick)
+                    }
+                    else{
+                        //TODO in Deati
+                        onAddClickShopping(recipe[i].ingredients[j])
+
                     }
                 }
             }

@@ -18,14 +18,21 @@ import com.example.findmymeal_recipes.screens.recipes.EditRecipesScreen
 import com.example.findmymeal_recipes.screens.recipes.RecipesScreen
 import com.example.findmymeal_recipes.screens.shoppinglist.ShoppingListScreen
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
+import com.example.findmymeal_recipes.viewmodels.FavoritesViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
+import com.example.findmymeal_recipes.viewmodels.ShoppingListViewModel
 
 @Composable
 fun AppNavigation(navController: NavHostController = rememberNavController()) {
+
     val ingredientsViewModel: ChoseIngredientsViewModel = viewModel()
     ingredientsViewModel.chosenIngredients
 
     val recipeViewModel: RecipeViewModel = viewModel()
+
+    val favoritesViewModel: FavoritesViewModel = viewModel()
+
+    val shoppingListViewModel: ShoppingListViewModel = viewModel()
 
     NavHost(navController = navController, startDestination = AppScreens.HomeScreen.name) {
         composable(route = AppScreens.HomeScreen.name) {
@@ -54,16 +61,16 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
         }
 
         composable(route = AppScreens.ShoppingListScreen.name) {
-            ShoppingListScreen(navController = navController)
+            ShoppingListScreen(navController = navController, viewModelShopping = shoppingListViewModel)
         }
 
         composable(route = AppScreens.ChosenScreen.name) {
             ChosenScreen(navController = navController, viewModelChosen = ingredientsViewModel,
-            viewModelRecipe = recipeViewModel)
+            viewModelRecipe = recipeViewModel, viewModelShopping = shoppingListViewModel)
         }
 
         composable(route = AppScreens.FavoriteScreen.name) {
-            FavoriteScreen(navController = navController)
+            FavoriteScreen(navController = navController, viewModel = favoritesViewModel)
         }
 
         composable(route = AppScreens.AddRecipesScreen.name) {
@@ -82,7 +89,5 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
                 viewModel = recipeViewModel
             )
         }
-
     }
-
 }

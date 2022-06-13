@@ -25,8 +25,8 @@ import com.example.findmymeal_recipes.widgets.AddRecipe
 import com.example.findmymeal_recipes.widgets.RecipeCards
 
 @Composable
-fun RecipesScreen(
-    navController: NavController, viewModel: RecipeViewModel = viewModel()
+fun RecipesScreen(navController: NavController,
+                  viewModel: RecipeViewModel = viewModel()
 
 ) {
     Scaffold(topBar = {
@@ -99,10 +99,9 @@ fun RecipesScreen(
 }
 
 @Composable
-fun Content(
-    recipe: List<Recipe>,
-    onItemClick: (String) -> Unit = {},
-    onDeleteClickRecipe: (Recipe) -> Unit = {}
+fun Content(recipe: List<Recipe>,
+            onItemClick: (String) -> Unit = {},
+            onDeleteClickRecipe: (Recipe) -> Unit = {}
 ) {
 
     LazyColumn {

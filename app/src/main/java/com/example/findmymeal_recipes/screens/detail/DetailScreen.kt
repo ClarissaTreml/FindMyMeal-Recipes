@@ -20,10 +20,9 @@ import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.DetailRecipeCard
 
 @Composable
-fun DetailScreen(
-    navController: NavController,
-    recipeId: String? = "0",
-    viewModel: RecipeViewModel = viewModel()
+fun DetailScreen(navController: NavController,
+                 recipeId: String? = "0",
+                 viewModel: RecipeViewModel = viewModel()
 ) {
 
     val recipe = filterRecipe(recipeId = recipeId, recipes = viewModel.getAllRecipes())

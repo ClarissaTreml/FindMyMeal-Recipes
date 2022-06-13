@@ -19,7 +19,9 @@ import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.AddRecipe
 
 @Composable
-fun AddRecipesScreen(navController: NavController, viewModel: RecipeViewModel = viewModel()) {
+fun AddRecipesScreen(navController: NavController,
+                     viewModel: RecipeViewModel = viewModel()
+) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
             Row(
@@ -89,8 +91,3 @@ fun AddRecipesScreen(navController: NavController, viewModel: RecipeViewModel = 
     }
 }
 
-
-@Composable
-fun Content() {
-
-}

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.findmymeal_recipes.models.Ingredients
 
 class ChoseIngredientsViewModel : ViewModel() {
+
     private val _chosenIngredients = mutableStateListOf<Ingredients>()
 
     val chosenIngredients: List<Ingredients>

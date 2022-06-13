@@ -7,6 +7,7 @@ import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.models.getRecipes
 
 class RecipeViewModel : ViewModel() {
+
     private var _recipes = mutableStateListOf<Recipe>()
     private var _ingredients = mutableStateListOf<String>()
 

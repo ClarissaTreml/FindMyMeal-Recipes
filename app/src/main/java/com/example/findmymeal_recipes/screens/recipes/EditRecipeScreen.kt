@@ -21,9 +21,9 @@ import com.example.findmymeal_recipes.widgets.EditRecipe
 import com.example.findmymeal_recipes.widgets.ViewIngredients
 
 @Composable
-fun EditRecipesScreen(
-    navController: NavController, viewModel: RecipeViewModel = viewModel(),
-    recipeId: String? = "0"
+fun EditRecipesScreen(navController: NavController,
+                      viewModel: RecipeViewModel = viewModel(),
+                      recipeId: String? = "0"
 ) {
 
     val oldRecipe = filterRecipe(recipeId = recipeId, recipes = viewModel.getAllRecipes())
@@ -90,7 +90,6 @@ fun EditRecipesScreen(
                 )
 
                 Text(text = "Edit Screen")
-
 
 
                 EditRecipe(

@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 
 //@credits: https://fvilarino.medium.com/creating-a-rotating-card-in-jetpack-compose-ba94c7dd76fb
 enum class CardFace(val angle: Float) {
+
     Front(0f) { //angle
         override val next: CardFace
             get() = Back
