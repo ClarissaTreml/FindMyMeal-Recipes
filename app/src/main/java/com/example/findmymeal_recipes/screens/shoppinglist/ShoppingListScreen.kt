@@ -20,8 +20,9 @@ import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.ShoppingListViewModel
 
 @Composable
-fun ShoppingListScreen(navController: NavController,
-                       viewModelShopping: ShoppingListViewModel = viewModel()
+fun ShoppingListScreen(
+    navController: NavController,
+    viewModelShopping: ShoppingListViewModel = viewModel()
 ) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
@@ -87,13 +88,10 @@ fun ShoppingListScreen(navController: NavController,
 
 
 @Composable
-fun Content(shoppingIngredients: List<String>){
-    LazyColumn(){
-        items(items = shoppingIngredients){
-            ingredient ->
+fun Content(shoppingIngredients: List<String>) {
+    LazyColumn() {
+        items(items = shoppingIngredients) { ingredient ->
             Text(text = ingredient)
         }
-
     }
-
 }

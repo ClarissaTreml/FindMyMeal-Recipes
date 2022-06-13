@@ -7,7 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -101,8 +101,21 @@ fun RecipesScreen(navController: NavController,
 @Composable
 fun Content(recipe: List<Recipe>,
             onItemClick: (String) -> Unit = {},
-            onDeleteClickRecipe: (Recipe) -> Unit = {}
+            onDeleteClickRecipe: (Recipe) -> Unit = {},
 ) {
+    var expanded by remember { mutableStateOf(false) }
+    val difficulty = listOf("Beginner", "Advanced", "Pro")
+    var selectedIndex by remember { mutableStateOf(0) }
+
+    DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        difficulty.forEachIndexed { index, s ->
+            DropdownMenuItem(onClick = { selectedIndex = index }) {
+
+
+            }
+        }
+
+    }
 
     LazyColumn {
         items(items = recipe) { recipe ->
