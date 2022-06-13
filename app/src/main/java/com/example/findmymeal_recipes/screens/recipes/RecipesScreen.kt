@@ -89,11 +89,11 @@ fun RecipesScreen(navController: NavController,
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
 
+
                 Content(
                     recipe = viewModel.recipes,
                     onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") },
                     onDeleteClickRecipe = { recipe -> viewModel.removeRecipe(recipe) }
-
                 )
             }
         }
@@ -105,7 +105,7 @@ fun Content(recipe: List<Recipe>,
             onItemClick: (String) -> Unit = {},
             onDeleteClickRecipe: (Recipe) -> Unit = {},
 ) {
-    FilterRecipe(recipe = recipe[0])
+    //FilterRecipe(recipe = recipe[0])
 
 
     LazyColumn {
@@ -113,7 +113,7 @@ fun Content(recipe: List<Recipe>,
             RecipeCards(
                 recipe = recipe,
                 onItemClick = onItemClick,
-                onDeleteClickRecipe = onDeleteClickRecipe
+                onDeleteClickRecipe = onDeleteClickRecipe,
             )
         }
     }
