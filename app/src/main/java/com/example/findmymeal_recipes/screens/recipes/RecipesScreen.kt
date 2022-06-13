@@ -83,7 +83,8 @@ fun RecipesScreen(
                     text = "Find My Meal\nRecipes",
                     style = MaterialTheme.typography.h3,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
+                    modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name)
+                    }
                 )
 
                 FilterRecipe(onScreenClick = {

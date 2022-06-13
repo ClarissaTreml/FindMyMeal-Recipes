@@ -1,6 +1,5 @@
 package com.example.findmymeal_recipes.widgets
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -27,7 +26,9 @@ import com.example.findmymeal_recipes.R
 import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.ui.theme.BackColor
 
-var difficulty = ""
+var init: String? = "All"
+var difficulty: String? = null
+var category: String? = null
 
 @Composable
 fun FilterRecipe(
@@ -37,6 +38,7 @@ fun FilterRecipe(
     var expanded by remember { mutableStateOf(false) }
     var difficultyExpanded by remember { mutableStateOf(false) }
     var categoryExpanded by remember { mutableStateOf(false) }
+
 
     Box() {
         IconButton(onClick = { expanded = true }) {
@@ -56,23 +58,26 @@ fun FilterRecipe(
 
                 DropdownMenuItem(onClick = {
                     difficulty = "Beginner"
-                    Log.d("Difficulty", difficulty)
-                    onScreenClick("hello")
+                    init = null
+                    category = null
+                    onScreenClick("")
                 }) {
                     Text(text = "Beginner")
 
                 }
                 DropdownMenuItem(onClick = {
                     difficulty = "Advanced"
-                    Log.d("Difficulty", difficulty)
-                    onScreenClick("hello")
+                    init = null
+                    category = null
+                    onScreenClick("")
                 }) {
                     Text(text = "Advanced")
                 }
                 DropdownMenuItem(onClick = {
                     difficulty = "Pro"
-                    Log.d("Difficulty", difficulty)
-                    onScreenClick("hello")
+                    init = null
+                    category = null
+                    onScreenClick("")
                 }) {
                     Text(text = "Pro")
                 }
@@ -85,16 +90,36 @@ fun FilterRecipe(
             DropdownMenu(
                 expanded = categoryExpanded,
                 onDismissRequest = { categoryExpanded = false }) {
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                DropdownMenuItem(onClick = {
+                    category = "Breakfast"
+                    init = null
+                    difficulty = null
+                    onScreenClick("")
+                }) {
                     Text(text = "Breakfast")
                 }
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                DropdownMenuItem(onClick = {
+                    category = "Lunch"
+                    init = null
+                    difficulty = null
+                    onScreenClick("")
+                }) {
                     Text(text = "Lunch")
                 }
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                DropdownMenuItem(onClick = {
+                    category = "Dinner"
+                    init = null
+                    difficulty = null
+                    onScreenClick("")
+                }) {
                     Text(text = "Dinner")
                 }
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                DropdownMenuItem(onClick = {
+                    category = "Dessert"
+                    init = null
+                    difficulty = null
+                    onScreenClick("")
+                }) {
                     Text(text = "Dessert")
                 }
             }
@@ -103,209 +128,119 @@ fun FilterRecipe(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RecipeCards(
     recipe: Recipe,
     onItemClick: (String) -> Unit = {},
     onDeleteClickRecipe: (Recipe) -> Unit = {},
 ) {
-
-    if (recipe.difficulty == difficulty){// || recipe.category == "Dessert") {
-        Text(text = difficulty)
-
-        var cardFace by remember {
-            mutableStateOf(CardFace.Front)
-        }
-
-        FlipCard(
-            cardFace = cardFace,
-            onClick = { cardFace = cardFace.next },
-            front = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Image(
-                        painter = rememberAsyncImagePainter(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .data(recipe.images)
-                                .crossfade(true)
-                                .build()
-                        ),
-                        contentDescription = "Recipe Front Image",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-            },
-            back = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(BackColor),
-                ) {
-                    Row(horizontalArrangement = Arrangement.End) {
-                        IconButton(
-                            onClick = { onItemClick(recipe.id) }) {
-                            Image(
-                                painterResource(R.drawable.fork),
-                                contentScale = ContentScale.Crop,
-                                contentDescription = "Fork"
-                            )
-                        }
-                        IconButton(
-                            onClick = { onDeleteClickRecipe(recipe) },
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Delete,
-                                contentDescription = "Delete Button"
-                            )
-                        }
-                    }
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = recipe.name,
-                            style = MaterialTheme.typography.h6,
-                        )
-                        Spacer(modifier = Modifier.height(2.dp))
-                        Row() {
-                            Text(
-                                text = recipe.difficulty,
-                                style = MaterialTheme.typography.subtitle1
-                            )
-                            Spacer(modifier = Modifier.width(10.dp))
-
-                            Text(
-                                text = recipe.category,
-                                style = MaterialTheme.typography.subtitle1
-                            )
-                            Spacer(modifier = Modifier.width(10.dp))
-
-                            Text(
-                                text = recipe.duration,
-                                style = MaterialTheme.typography.subtitle1
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.height(2.dp))
-
-                        Text(
-                            text = recipe.description,
-                            style = MaterialTheme.typography.body1
-                        )
-                    }
-
-                }
-            },
-        )
+    if (recipe.difficulty == difficulty) {
+        RecipeCards2(recipe = recipe, onItemClick = onItemClick, onDeleteClickRecipe)
+    } else if (init == "All") {
+        RecipeCards2(recipe = recipe, onItemClick = onItemClick, onDeleteClickRecipe)
+    } else if (recipe.category == category) {
+        RecipeCards2(recipe = recipe, onItemClick = onItemClick, onDeleteClickRecipe)
     }
 }
 
 
-/*
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun RecipeCards(
+fun RecipeCards2(
     recipe: Recipe,
     onItemClick: (String) -> Unit = {},
     onDeleteClickRecipe: (Recipe) -> Unit = {},
     //difficulty: String,
 ) {
 
-    if (recipe.difficulty == difficulty) {// || recipe.category == "Dessert") {
+    var cardFace by remember {
+        mutableStateOf(CardFace.Front)
+    }
 
+    FlipCard(
+        cardFace = cardFace,
+        onClick = { cardFace = cardFace.next },
+        front = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Image(
+                    painter = rememberAsyncImagePainter(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(recipe.images)
+                            .crossfade(true)
+                            .build()
+                    ),
+                    contentDescription = "Recipe Front Image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+        },
+        back = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(BackColor),
+            ) {
+                Row(horizontalArrangement = Arrangement.End) {
+                    IconButton(
+                        onClick = { onItemClick(recipe.id) }) {
+                        Image(
+                            painterResource(R.drawable.fork),
+                            contentScale = ContentScale.Crop,
+                            contentDescription = "Fork"
+                        )
+                    }
+                    IconButton(
+                        onClick = { onDeleteClickRecipe(recipe) },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Delete Button"
+                        )
+                    }
+                }
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = recipe.name,
+                        style = MaterialTheme.typography.h6,
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Row() {
+                        Text(
+                            text = recipe.difficulty,
+                            style = MaterialTheme.typography.subtitle1
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
 
-        var cardFace by remember {
-            mutableStateOf(CardFace.Front)
-        }
+                        Text(
+                            text = recipe.category,
+                            style = MaterialTheme.typography.subtitle1
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
 
-        FlipCard(
-            cardFace = cardFace,
-            onClick = { cardFace = cardFace.next },
-            front = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Image(
-                        painter = rememberAsyncImagePainter(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .data(recipe.images)
-                                .crossfade(true)
-                                .build()
-                        ),
-                        contentDescription = "Recipe Front Image",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
+                        Text(
+                            text = recipe.duration,
+                            style = MaterialTheme.typography.subtitle1
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(2.dp))
+
+                    Text(
+                        text = recipe.description,
+                        style = MaterialTheme.typography.body1
                     )
                 }
-            },
-            back = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(BackColor),
-                ) {
-                    Row(horizontalArrangement = Arrangement.End) {
-                        IconButton(
-                            onClick = { onItemClick(recipe.id) }) {
-                            Image(
-                                painterResource(R.drawable.fork),
-                                contentScale = ContentScale.Crop,
-                                contentDescription = "Fork"
-                            )
-                        }
-                        IconButton(
-                            onClick = { onDeleteClickRecipe(recipe) },
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Delete,
-                                contentDescription = "Delete Button"
-                            )
-                        }
-                    }
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = recipe.name,
-                            style = MaterialTheme.typography.h6,
-                        )
-                        Spacer(modifier = Modifier.height(2.dp))
-                        Row() {
-                            Text(
-                                text = recipe.difficulty,
-                                style = MaterialTheme.typography.subtitle1
-                            )
-                            Spacer(modifier = Modifier.width(10.dp))
 
-                            Text(
-                                text = recipe.category,
-                                style = MaterialTheme.typography.subtitle1
-                            )
-                            Spacer(modifier = Modifier.width(10.dp))
-
-                            Text(
-                                text = recipe.duration,
-                                style = MaterialTheme.typography.subtitle1
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.height(2.dp))
-
-                        Text(
-                            text = recipe.description,
-                            style = MaterialTheme.typography.body1
-                        )
-                    }
-
-                }
-            },
-        )
-    }
+            }
+        },
+    )
 }
- */
+
 
 @Composable
 fun DetailRecipeCard(recipe: Recipe, onEditClick: (String) -> Unit = {}) {

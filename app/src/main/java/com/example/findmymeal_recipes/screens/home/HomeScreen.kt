@@ -14,6 +14,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
+import com.example.findmymeal_recipes.widgets.difficulty
+import com.example.findmymeal_recipes.widgets.init
 
 @Preview(showBackground = true)
 @Composable
@@ -59,7 +61,9 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                 IconButton(modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.White),
-                    onClick = { navController.navigate(route = AppScreens.RecipesScreen.name) }) {
+                    onClick = {
+                        init = "All"
+                        navController.navigate(route = AppScreens.RecipesScreen.name) }) {
                     Text(
                         text = "Show Recipes",
                         textAlign = TextAlign.Center,
@@ -72,7 +76,8 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                 IconButton(modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.White),
-                    onClick = { navController.navigate(route = AppScreens.ShoppingListScreen.name) }) {
+                    onClick = {
+                        navController.navigate(route = AppScreens.ShoppingListScreen.name) }) {
                     Text(
                         text = "Shopping List",
                         textAlign = TextAlign.Center,
