@@ -13,7 +13,7 @@ class ChoseIngredientsViewModel : ViewModel() {
         get() = _chosenIngredients
 
     fun addIngredient(ingredient: Ingredients) {
-        if (!exists(ingredient = ingredient)) {
+        if (!exists(ingredient)) {
             _chosenIngredients.add(ingredient)
             Log.d("ADDED", "${_chosenIngredients.last()}")
         }
@@ -29,7 +29,7 @@ class ChoseIngredientsViewModel : ViewModel() {
     }
 
     fun isClicked(ingredient: Ingredients): Boolean {
-        return exists(ingredient = ingredient)
+        return exists(ingredient)
     }
 
 }

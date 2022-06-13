@@ -99,10 +99,12 @@ fun ChosenScreen(navController: NavController,
                     ingredientsList = viewModelChosen.chosenIngredients,
                     recipe = viewModelRecipe.recipes,
                     onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") },
-                    onAddClickShopping = {shoppingIngredient -> viewModelShopping.addShoppingIngredient(shoppingIngredient)}
+                    //onAddClickShopping = {shoppingIngredient -> viewModelShopping.addShoppingIngredient(shoppingIngredient)}
 
                     //recipe = getRecipes()[0],
                 )
+
+
             }
         }
     }
@@ -113,7 +115,7 @@ fun ChosenScreen(navController: NavController,
 fun Content(ingredientsList: List<Ingredients>,
             recipe: List<Recipe>,
             onItemClick: (String) -> Unit = {},
-            onAddClickShopping: (String) -> Unit = {}
+            //onAddClickShopping: (String) -> Unit = {}
 ) {
     Text(text = "Chosen Screen")
 
@@ -128,7 +130,7 @@ fun Content(ingredientsList: List<Ingredients>,
                     }
                     else{
                         //TODO in Deati
-                        onAddClickShopping(recipe[i].ingredients[j])
+                        //onAddClickShopping(recipe[i].ingredients[j])
 
                     }
                 }
@@ -136,6 +138,8 @@ fun Content(ingredientsList: List<Ingredients>,
         }
     }
 
+
     Spacer(modifier = Modifier.height(20.dp))
+
 
 }

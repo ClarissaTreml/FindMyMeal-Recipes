@@ -7,7 +7,7 @@ data class Ingredients(
 
 fun getIngredients(): List<Ingredients> {
     return listOf(
-        Ingredients(ingredient = "tomato"),
+        Ingredients("tomato"),
         Ingredients(ingredient = "potato"),
         Ingredients(ingredient = "mushroom"),
         Ingredients(ingredient = "carrot"),

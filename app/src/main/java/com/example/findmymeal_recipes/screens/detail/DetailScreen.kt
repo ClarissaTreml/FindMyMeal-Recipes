@@ -16,16 +16,21 @@ import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
+import com.example.findmymeal_recipes.viewmodels.ShoppingListViewModel
 import com.example.findmymeal_recipes.widgets.DetailRecipeCard
 
 @Composable
-fun DetailScreen(navController: NavController,
-                 recipeId: String? = "0",
-                 viewModel: RecipeViewModel = viewModel()
+fun DetailScreen(
+    navController: NavController,
+    recipeId: String? = "0",
+    viewModelRecipe: RecipeViewModel = viewModel(),
+    viewModelShopping: ShoppingListViewModel = viewModel(),
+    viewModelChosen: ChoseIngredientsViewModel = viewModel(),
 ) {
 
-    val recipe = filterRecipe(recipeId = recipeId, recipes = viewModel.getAllRecipes())
+    val recipe = filterRecipe(recipeId = recipeId, recipes = viewModelRecipe.getAllRecipes())
 
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
@@ -83,6 +88,34 @@ fun DetailScreen(navController: NavController,
                     DetailRecipeCard(recipe = recipe, onEditClick = { recipeId ->
                         navController.navigate(route = AppScreens.EditRecipeScreen.name + "/$recipeId")
                     })
+                }
+
+                //val chosenIngredient = viewModelChosen.chosenIngredients[0].toString()
+                //recipe.ingredients.contains(chosenIngredient)
+
+                /*
+                for (i in viewModelChosen.chosenIngredients.indices){
+                    val chosenIngredient = viewModelChosen.chosenIngredients[i].toString()
+                    if (!recipe.ingredients.contains(chosenIngredient)){
+                        viewModelShopping.addShoppingIngredient(chosenIngredient)
+                    }
+                }*/
+
+
+                for (i in recipe.ingredients.indices) {
+                    Text(text = "Detail Recipe Ingredients")
+                    Text(text = recipe.ingredients[i])
+                    for (j in viewModelChosen.chosenIngredients.indices) {
+                        val chosenIngredient = viewModelChosen.chosenIngredients[j].ingredient
+                        Text(text = "Chosen Ingredients")
+                        Text(text = chosenIngredient)
+                        if (recipe.ingredients.contains(chosenIngredient)) {
+                            //if (!viewModelShopping.shoppingIngredients.contains(chosenIngredient)) {
+                            // TODO dont show the chosen ingredient
+                            viewModelShopping.addShoppingIngredient(recipe.ingredients[i])
+                            //}
+                        }
+                    }
                 }
             }
         }
