@@ -33,7 +33,7 @@ fun ChosenScreen(
     recipe: List<Recipe> = getRecipes(),
     viewModelRecipe: RecipeViewModel = viewModel()
 
-    ) {
+) {
 
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
@@ -117,11 +117,10 @@ fun Content(
 ) {
     Text(text = "Chosen Screen")
 
-    // TODO
     LazyColumn() {
         items(items = ingredientsList) { ingredient ->
-            for (i in 0..2) { //für Rezepte
-                for (j in 0..5) { //für Ingredients
+            for (i in recipe.indices) { //für Rezepte
+                for (j in recipe[i].ingredients.indices) { //für Ingredients
                     // show no duplicate recipes
                     if (recipe[i].ingredients[j] == ingredient.ingredient) {
                         Text(text = "same")

@@ -98,12 +98,12 @@ fun EditRecipesScreen(
                         viewModel.addIngredientsRecipe(ingredient)
                     },
                     ingredients = viewModel.ingredientsRecipe,
-                    //TODO
                     onAddClickRecipe = { newRecipe -> viewModel.addRecipe(newRecipe) },
                     oldRecipe = oldRecipe,
                     onDeleteClickRecipe = { oldRecipe -> viewModel.removeRecipe(oldRecipe) },
                     oldIngredient = oldIngredient
                 )
+                viewModel.clearIngredientsList()
             }
         }
     }

@@ -21,6 +21,7 @@ class RecipeViewModel : ViewModel() {
 
     fun addRecipe(recipe: Recipe) {
         _recipes.add(recipe)
+        Log.d("ADDED", _recipes.toList().toString())
     }
 
     fun removeRecipe(recipe: Recipe) {
@@ -41,6 +42,10 @@ class RecipeViewModel : ViewModel() {
     fun addIngredientsRecipe(ingredient: String) {
         _ingredients.add(ingredient)
         Log.d("ADDED", _ingredients.last())
+    }
+
+    fun clearIngredientsList() {
+        _ingredients.clear()
     }
 
     fun removeIngredientsRecipe(ingredient: String) {

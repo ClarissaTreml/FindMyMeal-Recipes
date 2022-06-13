@@ -281,6 +281,7 @@ fun AddRecipe(
     }
 
 }
+
 @Composable
 fun EditRecipe(
     onAddClickIngredient: (String) -> Unit = {},
@@ -289,7 +290,7 @@ fun EditRecipe(
     oldRecipe: Recipe,
     onDeleteClickRecipe: (Recipe) -> Unit = {},
     oldIngredient: List<String>,
-    ) {
+) {
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
 
@@ -300,12 +301,12 @@ fun EditRecipe(
         var description by remember { mutableStateOf(oldRecipe.description) }
         var duration by remember { mutableStateOf(oldRecipe.duration) }
         var category by remember { mutableStateOf(oldRecipe.category) }
-        var ingredient by remember { mutableStateOf(" ") }
+        var ingredient by remember { mutableStateOf("") }
         var steps by remember { mutableStateOf(oldRecipe.steps) }
 
         /*OutlinedTextField(value = id, onValueChange = { id = oldRecipe.id },
             label = { Text(text = "id") })*/
-        OutlinedTextField(value = name, onValueChange = { name = it},
+        OutlinedTextField(value = name, onValueChange = { name = it },
             label = { Text(text = "name") })
         OutlinedTextField(value = images, onValueChange = { images = it },
             label = { Text(text = "images") })
@@ -318,7 +319,8 @@ fun EditRecipe(
         OutlinedTextField(value = category, onValueChange = { category = it },
             label = { Text(text = "category") })
 
-        // TODO
+        // TODO (Man kann bereits existierende Ingredients nicht editen)
+        // TODO einzelne Ingredients deleten
         OutlinedTextField(
             value = ingredient,
             onValueChange = { value ->
@@ -349,7 +351,7 @@ fun EditRecipe(
                 if (name.isNotEmpty() && images.isNotEmpty()
                     && difficulty.isNotEmpty() && description.isNotEmpty() &&
                     duration.isNotEmpty() && category.isNotEmpty() &&
-                    ingredient.isNotEmpty() && steps.isNotEmpty()
+                    steps.isNotEmpty()
                 ) {
                     val newRecipe = Recipe(
                         oldRecipe.id, name, images, difficulty,
@@ -358,7 +360,6 @@ fun EditRecipe(
 
                     onDeleteClickRecipe(oldRecipe)
                     onAddClickRecipe(newRecipe)
-
 
                 }
 
