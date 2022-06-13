@@ -103,6 +103,16 @@ fun DetailScreen(
 
 
                 for (i in recipe.ingredients.indices) {
+                    for (j in viewModelChosen.chosenIngredients.indices) {
+                        if (recipe.ingredients[i] != viewModelChosen.chosenIngredients[j].ingredient) {
+                            if (!viewModelShopping.shoppingIngredients.contains(recipe.ingredients[i]))
+                                viewModelShopping.addShoppingIngredient(recipe.ingredients[i])
+                        }
+                    }
+                }
+
+                /*
+                for (i in recipe.ingredients.indices) {
                     Text(text = "Detail Recipe Ingredients")
                     Text(text = recipe.ingredients[i])
                     for (j in viewModelChosen.chosenIngredients.indices) {
@@ -116,7 +126,7 @@ fun DetailScreen(
                             //}
                         }
                     }
-                }
+                }*/
             }
         }
     }
