@@ -50,7 +50,6 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
                 recipeId = backStackEntry.arguments?.getString("recipeId"),
                 viewModelRecipe = recipeViewModel,
                 viewModelShopping = shoppingListViewModel,
-                viewModelChosen = ingredientsViewModel
             )
         }
 

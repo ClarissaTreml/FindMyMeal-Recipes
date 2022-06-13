@@ -123,7 +123,7 @@ fun Content(ingredientsList: List<Ingredients>,
         items(items = ingredientsList) { ingredient ->
             for (i in recipe.indices) { //für Rezepte
                 for (j in recipe[i].ingredients.indices) { //für Ingredients
-                    // show no duplicate recipes
+                    // TODO show no duplicate recipes
                     if (recipe[i].ingredients[j] == ingredient.ingredient) {
                         Text(text = "same")
                         RecipeCards(recipe = recipe[i], onItemClick = onItemClick)
