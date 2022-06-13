@@ -2,6 +2,7 @@ package com.example.findmymeal_recipes.viewmodels
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.models.getRecipes
@@ -10,6 +11,8 @@ class RecipeViewModel : ViewModel() {
 
     private var _recipes = mutableStateListOf<Recipe>()
     private var _ingredients = mutableStateListOf<String>()
+    private var _category = mutableStateOf(String)
+    private var _difficulty = mutableStateOf(String)
 
     init {
         _recipes.addAll(
@@ -34,6 +37,7 @@ class RecipeViewModel : ViewModel() {
     }
 
     fun filterRecipes() {
+
 
     }
 

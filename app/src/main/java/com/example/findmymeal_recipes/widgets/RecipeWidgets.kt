@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -370,6 +371,62 @@ fun EditRecipe(
     }
 
 }
+
+@Composable
+fun FilterRecipe(recipe: Recipe,
+){
+    var expanded by remember { mutableStateOf(false) }
+    var difficultyExpanded by remember { mutableStateOf(false)}
+    var categoryExpanded by remember { mutableStateOf(false)}
+
+    Box(){
+        IconButton(onClick = { expanded = true }) {
+            Text(text = "Filter")
+            Icon(Icons.Default.MoreVert, contentDescription = "Filter")
+
+        }
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            IconButton(onClick = { difficultyExpanded = true }) {
+                Text(text = "Filter by Difficulty")
+                Icon(Icons.Default.MoreVert, contentDescription = "Filter by Difficulty")
+
+            }
+            DropdownMenu(expanded = difficultyExpanded, onDismissRequest = { difficultyExpanded = false }) {
+
+                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                    Text(text = "Beginner")
+                }
+                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                    Text(text = "Advanced")
+                }
+                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                    Text(text = "Pro")
+                }
+            }
+            IconButton(onClick = { categoryExpanded = true }) {
+                Text(text = "Filter by Category")
+                Icon(Icons.Default.MoreVert, contentDescription = "Filter by Category")
+
+            }
+            DropdownMenu(expanded = categoryExpanded, onDismissRequest = { categoryExpanded = false }) {
+                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                    Text(text = "Breakfast")
+                }
+                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                    Text(text = "Lunch")
+                }
+                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                    Text(text = "Dinner")
+                }
+                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                    Text(text = "Dessert")
+                }
+            }
+
+        }
+    }
+}
+
 
 
 /*
