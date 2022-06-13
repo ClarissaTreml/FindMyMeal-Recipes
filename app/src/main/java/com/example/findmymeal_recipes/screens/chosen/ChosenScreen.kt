@@ -22,15 +22,18 @@ import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
+import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.RecipeCards
 
 @Composable
 fun ChosenScreen(
     navController: NavController,
-    viewModel: ChoseIngredientsViewModel = viewModel(),
+    viewModelChosen: ChoseIngredientsViewModel = viewModel(),
     //recipe: Recipe,
     recipe: List<Recipe> = getRecipes(),
-) {
+    viewModelRecipe: RecipeViewModel = viewModel()
+
+    ) {
 
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
@@ -94,8 +97,8 @@ fun ChosenScreen(
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
                 Content(
-                    ingredientsList = viewModel.chosenIngredients,
-                    recipe = recipe,
+                    ingredientsList = viewModelChosen.chosenIngredients,
+                    recipe = viewModelRecipe.recipes,
                     onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") }
 
                     //recipe = getRecipes()[0],
@@ -117,8 +120,8 @@ fun Content(
     // TODO
     LazyColumn() {
         items(items = ingredientsList) { ingredient ->
-            for (i in 0..2) {
-                for (j in 0..3) {
+            for (i in 0..2) { //für Rezepte
+                for (j in 0..5) { //für Ingredients
                     // show no duplicate recipes
                     if (recipe[i].ingredients[j] == ingredient.ingredient) {
                         Text(text = "same")

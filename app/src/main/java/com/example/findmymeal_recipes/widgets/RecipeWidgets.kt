@@ -190,7 +190,7 @@ fun DetailRecipeCard(recipe: Recipe, onEditClick: (String) -> Unit = {}) {
 fun ViewIngredients(
     ingredients: List<String> = listOf(),
 ) {
-    Column(modifier = Modifier.height(100.dp)) {
+    Column(modifier = Modifier.height(120.dp)) {
         LazyColumn {
             items(ingredients) { ingredient ->
                 Text(text = ingredient)
@@ -287,8 +287,9 @@ fun EditRecipe(
     ingredients: List<String> = listOf(),
     onAddClickRecipe: (Recipe) -> Unit = {},
     oldRecipe: Recipe,
-    onDeleteClickRecipe: (Recipe) -> Unit = {}
-) {
+    onDeleteClickRecipe: (Recipe) -> Unit = {},
+    oldIngredient: List<String>,
+    ) {
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
 
@@ -335,6 +336,8 @@ fun EditRecipe(
             placeholder = { Text(text = "Enter your ingredient") },
         )
 
+        //ViewIngredients(oldIngredient)
+        Text(text = "added: ")
         ViewIngredients(ingredients)
 
         OutlinedTextField(value = steps, onValueChange = { steps = it },
@@ -350,7 +353,7 @@ fun EditRecipe(
                 ) {
                     val newRecipe = Recipe(
                         oldRecipe.id, name, images, difficulty,
-                        description, duration, category, ingredients, steps
+                        description, duration, category, (oldIngredient + ingredients), steps
                     )
 
                     onDeleteClickRecipe(oldRecipe)

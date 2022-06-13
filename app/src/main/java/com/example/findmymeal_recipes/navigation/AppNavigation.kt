@@ -58,7 +58,8 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
         }
 
         composable(route = AppScreens.ChosenScreen.name) {
-            ChosenScreen(navController = navController, viewModel = ingredientsViewModel)
+            ChosenScreen(navController = navController, viewModelChosen = ingredientsViewModel,
+            viewModelRecipe = recipeViewModel)
         }
 
         composable(route = AppScreens.FavoriteScreen.name) {

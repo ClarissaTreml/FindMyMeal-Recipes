@@ -19,6 +19,7 @@ fun getIngredients(): List<Ingredients> {
         Ingredients(ingredient = "garlic"),
         Ingredients(ingredient = "spring onion"),
         Ingredients(ingredient = "spinach"),
+        Ingredients(ingredient = "water"),
     )
 }
 

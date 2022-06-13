@@ -18,6 +18,7 @@ import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.EditRecipe
+import com.example.findmymeal_recipes.widgets.ViewIngredients
 
 @Composable
 fun EditRecipesScreen(
@@ -26,6 +27,7 @@ fun EditRecipesScreen(
 ) {
 
     val oldRecipe = filterRecipe(recipeId = recipeId, recipes = viewModel.getAllRecipes())
+    val oldIngredient = oldRecipe.ingredients
 
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
@@ -89,6 +91,8 @@ fun EditRecipesScreen(
 
                 Text(text = "Edit Screen")
 
+
+
                 EditRecipe(
                     onAddClickIngredient = { ingredient ->
                         viewModel.addIngredientsRecipe(ingredient)
@@ -97,7 +101,8 @@ fun EditRecipesScreen(
                     //TODO
                     onAddClickRecipe = { newRecipe -> viewModel.addRecipe(newRecipe) },
                     oldRecipe = oldRecipe,
-                    onDeleteClickRecipe = { oldRecipe -> viewModel.removeRecipe(oldRecipe) }
+                    onDeleteClickRecipe = { oldRecipe -> viewModel.removeRecipe(oldRecipe) },
+                    oldIngredient = oldIngredient
                 )
             }
         }
