@@ -9,10 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -133,13 +130,17 @@ fun RecipeCards(
     recipe: Recipe,
     onItemClick: (String) -> Unit = {},
     onDeleteClickRecipe: (Recipe) -> Unit = {},
+    onAddRecipeToFavorite: (Recipe) -> Unit = {}
 ) {
     if (recipe.difficulty == difficulty) {
-        RecipeCards2(recipe = recipe, onItemClick = onItemClick, onDeleteClickRecipe)
+        RecipeCards2(recipe = recipe, onItemClick = onItemClick,
+            onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite)
     } else if (init == "All") {
-        RecipeCards2(recipe = recipe, onItemClick = onItemClick, onDeleteClickRecipe)
+        RecipeCards2(recipe = recipe, onItemClick = onItemClick,
+            onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite)
     } else if (recipe.category == category) {
-        RecipeCards2(recipe = recipe, onItemClick = onItemClick, onDeleteClickRecipe)
+        RecipeCards2(recipe = recipe, onItemClick = onItemClick,
+            onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite)
     }
 }
 
@@ -150,6 +151,7 @@ fun RecipeCards2(
     recipe: Recipe,
     onItemClick: (String) -> Unit = {},
     onDeleteClickRecipe: (Recipe) -> Unit = {},
+    onAddRecipeToFavorite: (Recipe) -> Unit = {}
     //difficulty: String,
 ) {
 
@@ -202,6 +204,121 @@ fun RecipeCards2(
                             contentDescription = "Delete Button"
                         )
                     }
+                    IconButton(
+                        onClick = { onAddRecipeToFavorite(recipe) },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Favorite,
+                            contentDescription = "Favorite Button"
+                        )
+                    }
+
+                }
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = recipe.name,
+                        style = MaterialTheme.typography.h6,
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Row() {
+                        Text(
+                            text = recipe.difficulty,
+                            style = MaterialTheme.typography.subtitle1
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+
+                        Text(
+                            text = recipe.category,
+                            style = MaterialTheme.typography.subtitle1
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+
+                        Text(
+                            text = recipe.duration,
+                            style = MaterialTheme.typography.subtitle1
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(2.dp))
+
+                    Text(
+                        text = recipe.description,
+                        style = MaterialTheme.typography.body1
+                    )
+                }
+
+            }
+        },
+    )
+}
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun FavoriteCard(
+    recipe: Recipe,
+    onItemClick: (String) -> Unit = {},
+    onDeleteClickRecipe: (Recipe) -> Unit = {},
+    onAddRecipeToFavorite: (Recipe) -> Unit = {}
+    //difficulty: String,
+) {
+
+    var cardFace by remember {
+        mutableStateOf(CardFace.Front)
+    }
+
+    FlipCard(
+        cardFace = cardFace,
+        onClick = { cardFace = cardFace.next },
+        front = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Image(
+                    painter = rememberAsyncImagePainter(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(recipe.images)
+                            .crossfade(true)
+                            .build()
+                    ),
+                    contentDescription = "Recipe Front Image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+        },
+        back = {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(BackColor),
+            ) {
+                Row(horizontalArrangement = Arrangement.End) {
+                    IconButton(
+                        onClick = { onItemClick(recipe.id) }) {
+                        Image(
+                            painterResource(R.drawable.fork),
+                            contentScale = ContentScale.Crop,
+                            contentDescription = "Fork"
+                        )
+                    }
+                    IconButton(
+                        onClick = { onDeleteClickRecipe(recipe) },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Delete Button"
+                        )
+                    }
+                    IconButton(
+                        onClick = { onAddRecipeToFavorite(recipe) },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Favorite,
+                            contentDescription = "Favorite Button"
+                        )
+                    }
+
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(

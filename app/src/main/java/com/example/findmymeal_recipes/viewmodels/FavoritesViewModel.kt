@@ -1,5 +1,6 @@
 package com.example.findmymeal_recipes.viewmodels
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import com.example.findmymeal_recipes.models.Recipe
@@ -14,6 +15,7 @@ class FavoritesViewModel : ViewModel() {
     fun addFavorite(recipe: Recipe) {
         if (!existFavorite(recipe = recipe)) {
             _favoriteRecipes.add(recipe)
+            Log.d("AddedF", _favoriteRecipes.toList().toString())
         }
     }
 

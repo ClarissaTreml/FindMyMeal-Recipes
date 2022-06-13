@@ -58,7 +58,8 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
         }
 
         composable(route = AppScreens.RecipesScreen.name) {
-            RecipesScreen(navController = navController, viewModel = recipeViewModel)
+            RecipesScreen(navController = navController, viewModel = recipeViewModel,
+            viewModelFavorites = favoritesViewModel)
         }
 
         composable(route = AppScreens.ShoppingListScreen.name) {
@@ -71,8 +72,10 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
         }
 
         composable(route = AppScreens.FavoriteScreen.name) {
-            FavoriteScreen(navController = navController, viewModel = favoritesViewModel)
+            FavoriteScreen(navController = navController, viewModelFavorite = favoritesViewModel,
+                viewModelRecipes = recipeViewModel)
         }
+
 
         composable(route = AppScreens.AddRecipesScreen.name) {
             AddRecipesScreen(navController = navController, viewModel = recipeViewModel)

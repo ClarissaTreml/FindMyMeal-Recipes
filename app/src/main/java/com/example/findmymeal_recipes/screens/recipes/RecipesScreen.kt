@@ -18,6 +18,7 @@ import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.viewmodels.FavoritesViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.FilterRecipe
 import com.example.findmymeal_recipes.widgets.RecipeCards
@@ -25,7 +26,8 @@ import com.example.findmymeal_recipes.widgets.RecipeCards
 @Composable
 fun RecipesScreen(
     navController: NavController,
-    viewModel: RecipeViewModel = viewModel()
+    viewModel: RecipeViewModel = viewModel(),
+    viewModelFavorites: FavoritesViewModel = viewModel()
 
 ) {
     Scaffold(topBar = {
@@ -94,7 +96,8 @@ fun RecipesScreen(
                 Content(
                     recipe = viewModel.recipes,
                     onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") },
-                    onDeleteClickRecipe = { recipe -> viewModel.removeRecipe(recipe) }
+                    onDeleteClickRecipe = { recipe -> viewModel.removeRecipe(recipe) },
+                    onAddRecipeToFavorite = {recipe -> viewModelFavorites.addFavorite(recipe)}
                 )
             }
         }
@@ -106,6 +109,7 @@ fun Content(
     recipe: List<Recipe>,
     onItemClick: (String) -> Unit = {},
     onDeleteClickRecipe: (Recipe) -> Unit = {},
+    onAddRecipeToFavorite: (Recipe) -> Unit = {}
 ) {
     //FilterRecipe(recipe = recipe[0])
 
@@ -116,6 +120,7 @@ fun Content(
                 recipe = recipe,
                 onItemClick = onItemClick,
                 onDeleteClickRecipe = onDeleteClickRecipe,
+                onAddRecipeToFavorite = onAddRecipeToFavorite
             )
         }
     }

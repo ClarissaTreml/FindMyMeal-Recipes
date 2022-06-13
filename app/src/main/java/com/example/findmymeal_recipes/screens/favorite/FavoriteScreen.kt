@@ -2,24 +2,30 @@ package com.example.findmymeal_recipes.screens.favorite
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.FavoritesViewModel
+import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
+import com.example.findmymeal_recipes.widgets.FavoriteCard
+import com.example.findmymeal_recipes.widgets.RecipeCards
 
 @Composable
 fun FavoriteScreen(navController: NavController = rememberNavController(),
-                   viewModel: FavoritesViewModel
+                   viewModelFavorite: FavoritesViewModel = viewModel(),
+                   viewModelRecipes: RecipeViewModel = viewModel()
 ) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
@@ -71,8 +77,36 @@ fun FavoriteScreen(navController: NavController = rememberNavController(),
                 )
                 Column() {
                     Text(text = "Favorite Screen")
+                    Content(
+                        recipe = viewModelFavorite.favoriteRecipe,
+                        onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") },
+                        onDeleteClickRecipe = { recipe -> viewModelRecipes.removeRecipe(recipe)
+                                              viewModelFavorite.removeFavorite(recipe)},
+                        onAddRecipeToFavorite = {recipe -> viewModelFavorite.addFavorite(recipe)}
+                    )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun Content(
+    recipe: List<Recipe>,
+    onItemClick: (String) -> Unit = {},
+    onDeleteClickRecipe: (Recipe) -> Unit = {},
+    onAddRecipeToFavorite: (Recipe) -> Unit = {}
+) {
+    //FilterRecipe(recipe = recipe[0])
+
+    LazyColumn {
+        items(items = recipe) { recipe ->
+            FavoriteCard(
+                recipe = recipe,
+                onItemClick = onItemClick,
+                onDeleteClickRecipe = onDeleteClickRecipe,
+                onAddRecipeToFavorite = onAddRecipeToFavorite
+            )
         }
     }
 }
