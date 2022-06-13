@@ -15,13 +15,13 @@ class ChoseIngredientsViewModel : ViewModel() {
     fun addIngredient(ingredient: Ingredients) {
         if (!exists(ingredient)) {
             _chosenIngredients.add(ingredient)
-            Log.d("ADDED", "${_chosenIngredients.last()}")
+            Log.d("ADDED", _chosenIngredients.toString())
         }
     }
 
     fun removeIngredient(ingredient: Ingredients) {
         _chosenIngredients.remove(ingredient)
-        Log.d("Removed", "${_chosenIngredients.last()}")
+        Log.d("Removed", _chosenIngredients.toString())
     }
 
     private fun exists(ingredient: Ingredients): Boolean {

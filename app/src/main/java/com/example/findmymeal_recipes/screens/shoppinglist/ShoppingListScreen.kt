@@ -89,9 +89,13 @@ fun ShoppingListScreen(
 
 @Composable
 fun Content(shoppingIngredients: List<String>) {
+
+    //Todo ingredients als Checkliste anfügen (zum abhacken)
     LazyColumn() {
         items(items = shoppingIngredients) { ingredient ->
             Text(text = ingredient)
         }
+
     }
+
 }

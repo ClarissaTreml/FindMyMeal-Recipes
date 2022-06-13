@@ -42,7 +42,7 @@ class RecipeViewModel : ViewModel() {
 
     fun addIngredientsRecipe(ingredient: String) {
         _ingredients.add(ingredient)
-        Log.d("ADDED", _ingredients.last())
+        Log.d("ADDED", _ingredients.last().toString())
     }
 
     fun clearIngredientsList() {
