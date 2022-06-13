@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,19 +15,17 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.findmymeal_recipes.models.Recipe
-import com.example.findmymeal_recipes.models.getRecipes
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
-import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
-import com.example.findmymeal_recipes.widgets.AddRecipe
 import com.example.findmymeal_recipes.widgets.FilterRecipe
 import com.example.findmymeal_recipes.widgets.RecipeCards
 
 @Composable
-fun RecipesScreen(navController: NavController,
-                  viewModel: RecipeViewModel = viewModel()
+fun RecipesScreen(
+    navController: NavController,
+    viewModel: RecipeViewModel = viewModel()
 
 ) {
     Scaffold(topBar = {
@@ -89,6 +86,9 @@ fun RecipesScreen(navController: NavController,
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
 
+                FilterRecipe(onScreenClick = {
+                    navController.navigate(route = AppScreens.RecipesScreen.name)
+                })
 
                 Content(
                     recipe = viewModel.recipes,
@@ -101,9 +101,10 @@ fun RecipesScreen(navController: NavController,
 }
 
 @Composable
-fun Content(recipe: List<Recipe>,
-            onItemClick: (String) -> Unit = {},
-            onDeleteClickRecipe: (Recipe) -> Unit = {},
+fun Content(
+    recipe: List<Recipe>,
+    onItemClick: (String) -> Unit = {},
+    onDeleteClickRecipe: (Recipe) -> Unit = {},
 ) {
     //FilterRecipe(recipe = recipe[0])
 

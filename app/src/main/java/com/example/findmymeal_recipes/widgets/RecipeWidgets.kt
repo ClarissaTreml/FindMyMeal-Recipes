@@ -1,5 +1,6 @@
 package com.example.findmymeal_recipes.widgets
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -26,6 +27,82 @@ import com.example.findmymeal_recipes.R
 import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.ui.theme.BackColor
 
+var difficulty = ""
+
+@Composable
+fun FilterRecipe(
+    onScreenClick: (String) -> Unit = {},
+    //recipe: Recipe,
+) {
+    var expanded by remember { mutableStateOf(false) }
+    var difficultyExpanded by remember { mutableStateOf(false) }
+    var categoryExpanded by remember { mutableStateOf(false) }
+
+    Box() {
+        IconButton(onClick = { expanded = true }) {
+            Text(text = "Filter")
+            Icon(Icons.Default.MoreVert, contentDescription = "Filter")
+
+        }
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            IconButton(onClick = { difficultyExpanded = true }) {
+                Text(text = "Filter by Difficulty")
+                Icon(Icons.Default.MoreVert, contentDescription = "Filter by Difficulty")
+
+            }
+            DropdownMenu(
+                expanded = difficultyExpanded,
+                onDismissRequest = { difficultyExpanded = false }) {
+
+                DropdownMenuItem(onClick = {
+                    difficulty = "Beginner"
+                    Log.d("Difficulty", difficulty)
+                    onScreenClick("hello")
+                }) {
+                    Text(text = "Beginner")
+
+                }
+                DropdownMenuItem(onClick = {
+                    difficulty = "Advanced"
+                    Log.d("Difficulty", difficulty)
+                    onScreenClick("hello")
+                }) {
+                    Text(text = "Advanced")
+                }
+                DropdownMenuItem(onClick = {
+                    difficulty = "Pro"
+                    Log.d("Difficulty", difficulty)
+                    onScreenClick("hello")
+                }) {
+                    Text(text = "Pro")
+                }
+            }
+            IconButton(onClick = { categoryExpanded = true }) {
+                Text(text = "Filter by Category")
+                Icon(Icons.Default.MoreVert, contentDescription = "Filter by Category")
+
+            }
+            DropdownMenu(
+                expanded = categoryExpanded,
+                onDismissRequest = { categoryExpanded = false }) {
+                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                    Text(text = "Breakfast")
+                }
+                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                    Text(text = "Lunch")
+                }
+                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                    Text(text = "Dinner")
+                }
+                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                    Text(text = "Dessert")
+                }
+            }
+
+        }
+    }
+}
+
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RecipeCards(
@@ -34,7 +111,8 @@ fun RecipeCards(
     onDeleteClickRecipe: (Recipe) -> Unit = {},
 ) {
 
-    if (recipe.difficulty == "Beginner") {// || recipe.category == "Dessert") {
+    if (recipe.difficulty == difficulty){// || recipe.category == "Dessert") {
+        Text(text = difficulty)
 
         var cardFace by remember {
             mutableStateOf(CardFace.Front)
@@ -125,68 +203,6 @@ fun RecipeCards(
     }
 }
 
-@Composable
-fun FilterRecipe(
-    //recipe: Recipe,
-): String {
-    var expanded by remember { mutableStateOf(false) }
-    var difficultyExpanded by remember { mutableStateOf(false) }
-    var categoryExpanded by remember { mutableStateOf(false) }
-    var difficulty = " "
-
-    Box() {
-        IconButton(onClick = { expanded = true }) {
-            Text(text = "Filter")
-            Icon(Icons.Default.MoreVert, contentDescription = "Filter")
-
-        }
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            IconButton(onClick = { difficultyExpanded = true }) {
-                Text(text = "Filter by Difficulty")
-                Icon(Icons.Default.MoreVert, contentDescription = "Filter by Difficulty")
-
-            }
-            DropdownMenu(
-                expanded = difficultyExpanded,
-                onDismissRequest = { difficultyExpanded = false }) {
-
-                DropdownMenuItem(onClick = { difficulty = "Beginner" }) {
-                    Text(text = "Beginner")
-
-                }
-                DropdownMenuItem(onClick = { difficulty = "Advanced" }) {
-                    Text(text = "Advanced")
-                }
-                DropdownMenuItem(onClick = { difficulty = "Pro" }) {
-                    Text(text = "Pro")
-                }
-            }
-            IconButton(onClick = { categoryExpanded = true }) {
-                Text(text = "Filter by Category")
-                Icon(Icons.Default.MoreVert, contentDescription = "Filter by Category")
-
-            }
-            DropdownMenu(
-                expanded = categoryExpanded,
-                onDismissRequest = { categoryExpanded = false }) {
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
-                    Text(text = "Breakfast")
-                }
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
-                    Text(text = "Lunch")
-                }
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
-                    Text(text = "Dinner")
-                }
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
-                    Text(text = "Dessert")
-                }
-            }
-
-        }
-    }
-    return difficulty
-}
 
 /*
 @OptIn(ExperimentalMaterialApi::class)
