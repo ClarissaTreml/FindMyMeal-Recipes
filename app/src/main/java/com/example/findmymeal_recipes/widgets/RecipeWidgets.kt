@@ -393,7 +393,7 @@ fun FilterRecipe(recipe: Recipe,
             }
             DropdownMenu(expanded = difficultyExpanded, onDismissRequest = { difficultyExpanded = false }) {
 
-                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                DropdownMenuItem(onClick = {  }) {
                     Text(text = "Beginner")
                 }
                 DropdownMenuItem(onClick = { /*TODO*/ }) {

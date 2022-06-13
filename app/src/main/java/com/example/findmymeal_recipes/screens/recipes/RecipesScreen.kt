@@ -23,6 +23,7 @@ import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.AddRecipe
+import com.example.findmymeal_recipes.widgets.FilterRecipe
 import com.example.findmymeal_recipes.widgets.RecipeCards
 
 @Composable
@@ -104,6 +105,7 @@ fun Content(recipe: List<Recipe>,
             onItemClick: (String) -> Unit = {},
             onDeleteClickRecipe: (Recipe) -> Unit = {},
 ) {
+    FilterRecipe(recipe = recipe[0])
 
 
     LazyColumn {

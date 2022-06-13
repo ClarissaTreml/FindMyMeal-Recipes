@@ -11,8 +11,7 @@ class RecipeViewModel : ViewModel() {
 
     private var _recipes = mutableStateListOf<Recipe>()
     private var _ingredients = mutableStateListOf<String>()
-    private var _category = mutableStateOf(String)
-    private var _difficulty = mutableStateOf(String)
+
 
     init {
         _recipes.addAll(
@@ -36,10 +35,7 @@ class RecipeViewModel : ViewModel() {
         return _recipes
     }
 
-    fun filterRecipes() {
 
-
-    }
 
     val ingredientsRecipe: List<String>
         get() = _ingredients
@@ -56,6 +52,7 @@ class RecipeViewModel : ViewModel() {
     fun removeIngredientsRecipe(ingredient: String) {
         _ingredients.remove(ingredient)
     }
+
 }
 
 /*
