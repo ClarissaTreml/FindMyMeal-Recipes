@@ -97,7 +97,10 @@ fun RecipesScreen(
                     recipe = viewModel.recipes,
                     onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") },
                     onDeleteClickRecipe = { recipe -> viewModel.removeRecipe(recipe) },
-                    onAddRecipeToFavorite = {recipe -> viewModelFavorites.addFavorite(recipe)}
+                    onAddRecipeToFavorite = {recipe -> viewModelFavorites.addFavorite(recipe)},
+                    onDeleteOfFavorites = {recipe -> viewModelFavorites.removeFavorite(recipe)},
+                    favorite = { recipe -> viewModelFavorites.isFavorite(recipe = recipe) },
+                    favoriteIcon = true
                 )
             }
         }
@@ -109,8 +112,12 @@ fun Content(
     recipe: List<Recipe>,
     onItemClick: (String) -> Unit = {},
     onDeleteClickRecipe: (Recipe) -> Unit = {},
-    onAddRecipeToFavorite: (Recipe) -> Unit = {}
-) {
+    onAddRecipeToFavorite: (Recipe) -> Unit = {},
+    onDeleteOfFavorites: (Recipe) -> Unit = {},
+    //favorite: Boolean = false,
+    favorite: @Composable (Recipe) -> Boolean = { false },
+    favoriteIcon: Boolean,
+    ) {
     //FilterRecipe(recipe = recipe[0])
 
 
@@ -120,7 +127,10 @@ fun Content(
                 recipe = recipe,
                 onItemClick = onItemClick,
                 onDeleteClickRecipe = onDeleteClickRecipe,
-                onAddRecipeToFavorite = onAddRecipeToFavorite
+                onAddRecipeToFavorite = onAddRecipeToFavorite,
+                onDeleteOfFavorites = onDeleteOfFavorites,
+                favorite = favorite(recipe),
+                favoriteIcon = favoriteIcon
             )
         }
     }

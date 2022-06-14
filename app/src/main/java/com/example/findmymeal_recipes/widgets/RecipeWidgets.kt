@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -130,17 +131,23 @@ fun RecipeCards(
     recipe: Recipe,
     onItemClick: (String) -> Unit = {},
     onDeleteClickRecipe: (Recipe) -> Unit = {},
-    onAddRecipeToFavorite: (Recipe) -> Unit = {}
+    onAddRecipeToFavorite: (Recipe) -> Unit = {},
+    onDeleteOfFavorites: (Recipe) -> Unit = {},
+    favorite: Boolean,
+    favoriteIcon: Boolean
 ) {
     if (recipe.difficulty == difficulty) {
         RecipeCards2(recipe = recipe, onItemClick = onItemClick,
-            onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite)
+            onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite,
+        onDeleteOfFavorites = onDeleteOfFavorites, favoriteIcon = favoriteIcon, favorite = favorite) //, favorite = favorite, favoriteIcon = favoriteIcon)
     } else if (init == "All") {
         RecipeCards2(recipe = recipe, onItemClick = onItemClick,
-            onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite)
+            onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite,
+            onDeleteOfFavorites = onDeleteOfFavorites, favoriteIcon = favoriteIcon, favorite = favorite)//, favorite = favorite, favoriteIcon = favoriteIcon)
     } else if (recipe.category == category) {
         RecipeCards2(recipe = recipe, onItemClick = onItemClick,
-            onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite)
+            onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite,
+            onDeleteOfFavorites = onDeleteOfFavorites, favoriteIcon = favoriteIcon, favorite = favorite)//, favorite = favorite, favoriteIcon = favoriteIcon)
     }
 }
 
@@ -151,8 +158,10 @@ fun RecipeCards2(
     recipe: Recipe,
     onItemClick: (String) -> Unit = {},
     onDeleteClickRecipe: (Recipe) -> Unit = {},
-    onAddRecipeToFavorite: (Recipe) -> Unit = {}
-    //difficulty: String,
+    onAddRecipeToFavorite: (Recipe) -> Unit = {},
+    onDeleteOfFavorites: (Recipe) -> Unit = {},
+    favorite: Boolean,
+    favoriteIcon: Boolean
 ) {
 
     var cardFace by remember {
@@ -204,15 +213,35 @@ fun RecipeCards2(
                             contentDescription = "Delete Button"
                         )
                     }
-                    IconButton(
-                        onClick = { onAddRecipeToFavorite(recipe) },
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Favorite,
-                            contentDescription = "Favorite Button"
-                        )
-                    }
+                    if (favoriteIcon) {
+                        FavoriteIcon(
+                            recipe = recipe,
+                            onAddRecipeToFavorite = { recipe -> onAddRecipeToFavorite(recipe)},
+                            onDeleteOfFavorites = { recipe -> onDeleteOfFavorites(recipe)},
+                        )}
 
+                   /* if (favorite) {
+                        IconButton(
+                            onClick = {onAddRecipeToFavorite(recipe) },
+
+                            ) {
+                            Icon(
+                                imageVector = Icons.Default.Favorite,
+                                contentDescription = "Favorite Button Clicked",
+                                tint = Color.Blue
+                            )
+                        }
+                    } else {
+                        IconButton(
+                            onClick = { onDeleteOfFavorites(recipe) },
+                            ) {
+                            Icon(
+                                imageVector = Icons.Default.FavoriteBorder,
+                                contentDescription = "Favorite Button Unclicked",
+                                tint = Color.Red
+                            )
+                        }
+                    }*/
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
@@ -257,8 +286,10 @@ fun FavoriteCard(
     recipe: Recipe,
     onItemClick: (String) -> Unit = {},
     onDeleteClickRecipe: (Recipe) -> Unit = {},
-    onAddRecipeToFavorite: (Recipe) -> Unit = {}
-    //difficulty: String,
+    onAddRecipeToFavorite: (Recipe) -> Unit = {},
+    onDeleteOfFavorites: (Recipe) -> Unit = {},
+    favorite: Boolean = false,
+    favoriteIcon: Boolean
 ) {
 
     var cardFace by remember {
@@ -310,14 +341,35 @@ fun FavoriteCard(
                             contentDescription = "Delete Button"
                         )
                     }
-                    IconButton(
-                        onClick = { onAddRecipeToFavorite(recipe) },
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Favorite,
-                            contentDescription = "Favorite Button"
-                        )
-                    }
+                    if (favoriteIcon) {
+                        FavoriteIcon(
+                            recipe = recipe,
+                            onAddRecipeToFavorite = { recipe -> onAddRecipeToFavorite(recipe)},
+                            onDeleteOfFavorites = { recipe -> onDeleteOfFavorites(recipe)},
+                        )}
+
+//                    if (favorite) {
+//                        IconButton(
+//                            onClick = { onAddRecipeToFavorite(recipe) },
+//
+//                            ) {
+//                            Icon(
+//                                imageVector = Icons.Default.Favorite,
+//                                contentDescription = "Favorite Button Clicked",
+//                                tint = Color.Blue
+//                            )
+//                        }
+//                    } else {
+//                        IconButton(
+//                            onClick = { onDeleteOfFavorites(recipe) },
+//                        ) {
+//                            Icon(
+//                                imageVector = Icons.Default.FavoriteBorder,
+//                                contentDescription = "Favorite Button Unclicked",
+//                                tint = Color.Red
+//                            )
+//                        }
+//                    }
 
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -358,6 +410,21 @@ fun FavoriteCard(
     )
 }
 
+@Composable
+fun FavoriteIcon(
+    recipe: Recipe,
+    onAddRecipeToFavorite: (Recipe) -> Unit,
+    onDeleteOfFavorites: (Recipe) -> Unit,
+    favorite: Boolean = false,
+){
+    if (favorite) {
+        IconButton(onClick = { onDeleteOfFavorites(recipe) }){
+            Icon(Icons.Default.Favorite, contentDescription = "FavoriteClicked", tint = Color.Cyan)}
+    } else {
+        IconButton(onClick = { onAddRecipeToFavorite(recipe) }) {
+            Icon(Icons.Default.FavoriteBorder, contentDescription = "FavoriteNotClicked", tint = Color.Cyan)}
+    }
+}
 
 @Composable
 fun DetailRecipeCard(recipe: Recipe, onEditClick: (String) -> Unit = {}) {

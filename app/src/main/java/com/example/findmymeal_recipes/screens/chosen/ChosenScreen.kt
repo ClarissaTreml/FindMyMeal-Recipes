@@ -22,6 +22,7 @@ import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
+import com.example.findmymeal_recipes.viewmodels.FavoritesViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.viewmodels.ShoppingListViewModel
 import com.example.findmymeal_recipes.widgets.RecipeCards
@@ -31,7 +32,9 @@ fun ChosenScreen(navController: NavController,
                  viewModelChosen: ChoseIngredientsViewModel = viewModel(),
                  recipe: List<Recipe> = getRecipes(),
                  viewModelRecipe: RecipeViewModel = viewModel(),
-                 viewModelShopping: ShoppingListViewModel = viewModel()
+                 viewModelShopping: ShoppingListViewModel = viewModel(),
+                 viewModelFavorites: FavoritesViewModel = viewModel()
+
 ) {
 
     Scaffold(topBar = {
@@ -99,8 +102,11 @@ fun ChosenScreen(navController: NavController,
                     ingredientsList = viewModelChosen.chosenIngredients,
                     recipe = viewModelRecipe.recipes,
                     onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") },
-                    //onAddClickShopping = {shoppingIngredient -> viewModelShopping.addShoppingIngredient(shoppingIngredient)}
+                    favoriteIcon = true,
+                    favorite = false,
 
+
+                    //onAddClickShopping = {shoppingIngredient -> viewModelShopping.addShoppingIngredient(shoppingIngredient)}
                     //recipe = getRecipes()[0],
                 )
 
@@ -115,6 +121,9 @@ fun ChosenScreen(navController: NavController,
 fun Content(ingredientsList: List<Ingredients>,
             recipe: List<Recipe>,
             onItemClick: (String) -> Unit = {},
+            favorite: Boolean,
+            favoriteIcon: Boolean,
+
             //onAddClickShopping: (String) -> Unit = {}
 ) {
     Text(text = "Chosen Screen")
@@ -126,7 +135,11 @@ fun Content(ingredientsList: List<Ingredients>,
                     // TODO show no duplicate recipes
                     if (recipe[i].ingredients[j] == ingredient.ingredient) {
                         Text(text = "same")
-                        RecipeCards(recipe = recipe[i], onItemClick = onItemClick)
+                        RecipeCards(recipe = recipe[i],
+                            onItemClick = onItemClick,
+                            favorite = favorite,
+                            favoriteIcon = favoriteIcon,
+                        )
                     }
                     else{
                         //TODO in Deati

@@ -15,12 +15,13 @@ class FavoritesViewModel : ViewModel() {
     fun addFavorite(recipe: Recipe) {
         if (!existFavorite(recipe = recipe)) {
             _favoriteRecipes.add(recipe)
-            Log.d("AddedF", _favoriteRecipes.toList().toString())
+            Log.d("Added ADDED", _favoriteRecipes.toList().toString())
         }
     }
 
     fun removeFavorite(recipe: Recipe) {
         _favoriteRecipes.remove(recipe)
+        Log.d("Added REMOVED", _favoriteRecipes.toList().toString())
     }
 
     fun existFavorite(recipe: Recipe): Boolean {
