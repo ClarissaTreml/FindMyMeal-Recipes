@@ -127,8 +127,8 @@ fun Content(
                 recipe = recipe,
                 onItemClick = onItemClick,
                 onDeleteClickRecipe = onDeleteClickRecipe,
-                onAddRecipeToFavorite = onAddRecipeToFavorite,
-                onDeleteOfFavorites = onDeleteOfFavorites,
+                onAddRecipeToFavorite = {onAddRecipeToFavorite(recipe)},
+                onDeleteOfFavorites = {onDeleteOfFavorites(recipe)},
                 favorite = favorite(recipe),
                 favoriteIcon = favoriteIcon
             )

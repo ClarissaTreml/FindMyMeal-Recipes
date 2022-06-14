@@ -108,7 +108,7 @@ fun Content(
 
     LazyColumn {
         items(items = recipe) { recipe ->
-            FavoriteCard(
+            RecipeCards(
                 recipe = recipe,
                 onItemClick = onItemClick,
                 onDeleteClickRecipe = onDeleteClickRecipe,
