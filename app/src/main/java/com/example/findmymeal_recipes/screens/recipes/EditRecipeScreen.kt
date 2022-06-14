@@ -16,6 +16,7 @@ import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.screens.detail.filterRecipe
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.EditRecipe
 import com.example.findmymeal_recipes.widgets.ViewIngredients
@@ -23,7 +24,8 @@ import com.example.findmymeal_recipes.widgets.ViewIngredients
 @Composable
 fun EditRecipesScreen(navController: NavController,
                       viewModel: RecipeViewModel = viewModel(),
-                      recipeId: String? = "0"
+                      recipeId: String? = "0",
+                      viewModelIngredients: ChoseIngredientsViewModel = viewModel()
 ) {
 
     val oldRecipe = filterRecipe(recipeId = recipeId, recipes = viewModel.getAllRecipes())
@@ -93,14 +95,13 @@ fun EditRecipesScreen(navController: NavController,
 
 
                 EditRecipe(
-                    onAddClickIngredient = { ingredient ->
-                        viewModel.addIngredientsRecipe(ingredient)
-                    },
+                    onAddClickIngredient = { ingredient -> viewModel.addIngredientsRecipe(ingredient) },
                     ingredients = viewModel.ingredientsRecipe,
                     onAddClickRecipe = { newRecipe -> viewModel.addRecipe(newRecipe) },
                     oldRecipe = oldRecipe,
                     onDeleteClickRecipe = { oldRecipe -> viewModel.removeRecipe(oldRecipe) },
-                    oldIngredient = oldIngredient
+                    oldIngredient = oldIngredient,
+                    onDeleteIngredient = { ingredient -> viewModel.removeIngredientsRecipe(ingredient) }
                 )
                 viewModel.clearIngredientsList()
             }

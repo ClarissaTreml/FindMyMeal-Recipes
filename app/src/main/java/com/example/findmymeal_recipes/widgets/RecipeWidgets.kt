@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.findmymeal_recipes.R
+import com.example.findmymeal_recipes.models.Ingredients
 import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.ui.theme.BackColor
 
@@ -343,15 +344,18 @@ fun DetailRecipeCard(recipe: Recipe, onEditClick: (String) -> Unit = {}) {
 @Composable
 fun ViewIngredients(
     ingredients: List<String> = listOf(),
+    onDeleteIngredient: (String) -> Unit = {},
 ) {
     Column(modifier = Modifier.height(120.dp)) {
         LazyColumn {
             items(ingredients) { ingredient ->
-                Text(text = ingredient)
+                IconButton(onClick = { onDeleteIngredient(ingredient) }) {
+                    Icon(Icons.Default.Delete, contentDescription = "Delete Ingredient")
+                    Text(text = ingredient)
+                }
             }
         }
     }
-
 }
 
 
@@ -359,8 +363,10 @@ fun ViewIngredients(
 fun AddRecipe(
     onAddClickIngredient: (String) -> Unit = {},
     ingredients: List<String> = listOf(),
-    onSaveClickRecipe: (Recipe) -> Unit = {}
-) {
+    onSaveClickRecipe: (Recipe) -> Unit = {},
+    onDeleteIngredient: (String) -> Unit = {},
+
+    ) {
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
 
@@ -406,7 +412,10 @@ fun AddRecipe(
             placeholder = { Text(text = "Enter your ingredient") },
         )
 
-        ViewIngredients(ingredients)
+        ViewIngredients(
+            ingredients = ingredients,
+            onDeleteIngredient = onDeleteIngredient
+        )
 
         OutlinedTextField(value = steps, onValueChange = { value -> steps = value },
             label = { Text(text = "steps") })
@@ -444,7 +453,8 @@ fun EditRecipe(
     oldRecipe: Recipe,
     onDeleteClickRecipe: (Recipe) -> Unit = {},
     oldIngredient: List<String>,
-) {
+    onDeleteIngredient: (String) -> Unit = {},
+    ) {
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
 
@@ -473,7 +483,6 @@ fun EditRecipe(
         OutlinedTextField(value = category, onValueChange = { category = it },
             label = { Text(text = "category") })
 
-        // TODO einzelne Ingredients deleten
         OutlinedTextField(
             value = ingredient,
             onValueChange = { value ->
@@ -493,7 +502,10 @@ fun EditRecipe(
 
         //ViewIngredients(oldIngredient)
         Text(text = "added: ")
-        ViewIngredients(ingredients)
+        ViewIngredients(
+            ingredients = ingredients,
+            onDeleteIngredient = onDeleteIngredient )
+
 
         OutlinedTextField(value = steps, onValueChange = { steps = it },
             label = { Text(text = "steps") })

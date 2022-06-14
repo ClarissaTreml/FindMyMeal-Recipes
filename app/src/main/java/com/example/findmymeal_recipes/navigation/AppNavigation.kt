@@ -78,7 +78,7 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
 
 
         composable(route = AppScreens.AddRecipesScreen.name) {
-            AddRecipesScreen(navController = navController, viewModel = recipeViewModel)
+            AddRecipesScreen(navController = navController, viewModel = recipeViewModel, viewModelIngredients = ingredientsViewModel)
         }
 
         composable(
@@ -90,7 +90,8 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
             EditRecipesScreen(
                 navController = navController,
                 recipeId = backStackEntry.arguments?.getString("recipeId"),
-                viewModel = recipeViewModel
+                viewModel = recipeViewModel,
+                viewModelIngredients = ingredientsViewModel
             )
         }
     }

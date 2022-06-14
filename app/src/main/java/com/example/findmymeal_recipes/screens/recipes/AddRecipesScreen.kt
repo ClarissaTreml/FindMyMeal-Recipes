@@ -15,12 +15,14 @@ import androidx.navigation.NavController
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.AddRecipe
 
 @Composable
 fun AddRecipesScreen(navController: NavController,
-                     viewModel: RecipeViewModel = viewModel()
+                     viewModel: RecipeViewModel = viewModel(),
+                     viewModelIngredients: ChoseIngredientsViewModel = viewModel(),
 ) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
@@ -82,10 +84,11 @@ fun AddRecipesScreen(navController: NavController,
                     modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
                 )
 
-                AddRecipe(onAddClickIngredient = {
-                    ingredient -> viewModel.addIngredientsRecipe(ingredient)
-                }, ingredients = viewModel.ingredientsRecipe
-                , onSaveClickRecipe = { recipe -> viewModel.addRecipe(recipe) })
+                AddRecipe(onAddClickIngredient = { ingredient -> viewModel.addIngredientsRecipe(ingredient) },
+                    ingredients = viewModel.ingredientsRecipe,
+                    onSaveClickRecipe = { recipe -> viewModel.addRecipe(recipe) },
+                    onDeleteIngredient = { ingredient -> viewModel.removeIngredientsRecipe(ingredient) }
+                    )
             }
         }
     }
