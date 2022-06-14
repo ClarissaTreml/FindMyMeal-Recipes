@@ -6,6 +6,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -79,7 +81,10 @@ fun ShoppingListScreen(
 
                 Column() {
                     Text(text = "Shopping-List Screen")
-                    Content(shoppingIngredients = viewModelShopping.shoppingIngredients)
+                    Content(
+                        shoppingIngredients = viewModelShopping.shoppingIngredients,
+                        onCheckIngredient = {ingredient -> viewModelShopping.removeShoppingIngredient(ingredient)}
+                        )
                 }
             }
         }
@@ -88,14 +93,17 @@ fun ShoppingListScreen(
 
 
 @Composable
-fun Content(shoppingIngredients: List<String>) {
+fun Content(
+    shoppingIngredients: List<String>,
+    onCheckIngredient: (String) -> Unit = {},
+) {
 
-    //Todo ingredients als Checkliste anfügen (zum abhacken)
     LazyColumn() {
         items(items = shoppingIngredients) { ingredient ->
-            Text(text = ingredient)
+            IconButton(onClick = { onCheckIngredient(ingredient) }) {
+                Icon(Icons.Default.Check, contentDescription = "Check Ingredient")
+                Text(text = ingredient)
+            }
         }
-
     }
-
 }
