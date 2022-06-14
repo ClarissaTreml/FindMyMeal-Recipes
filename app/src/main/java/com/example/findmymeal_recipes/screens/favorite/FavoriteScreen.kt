@@ -19,7 +19,6 @@ import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.FavoritesViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
-import com.example.findmymeal_recipes.widgets.FavoriteCard
 import com.example.findmymeal_recipes.widgets.RecipeCards
 
 @Composable

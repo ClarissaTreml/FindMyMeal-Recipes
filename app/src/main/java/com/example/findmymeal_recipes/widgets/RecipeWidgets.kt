@@ -473,7 +473,6 @@ fun EditRecipe(
         OutlinedTextField(value = category, onValueChange = { category = it },
             label = { Text(text = "category") })
 
-        // TODO (Man kann bereits existierende Ingredients nicht editen)
         // TODO einzelne Ingredients deleten
         OutlinedTextField(
             value = ingredient,
