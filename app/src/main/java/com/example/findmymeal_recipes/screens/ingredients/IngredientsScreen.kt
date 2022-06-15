@@ -2,9 +2,13 @@ package com.example.findmymeal_recipes.screens.ingredients
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -25,8 +29,9 @@ import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 
 @Composable
-fun IngredientsScreen(navController: NavController = rememberNavController(),
-                      viewModel: ChoseIngredientsViewModel = viewModel(),
+fun IngredientsScreen(
+    navController: NavController = rememberNavController(),
+    viewModel: ChoseIngredientsViewModel = viewModel(),
 ) {
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Header) {
@@ -93,18 +98,19 @@ fun IngredientsScreen(navController: NavController = rememberNavController(),
 }
 
 @Composable
-fun Content(navController: NavController,
-            ingredientList: List<Ingredients>,
-            onAddClick: (Ingredients) -> Unit,
-            onDeleteClick: (Ingredients) -> Unit,
-            isColored: @Composable (Ingredients) -> Boolean = { false },
+fun Content(
+    navController: NavController,
+    ingredientList: List<Ingredients>,
+    onAddClick: (Ingredients) -> Unit,
+    onDeleteClick: (Ingredients) -> Unit,
+    isColored: @Composable (Ingredients) -> Boolean = { false },
 ) {
     Column(
         Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Column() {
+        Column(modifier = Modifier.height(450.dp).width(250.dp)) {
             Text(text = "Ingredients", style = MaterialTheme.typography.h5)
             Spacer(modifier = Modifier.height(50.dp))
             LazyColumn() {
@@ -125,24 +131,28 @@ fun Content(navController: NavController,
                         )
                     }
                 }
+
             }
+
+        }
+        Spacer(modifier = Modifier.height(25.dp))
+        Button(
+            onClick = { navController.navigate(route = AppScreens.ChosenScreen.name) },
+            colors = ButtonDefaults.buttonColors(Header),
+        ) {
+            Text(text = "Find Me")
         }
     }
-    Spacer(modifier = Modifier.height(50.dp))
-    Button(
-        onClick = { navController.navigate(route = AppScreens.ChosenScreen.name) },
-        colors = ButtonDefaults.buttonColors(Header),
-    ) {
-        Text(text = "Find Me")
-    }
+
 }
 
 
 @Composable
-fun Click(isColored: Boolean = false,
-          onAddClick: (Ingredients) -> Unit,
-          onDeleteClick: (Ingredients) -> Unit,
-          ingredient: Ingredients
+fun Click(
+    isColored: Boolean = false,
+    onAddClick: (Ingredients) -> Unit,
+    onDeleteClick: (Ingredients) -> Unit,
+    ingredient: Ingredients
 ) {
 
     if (isColored) {

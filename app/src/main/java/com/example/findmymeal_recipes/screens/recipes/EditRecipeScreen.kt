@@ -101,7 +101,8 @@ fun EditRecipesScreen(navController: NavController,
                     oldRecipe = oldRecipe,
                     onDeleteClickRecipe = { oldRecipe -> viewModel.removeRecipe(oldRecipe) },
                     oldIngredient = oldIngredient,
-                    onDeleteIngredient = { ingredient -> viewModel.removeIngredientsRecipe(ingredient) }
+                    onDeleteIngredient = { ingredient -> viewModel.removeIngredientsRecipe(ingredient) },
+                    onNavigateClick = {navController.navigate(route = AppScreens.RecipesScreen.name)}
                 )
                 viewModel.clearIngredientsList()
             }

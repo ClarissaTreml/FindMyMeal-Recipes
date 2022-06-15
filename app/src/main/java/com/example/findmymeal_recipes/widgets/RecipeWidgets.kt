@@ -23,6 +23,7 @@ import coil.request.ImageRequest
 import com.example.findmymeal_recipes.R
 import com.example.findmymeal_recipes.models.Ingredients
 import com.example.findmymeal_recipes.models.Recipe
+import com.example.findmymeal_recipes.screens.detail.addToShoppingList
 import com.example.findmymeal_recipes.ui.theme.BackColor
 
 var init: String? = "All"
@@ -138,17 +139,35 @@ fun RecipeCards(
     favoriteIcon: Boolean
 ) {
     if (recipe.difficulty.lowercase() == (difficulty?.lowercase() ?: difficulty)) {
-        RecipeCards2(recipe = recipe, onItemClick = onItemClick,
-            onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite,
-        onDeleteOfFavorites = onDeleteOfFavorites, favoriteIcon = favoriteIcon, favorite = favorite) //, favorite = favorite, favoriteIcon = favoriteIcon)
+        RecipeCards2(
+            recipe = recipe,
+            onItemClick = onItemClick,
+            onDeleteClickRecipe = onDeleteClickRecipe,
+            onAddRecipeToFavorite = onAddRecipeToFavorite,
+            onDeleteOfFavorites = onDeleteOfFavorites,
+            favoriteIcon = favoriteIcon,
+            favorite = favorite
+        ) //, favorite = favorite, favoriteIcon = favoriteIcon)
     } else if (init == "All") {
-        RecipeCards2(recipe = recipe, onItemClick = onItemClick,
-            onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite,
-            onDeleteOfFavorites = onDeleteOfFavorites, favoriteIcon = favoriteIcon, favorite = favorite)//, favorite = favorite, favoriteIcon = favoriteIcon)
+        RecipeCards2(
+            recipe = recipe,
+            onItemClick = onItemClick,
+            onDeleteClickRecipe = onDeleteClickRecipe,
+            onAddRecipeToFavorite = onAddRecipeToFavorite,
+            onDeleteOfFavorites = onDeleteOfFavorites,
+            favoriteIcon = favoriteIcon,
+            favorite = favorite
+        )//, favorite = favorite, favoriteIcon = favoriteIcon)
     } else if (recipe.category.lowercase() == (category?.lowercase() ?: category)) {
-        RecipeCards2(recipe = recipe, onItemClick = onItemClick,
-            onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite,
-            onDeleteOfFavorites = onDeleteOfFavorites, favoriteIcon = favoriteIcon, favorite = favorite)//, favorite = favorite, favoriteIcon = favoriteIcon)
+        RecipeCards2(
+            recipe = recipe,
+            onItemClick = onItemClick,
+            onDeleteClickRecipe = onDeleteClickRecipe,
+            onAddRecipeToFavorite = onAddRecipeToFavorite,
+            onDeleteOfFavorites = onDeleteOfFavorites,
+            favoriteIcon = favoriteIcon,
+            favorite = favorite
+        )//, favorite = favorite, favoriteIcon = favoriteIcon)
     }
 }
 
@@ -217,10 +236,11 @@ fun RecipeCards2(
                     if (favoriteIcon) {
                         FavoriteIcon(
                             recipe = recipe,
-                            onAddRecipeToFavorite = { recipe -> onAddRecipeToFavorite(recipe)},
-                            onDeleteOfFavorites = { recipe -> onDeleteOfFavorites(recipe)},
+                            onAddRecipeToFavorite = { recipe -> onAddRecipeToFavorite(recipe) },
+                            onDeleteOfFavorites = { recipe -> onDeleteOfFavorites(recipe) },
                             favorite = favorite
-                        )}
+                        )
+                    }
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
@@ -266,20 +286,34 @@ fun FavoriteIcon(
     onAddRecipeToFavorite: (Recipe) -> Unit,
     onDeleteOfFavorites: (Recipe) -> Unit,
     favorite: Boolean = false,
-){
+) {
     if (favorite) {
-        IconButton(onClick = { onDeleteOfFavorites(recipe) }){
-            Icon(Icons.Default.Favorite, contentDescription = "FavoriteClicked", tint = Color.Cyan)}
+        IconButton(onClick = { onDeleteOfFavorites(recipe) }) {
+            Icon(Icons.Default.Favorite, contentDescription = "FavoriteClicked", tint = Color.Cyan)
+        }
     } else {
         IconButton(onClick = { onAddRecipeToFavorite(recipe) }) {
-            Icon(Icons.Default.FavoriteBorder, contentDescription = "FavoriteNotClicked", tint = Color.Cyan)}
+            Icon(
+                Icons.Default.FavoriteBorder,
+                contentDescription = "FavoriteNotClicked",
+                tint = Color.Cyan
+            )
+        }
     }
 }
 
 @Composable
-fun DetailRecipeCard(recipe: Recipe, onEditClick: (String) -> Unit = {}) {
+fun DetailRecipeCard(
+    recipe: Recipe, onEditClick: (String) -> Unit = {},
+    shoppingIngredient: List<String>,
+    onAddToShoppingList: (String) -> Unit = {}
+) {
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.verticalScroll(
+            rememberScrollState()
+        )
+    ) {
 
         IconButton(
             onClick = { onEditClick(recipe.id) },
@@ -321,23 +355,20 @@ fun DetailRecipeCard(recipe: Recipe, onEditClick: (String) -> Unit = {}) {
             style = MaterialTheme.typography.body1
         )
 
-        //Text(text = recipe.ingredients, style = MaterialTheme.typography.body1)
-
-
-        LazyColumn {
-            items(items = recipe.ingredients) { ingredient ->
-                Text(
-                    text = ingredient,
-                    style = MaterialTheme.typography.body1
-                )
-
-            }
-        }
-
         Text(
             text = recipe.steps,
             style = MaterialTheme.typography.body1
         )
+        Button(onClick = {
+            addToShoppingList(
+                recipe = recipe,
+                shoppingIngredient = shoppingIngredient,
+                onAddToShoppingList = onAddToShoppingList
+            )
+
+        }) {
+            Text(text = "Add Ingredients To Shopping List")
+        }
     }
 }
 
@@ -365,6 +396,7 @@ fun AddRecipe(
     ingredients: List<String> = listOf(),
     onSaveClickRecipe: (Recipe) -> Unit = {},
     onDeleteIngredient: (String) -> Unit = {},
+    onNavigateClick: (String) -> Unit = {},
 
     ) {
 
@@ -434,6 +466,7 @@ fun AddRecipe(
                     )
 
                     onSaveClickRecipe(newRecipe)
+                    onNavigateClick("")
 
                 }
 
@@ -454,7 +487,8 @@ fun EditRecipe(
     onDeleteClickRecipe: (Recipe) -> Unit = {},
     oldIngredient: List<String>,
     onDeleteIngredient: (String) -> Unit = {},
-    ) {
+    onNavigateClick: (String) -> Unit = {},
+) {
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
 
@@ -484,7 +518,7 @@ fun EditRecipe(
             label = { Text(text = "category") })
 
         OutlinedTextField(
-            value = ingredient,
+            value = ingredient.lowercase(),
             onValueChange = { value ->
                 ingredient = value.lowercase()
             },
@@ -504,7 +538,8 @@ fun EditRecipe(
         Text(text = "added: ")
         ViewIngredients(
             ingredients = ingredients,
-            onDeleteIngredient = onDeleteIngredient )
+            onDeleteIngredient = onDeleteIngredient
+        )
 
 
         OutlinedTextField(value = steps, onValueChange = { steps = it },
@@ -526,8 +561,10 @@ fun EditRecipe(
 
                     onDeleteClickRecipe(oldRecipe)
                     onAddClickRecipe(newRecipe)
+                    onNavigateClick("")
 
                 }
+
 
             }) {
 

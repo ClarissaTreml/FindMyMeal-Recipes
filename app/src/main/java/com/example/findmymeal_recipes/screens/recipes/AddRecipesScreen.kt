@@ -87,7 +87,8 @@ fun AddRecipesScreen(navController: NavController,
                 AddRecipe(onAddClickIngredient = { ingredient -> viewModel.addIngredientsRecipe(ingredient) },
                     ingredients = viewModel.ingredientsRecipe,
                     onSaveClickRecipe = { recipe -> viewModel.addRecipe(recipe) },
-                    onDeleteIngredient = { ingredient -> viewModel.removeIngredientsRecipe(ingredient) }
+                    onDeleteIngredient = { ingredient -> viewModel.removeIngredientsRecipe(ingredient) },
+                    onNavigateClick = {navController.navigate(route = AppScreens.RecipesScreen.name)}
                     )
             }
         }

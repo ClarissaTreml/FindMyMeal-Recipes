@@ -105,10 +105,13 @@ fun Content(
     onAddToShoppingList: (String) -> Unit = {}
 ) {
     Column {
-        DetailRecipeCard(recipe = recipe, onEditClick = onEditClick)
+        DetailRecipeCard(
+            recipe = recipe, onEditClick = onEditClick, shoppingIngredient = shoppingIngredient,
+            onAddToShoppingList = onAddToShoppingList
+        )
     }
 
-    Button(onClick = {
+    /*Button(onClick = {
         addToShoppingList(
             recipe = recipe,
             shoppingIngredient = shoppingIngredient,
@@ -116,7 +119,7 @@ fun Content(
         )
     }) {
         Text(text = "Add Ingredients To Shopping List")
-    }
+    }*/
 }
 
 fun filterRecipe(recipeId: String?, recipes: List<Recipe>): Recipe {
