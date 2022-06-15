@@ -137,7 +137,7 @@ fun RecipeCards(
     favorite: Boolean,
     favoriteIcon: Boolean
 ) {
-    if (recipe.difficulty == difficulty) {
+    if (recipe.difficulty.lowercase() == (difficulty?.lowercase() ?: difficulty)) {
         RecipeCards2(recipe = recipe, onItemClick = onItemClick,
             onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite,
         onDeleteOfFavorites = onDeleteOfFavorites, favoriteIcon = favoriteIcon, favorite = favorite) //, favorite = favorite, favoriteIcon = favoriteIcon)
@@ -145,7 +145,7 @@ fun RecipeCards(
         RecipeCards2(recipe = recipe, onItemClick = onItemClick,
             onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite,
             onDeleteOfFavorites = onDeleteOfFavorites, favoriteIcon = favoriteIcon, favorite = favorite)//, favorite = favorite, favoriteIcon = favoriteIcon)
-    } else if (recipe.category == category) {
+    } else if (recipe.category.lowercase() == (category?.lowercase() ?: category)) {
         RecipeCards2(recipe = recipe, onItemClick = onItemClick,
             onDeleteClickRecipe = onDeleteClickRecipe, onAddRecipeToFavorite = onAddRecipeToFavorite,
             onDeleteOfFavorites = onDeleteOfFavorites, favoriteIcon = favoriteIcon, favorite = favorite)//, favorite = favorite, favoriteIcon = favoriteIcon)
@@ -398,7 +398,7 @@ fun AddRecipe(
         OutlinedTextField(
             value = ingredient,
             onValueChange = { value ->
-                ingredient = value
+                ingredient = value.lowercase()
             },
             leadingIcon = {
                 IconButton(onClick = {
@@ -486,7 +486,7 @@ fun EditRecipe(
         OutlinedTextField(
             value = ingredient,
             onValueChange = { value ->
-                ingredient = value
+                ingredient = value.lowercase()
             },
             leadingIcon = {
                 IconButton(onClick = {
@@ -518,6 +518,7 @@ fun EditRecipe(
                     duration.isNotEmpty() && category.isNotEmpty() &&
                     steps.isNotEmpty()
                 ) {
+
                     val newRecipe = Recipe(
                         oldRecipe.id, name, images, difficulty,
                         description, duration, category, (oldIngredient + ingredients), steps

@@ -17,22 +17,45 @@ fun getRecipes(): List<Recipe> {
     return listOf(
         Recipe(
             id = "1",
-            name = "Chocolate Cake",
-            images = "https://hips.hearstapps.com/vidthumb/images/flourless-chocolate-cake-horizontal-1549916637.png?crop=0.668xw:1.00xh;0.151xw,0&resize=768:*",
+            name = "Sacher Torte",
+            images = "https://www.sacher.com/de/wp-content/uploads/sites/2/2019/08/SacherTorte_Teaser_klein.jpg",
             difficulty = "Pro",
-            description = "The best part about this flourless cake is that it doesn't require any flour alternatives. It's just the perfect cake that happens to have zero flour. " +
-                    "Cocoa powder and eggs give it all the lift and structure it needs. Elegant and sleek, this is the cake I make most whenever I'm having dinner guests or need to" +
-                    " throw together a quick and easy dessert for a party. It's can be made ahead of time, takes minimal effort, any gluten-free guests can still enjoy, and most " +
-                    "importantly it always elicits oohs and aahs when I pour the ganache on just before serving. ",
-            duration = "1h 30m",
+            description = "The Sachertorte is a chocolate cake made from Sachermasse with apricot jam and chocolate icing. It is considered a specialty of Viennese cuisine and is entered as such in the register of traditional foods.",
+            duration = "Baking time: about 60 minutes \n" +
+                    "Cooling time: about 20 minutes",
             category = "Dessert",
             ingredients = listOf(
-                "chocolate",
-                "spinach",
-                "heavy cream",
-                "cocoa powder"
+                "dark chocolate",
+                "vanilla pod",
+                "butter",
+                "powdered sugar",
+                "egg",
+                "sugar",
+                "flour",
+                "apricot jam",
+                "whipped cream"
             ),
-            steps = "Mix it ALL TOGETHER"
+            steps = "Ingredients: \n" +
+                    "130 g dark chocolate couverture (min. 55% cocoa)\n" +
+                    "1 vanilla pod\n" +
+                    "150 g melted butter\n" +
+                    "100g powdered sugar\n" +
+                    "6 Eggs\n" +
+                    "100g granulated sugar\n" +
+                    "140g Plain wheat flour\n" +
+                    "200g Apricot jam\n" +
+                    "200g granulated sugar\n" +
+                    "150g dark chocolate coating (min. 55% cocoa)\n" +
+                    "Unsweetened whipped cream for garnish\n" +
+                    "Preparation: \n" +
+                    "1: Preheat the oven to 170 °C. Line the bottom of the springform pan with baking paper, grease and the sides and dust with a little flour. For the chocolate dough, melt the couverture over a hot water bath and then let it cool down a bit.\n" +
+                    "2: Slit the vanilla bean lengthwise and scrape out the pulp. Beat the softened butter with the powdered sugar and vanilla pulp using a hand mixer fitted with a whisk attachment until fluffy.\n" +
+                    "3: Separate the eggs. Add the egg yolks to the butter mixture one at a time. Now gradually add the melted chocolate coating. Beat the egg whites with the caster sugar until stiff, then fold onto the butter and chocolate mixture. Sift the flour over the mixture, then fold in the flour and whisk the egg whites.\n" +
+                    "4: Pour the mixture into the springform pan, smooth the top and bake in the oven (center) for 10 to 15 minutes, leaving the oven door open a finger's width. Then close the oven and bake the cake for about 50 minutes more.\n" +
+                    "5: Remove the cake from the oven and loosen the sides of the springform pan. Carefully transfer the cake to a cake rack lined with baking paper and let it cool for about 20 minutes. Only then remove the baking paper, turn the cake over and let it cool on the cake rack.\n" +
+                    "6: Cut the cake in half horizontally. Heat the jam and stir until smooth. Spread the top of both halves of the cake with the jam and slide them over each other. Spread the sides with jam as well.\n" +
+                    "7: To make the glaze, place the caster sugar in a saucepan with 125 ml of water and boil over high heat for about 5 minutes. Remove the sugar syrup from the heat and allow to cool slightly. Coarsely chop the couverture, gradually add it to the syrup and stir until there is a thick liquid (see tip).\n" +
+                    "8: Pour all the lukewarm glaze over the surface of the cake at once, spreading it quickly with a palette. Allow the glaze to set for a few hours. Serve the Sacher cake garnished with unsweetened whipped cream.\n"
         ),
         Recipe(
             id = "2",
@@ -223,14 +246,14 @@ fun getRecipes(): List<Recipe> {
                 "green pepper",
             ),
             steps = "Ingredients: \n" +
-                    "4 medium sized potatoes, 4 eggs, 1 white onion, 1tbs salt, and oliveoil, 1 green pepper (optional)"+
-                    "\n"+
-                    "1. Peel and cut the potatoes in thin slices.\n"+
-                    "2. Cut the onions and the green pepper into cubes.\n"+
-                    "3. Stir eggs in a bowl with a tbs of salt.\n"+
-                    "4. Caramelize the onions in a pan with a little oil.\n"+
-                    "5. Then add the green pepper.\n"+
-                    "6. Then add the eggs.\n"+
+                    "4 medium sized potatoes, 4 eggs, 1 white onion, 1tbs salt, and oliveoil, 1 green pepper (optional)" +
+                    "\n" +
+                    "1. Peel and cut the potatoes in thin slices.\n" +
+                    "2. Cut the onions and the green pepper into cubes.\n" +
+                    "3. Stir eggs in a bowl with a tbs of salt.\n" +
+                    "4. Caramelize the onions in a pan with a little oil.\n" +
+                    "5. Then add the green pepper.\n" +
+                    "6. Then add the eggs.\n" +
                     "7. Put in with the lid on, in the oven for about 30 minutes at 180°C\n"
         ),
 
@@ -252,62 +275,19 @@ fun getRecipes(): List<Recipe> {
                 "garlic",
             ),
             steps = "Ingredients: \n" +
-                    "2 slices of toast, 2 eggs, salt, pepper, and olive oil"+
-                    "\n"+
-                    "1. Put both slices of toast in the toaster for 4 min\n"+
-                    "2. Peal the avocado and cut it into slices.\n"+
-                    "3. With a bit of olive oil fry two eggs.\n"+
-                    "4. Meanwhile rub the garlic on the toast.\n"+
-                    "5. Place the avocado slices on both toast.\n"+
-                    "6. Place the eggs on the toasts.\n"+
+                    "2 slices of toast, 2 eggs, salt, pepper, and olive oil" +
+                    "\n" +
+                    "1. Put both slices of toast in the toaster for 4 min\n" +
+                    "2. Peal the avocado and cut it into slices.\n" +
+                    "3. With a bit of olive oil fry two eggs.\n" +
+                    "4. Meanwhile rub the garlic on the toast.\n" +
+                    "5. Place the avocado slices on both toast.\n" +
+                    "6. Place the eggs on the toasts.\n" +
                     "7. Season it with salt and pepper.\n"
-        ),
-        Recipe(
-            id = "1",
-            name = "Sacher Torte",
-            images = "https://www.sacher.com/de/wp-content/uploads/sites/2/2019/08/SacherTorte_Teaser_klein.jpg",
-            difficulty = "Pro",
-            description = "The Sachertorte is a chocolate cake made from Sachermasse with apricot jam and chocolate icing. It is considered a specialty of Viennese cuisine and is entered as such in the register of traditional foods.",
-            duration = "Baking time: about 60 minutes \n" +
-                    "Cooling time: about 20 minutes",
-            category = "Dessert",
-            ingredients = listOf(
-                "dark chocolate",
-                "vanilla pod",
-                "butter",
-                "powdered sugar",
-                "egg",
-                "sugar",
-                "flour",
-                "apricot jam",
-                "whipped cream"
-            ),
-            steps = "Ingredients: \n" +
-                    "130 g dark chocolate couverture (min. 55% cocoa)\n" +
-                    "1 vanilla pod\n" +
-                    "150 g melted butter\n" +
-                    "100g powdered sugar\n" +
-                    "6 Eggs\n" +
-                    "100g granulated sugar\n" +
-                    "140g Plain wheat flour\n" +
-                    "200g Apricot jam\n" +
-                    "200g granulated sugar\n" +
-                    "150g dark chocolate coating (min. 55% cocoa)\n" +
-                    "Unsweetened whipped cream for garnish\n" +
-                    "Preparation: \n" +
-                    "1: Preheat the oven to 170 °C. Line the bottom of the springform pan with baking paper, grease and the sides and dust with a little flour. For the chocolate dough, melt the couverture over a hot water bath and then let it cool down a bit.\n" +
-                    "2: Slit the vanilla bean lengthwise and scrape out the pulp. Beat the softened butter with the powdered sugar and vanilla pulp using a hand mixer fitted with a whisk attachment until fluffy.\n" +
-                    "3: Separate the eggs. Add the egg yolks to the butter mixture one at a time. Now gradually add the melted chocolate coating. Beat the egg whites with the caster sugar until stiff, then fold onto the butter and chocolate mixture. Sift the flour over the mixture, then fold in the flour and whisk the egg whites.\n" +
-                    "4: Pour the mixture into the springform pan, smooth the top and bake in the oven (center) for 10 to 15 minutes, leaving the oven door open a finger's width. Then close the oven and bake the cake for about 50 minutes more.\n" +
-                    "5: Remove the cake from the oven and loosen the sides of the springform pan. Carefully transfer the cake to a cake rack lined with baking paper and let it cool for about 20 minutes. Only then remove the baking paper, turn the cake over and let it cool on the cake rack.\n" +
-                    "6: Cut the cake in half horizontally. Heat the jam and stir until smooth. Spread the top of both halves of the cake with the jam and slide them over each other. Spread the sides with jam as well.\n" +
-                    "7: To make the glaze, place the caster sugar in a saucepan with 125 ml of water and boil over high heat for about 5 minutes. Remove the sugar syrup from the heat and allow to cool slightly. Coarsely chop the couverture, gradually add it to the syrup and stir until there is a thick liquid (see tip).\n" +
-                    "8: Pour all the lukewarm glaze over the surface of the cake at once, spreading it quickly with a palette. Allow the glaze to set for a few hours. Serve the Sacher cake garnished with unsweetened whipped cream.\n"
         )
     )
 }
 
-// TODO: No double IDs adding allowed.
 
 
 //Rezepte zum Anlegen:
