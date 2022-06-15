@@ -2,6 +2,8 @@ package com.example.findmymeal_recipes.widgets
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -359,15 +361,17 @@ fun DetailRecipeCard(
             text = recipe.steps,
             style = MaterialTheme.typography.body1
         )
-        Button(onClick = {
+        val interactionSource = remember { MutableInteractionSource() }
+        val isPressed by interactionSource.collectIsPressedAsState()
+        Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),onClick = {
             addToShoppingList(
                 recipe = recipe,
                 shoppingIngredient = shoppingIngredient,
                 onAddToShoppingList = onAddToShoppingList
             )
 
-        }) {
-            Text(text = "Add Ingredients To Shopping List")
+        }, interactionSource = interactionSource) {
+            Text(if (isPressed) "Added to Shopping List" else "Add Ingredients To Shopping List")
         }
     }
 }
