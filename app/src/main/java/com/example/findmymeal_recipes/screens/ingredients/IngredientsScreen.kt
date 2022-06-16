@@ -11,7 +11,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,6 +30,7 @@ import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
+import com.example.findmymeal_recipes.widgets.TopAppBarWidget
 
 @Composable
 fun IngredientsScreen(
@@ -34,35 +38,7 @@ fun IngredientsScreen(
     viewModel: ChoseIngredientsViewModel = viewModel(),
 ) {
     Scaffold(topBar = {
-        TopAppBar(backgroundColor = Header) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                IconButton(modifier = Modifier.width(60.dp),
-                    onClick = { navController.navigate(route = AppScreens.RecipesScreen.name) }) {
-                    Text(text = "Recipes", modifier = Modifier.fillMaxWidth())
-                }
-                Spacer(modifier = Modifier.width(20.dp))
-
-                IconButton(modifier = Modifier.width(100.dp),
-                    onClick = { navController.navigate(route = AppScreens.ShoppingListScreen.name) }) {
-                    Text(text = "Shopping-List", modifier = Modifier.fillMaxWidth())
-                }
-                Spacer(modifier = Modifier.width(20.dp))
-
-                Icon(
-                    modifier = Modifier
-                        .padding(0.dp, 12.dp)
-                        .clickable { navController.navigate(route = AppScreens.FavoriteScreen.name) },
-                    imageVector = Icons.Default.Favorite,
-                    contentDescription = "favorites"
-                )
-            }
-
-        }
+        TopAppBarWidget(navController = navController)
     }) {
         Surface(
             color = BgColor, modifier = Modifier
@@ -78,11 +54,12 @@ fun IngredientsScreen(
             )
             {
                 Text(
-                    text = "Find My Meal\nRecipes",
-                    style = MaterialTheme.typography.h3,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
+                    text = "Choose your Ingredients",
+                    style = MaterialTheme.typography.h4,
+                    textAlign = TextAlign.Center
+
                 )
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Content(
                     navController = navController,
@@ -110,15 +87,16 @@ fun Content(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Column(modifier = Modifier.height(450.dp).width(250.dp)) {
-            Text(text = "Ingredients", style = MaterialTheme.typography.h5)
-            Spacer(modifier = Modifier.height(50.dp))
+        Column(modifier = Modifier
+            .height(450.dp)
+            .width(250.dp)) {
+
             LazyColumn() {
                 items(ingredientList) { ingredient ->
                     Card(
                         modifier = Modifier
-                            .width(100.dp)
-                            .height(30.dp)
+                            .width(130.dp)
+                            .height(40.dp)
                             .padding(0.dp, 0.dp, 0.dp, 10.dp),
                         elevation = 5.dp,
                         backgroundColor = Color.White

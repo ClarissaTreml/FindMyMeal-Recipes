@@ -5,7 +5,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,6 +24,7 @@ import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.viewmodels.ShoppingListViewModel
 import com.example.findmymeal_recipes.widgets.DetailRecipeCard
+import com.example.findmymeal_recipes.widgets.TopAppBarWidget
 
 @Composable
 fun DetailScreen(
@@ -34,36 +37,7 @@ fun DetailScreen(
     val recipe = filterRecipe(recipeId = recipeId, recipes = viewModelRecipe.getAllRecipes())
 
     Scaffold(topBar = {
-        TopAppBar(backgroundColor = Header) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                IconButton(modifier = Modifier.width(80.dp),
-                    onClick = { navController.navigate(route = AppScreens.IngredientsScreen.name) }) {
-                    Text(text = "Ingredients", modifier = Modifier.fillMaxWidth())
-                }
-
-                Spacer(modifier = Modifier.width(20.dp))
-
-                IconButton(modifier = Modifier.width(60.dp),
-                    onClick = { navController.navigate(route = AppScreens.RecipesScreen.name) }) {
-                    Text(text = "Recipes", modifier = Modifier.fillMaxWidth())
-                }
-
-                Spacer(modifier = Modifier.width(20.dp))
-
-                Icon(
-                    modifier = Modifier
-                        .padding(0.dp, 12.dp)
-                        .clickable { navController.navigate(route = AppScreens.FavoriteScreen.name) },
-                    imageVector = Icons.Default.Favorite,
-                    contentDescription = "favorites"
-                )
-            }
-        }
+        TopAppBarWidget(navController = navController)
     }) {
         Surface(
             color = BgColor, modifier = Modifier
@@ -79,11 +53,11 @@ fun DetailScreen(
             )
             {
                 Text(
-                    text = "Find My Meal\nRecipes",
-                    style = MaterialTheme.typography.h3,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.clickable { navController.navigate(route = AppScreens.HomeScreen.name) }
+                    text = "Recipe Details",
+                    style = MaterialTheme.typography.h4,
+                    textAlign = TextAlign.Center
                 )
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Content(recipe = recipe, onEditClick = { recipeId ->
                     navController.navigate(route = AppScreens.EditRecipeScreen.name + "/$recipeId")

@@ -20,13 +20,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.findmymeal_recipes.R
 import com.example.findmymeal_recipes.models.Ingredients
 import com.example.findmymeal_recipes.models.Recipe
+import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.screens.detail.addToShoppingList
 import com.example.findmymeal_recipes.ui.theme.BackColor
+import com.example.findmymeal_recipes.ui.theme.Header
 
 var init: String? = "All"
 var difficulty: String? = null
@@ -35,7 +38,6 @@ var category: String? = null
 @Composable
 fun FilterRecipe(
     onScreenClick: (String) -> Unit = {},
-    //recipe: Recipe,
 ) {
     var expanded by remember { mutableStateOf(false) }
     var difficultyExpanded by remember { mutableStateOf(false) }
@@ -43,17 +45,27 @@ fun FilterRecipe(
 
 
     Box() {
-        IconButton(onClick = { expanded = true }) {
-            Text(text = "Filter")
-            Icon(Icons.Default.MoreVert, contentDescription = "Filter")
+        IconButton(modifier = Modifier
+            .width(120.dp),onClick = { expanded = true }) {
+            Row(modifier = Modifier
+                .width(100.dp)) {
+                Text(text = "Filter")
+                Icon(Icons.Default.MoreVert, contentDescription = "Filter")
+            }
+
 
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            IconButton(onClick = { difficultyExpanded = true }) {
-                Text(text = "Filter by Difficulty")
-                Icon(Icons.Default.MoreVert, contentDescription = "Filter by Difficulty")
+            IconButton(modifier = Modifier
+                .width(120.dp),onClick = { difficultyExpanded = true }) {
+                Row() {
+                    Text(text = "by Difficulty")
+                    Icon(Icons.Default.MoreVert, contentDescription = "Filter by Difficulty")
+                }
+
 
             }
+            Divider()
             DropdownMenu(
                 expanded = difficultyExpanded,
                 onDismissRequest = { difficultyExpanded = false }) {
@@ -67,6 +79,7 @@ fun FilterRecipe(
                     Text(text = "Beginner")
 
                 }
+                Divider()
                 DropdownMenuItem(onClick = {
                     difficulty = "Advanced"
                     init = null
@@ -75,6 +88,7 @@ fun FilterRecipe(
                 }) {
                     Text(text = "Advanced")
                 }
+                Divider()
                 DropdownMenuItem(onClick = {
                     difficulty = "Pro"
                     init = null
@@ -84,9 +98,13 @@ fun FilterRecipe(
                     Text(text = "Pro")
                 }
             }
-            IconButton(onClick = { categoryExpanded = true }) {
-                Text(text = "Filter by Category")
-                Icon(Icons.Default.MoreVert, contentDescription = "Filter by Category")
+            IconButton(modifier = Modifier
+                .width(120.dp),onClick = { categoryExpanded = true }) {
+                Row() {
+                    Text(text = "by Category")
+                    Icon(Icons.Default.MoreVert, contentDescription = "Filter by Category")
+                }
+
 
             }
             DropdownMenu(
@@ -100,6 +118,7 @@ fun FilterRecipe(
                 }) {
                     Text(text = "Breakfast")
                 }
+                Divider()
                 DropdownMenuItem(onClick = {
                     category = "Lunch"
                     init = null
@@ -108,6 +127,7 @@ fun FilterRecipe(
                 }) {
                     Text(text = "Lunch")
                 }
+                Divider()
                 DropdownMenuItem(onClick = {
                     category = "Dinner"
                     init = null
@@ -116,6 +136,7 @@ fun FilterRecipe(
                 }) {
                     Text(text = "Dinner")
                 }
+                Divider()
                 DropdownMenuItem(onClick = {
                     category = "Dessert"
                     init = null
@@ -310,13 +331,9 @@ fun DetailRecipeCard(
     shoppingIngredient: List<String>,
     onAddToShoppingList: (String) -> Unit = {}
 ) {
-
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.verticalScroll(
-            rememberScrollState()
-        )
-    ) {
-
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .fillMaxHeight()) {
         IconButton(
             onClick = { onEditClick(recipe.id) },
         ) {
@@ -325,55 +342,65 @@ fun DetailRecipeCard(
                 contentDescription = "Edit Button"
             )
         }
-
-        Text(
-            text = recipe.name,
-            style = MaterialTheme.typography.h6,
-        )
-        Spacer(modifier = Modifier.height(2.dp))
-        Row() {
-            Text(
-                text = recipe.difficulty,
-                style = MaterialTheme.typography.subtitle1
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.verticalScroll(
+                rememberScrollState()
             )
-            Spacer(modifier = Modifier.width(10.dp))
+        ) {
+
+
 
             Text(
-                text = recipe.category,
-                style = MaterialTheme.typography.subtitle1
+                text = recipe.name,
+                style = MaterialTheme.typography.h6,
             )
-            Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.height(2.dp))
+            Row() {
+                Text(
+                    text = recipe.difficulty,
+                    style = MaterialTheme.typography.subtitle1
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+
+                Text(
+                    text = recipe.category,
+                    style = MaterialTheme.typography.subtitle1
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+
+                Text(
+                    text = recipe.duration,
+                    style = MaterialTheme.typography.subtitle1
+                )
+            }
+
+            Spacer(modifier = Modifier.height(2.dp))
 
             Text(
-                text = recipe.duration,
-                style = MaterialTheme.typography.subtitle1
-            )
-        }
-
-        Spacer(modifier = Modifier.height(2.dp))
-
-        Text(
-            text = recipe.description,
-            style = MaterialTheme.typography.body1
-        )
-
-        Text(
-            text = recipe.steps,
-            style = MaterialTheme.typography.body1
-        )
-        val interactionSource = remember { MutableInteractionSource() }
-        val isPressed by interactionSource.collectIsPressedAsState()
-        Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),onClick = {
-            addToShoppingList(
-                recipe = recipe,
-                shoppingIngredient = shoppingIngredient,
-                onAddToShoppingList = onAddToShoppingList
+                text = recipe.description,
+                style = MaterialTheme.typography.body1
             )
 
-        }, interactionSource = interactionSource) {
-            Text(if (isPressed) "Added to Shopping List" else "Add Ingredients To Shopping List")
+            Text(
+                text = recipe.steps,
+                style = MaterialTheme.typography.body1
+            )
+            val interactionSource = remember { MutableInteractionSource() }
+            val isPressed by interactionSource.collectIsPressedAsState()
+            Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),onClick = {
+                addToShoppingList(
+                    recipe = recipe,
+                    shoppingIngredient = shoppingIngredient,
+                    onAddToShoppingList = onAddToShoppingList
+                )
+
+            }, interactionSource = interactionSource) {
+                Text(if (isPressed) "Added to Shopping List" else "Add Ingredients To Shopping List")
+            }
         }
     }
+
+
 }
 
 @Composable
@@ -381,7 +408,9 @@ fun ViewIngredients(
     ingredients: List<String> = listOf(),
     onDeleteIngredient: (String) -> Unit = {},
 ) {
-    Column(modifier = Modifier.height(120.dp)) {
+    Column(modifier = Modifier
+        .height(120.dp)
+        .width(200.dp)) {
         LazyColumn {
             items(ingredients) { ingredient ->
                 IconButton(onClick = { onDeleteIngredient(ingredient) }) {
@@ -577,6 +606,63 @@ fun EditRecipe(
     }
 
 }
+
+@Composable
+fun TopAppBarWidget(navController: NavController){
+    TopAppBar( backgroundColor = Header, elevation = 9.dp, modifier = Modifier.height(60.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            IconButton(modifier = Modifier
+                .padding(0.dp, 12.dp),
+                onClick = {navController.navigate(route = AppScreens.HomeScreen.name)}) {
+                Icon(imageVector = Icons.Default.Home, contentDescription = "Home Screen")
+            }
+            IconButton(modifier = Modifier
+                .padding(0.dp, 12.dp)
+                .width(60.dp),
+                onClick = { navController.navigate(route = AppScreens.RecipesScreen.name) }) {
+                Text(text = "Recipes", modifier = Modifier.fillMaxWidth())
+            }
+
+            Spacer(modifier = Modifier.width(10.dp))
+
+            IconButton(modifier = Modifier
+                .padding(0.dp, 12.dp)
+                .width(80.dp),
+                onClick = { navController.navigate(route = AppScreens.IngredientsScreen.name) }) {
+                Text(text = "Ingredients", modifier = Modifier.fillMaxWidth())
+            }
+            Spacer(modifier = Modifier.width(10.dp))
+
+            IconButton(modifier = Modifier
+                .padding(0.dp, 12.dp)
+                .width(98.dp),
+                onClick = { navController.navigate(route = AppScreens.ShoppingListScreen.name) }) {
+                //Icon(imageVector = Icons.Default.List, contentDescription = "Shopping List" )
+                Text(text = "Shopping List")
+            }
+
+            IconButton(modifier = Modifier
+                .padding(0.dp, 12.dp),
+                onClick = {navController.navigate(route = AppScreens.AddRecipesScreen.name)}) {
+                Icon(imageVector = Icons.Default.AddCircle, contentDescription = "Add Recipe")
+            }
+
+            IconButton(modifier = Modifier
+                .padding(0.dp, 12.dp),
+                onClick = { navController.navigate(route = AppScreens.FavoriteScreen.name)}) {
+                Icon(imageVector = Icons.Default.Favorite, contentDescription = "My Favorites")
+            }
+
+        }
+
+    }
+}
+
 
 
 /*

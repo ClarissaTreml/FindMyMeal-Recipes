@@ -1,8 +1,12 @@
 package com.example.findmymeal_recipes.screens.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,6 +38,7 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
             horizontalAlignment = Alignment.CenterHorizontally,
         )
         {
+            Spacer(modifier = Modifier.height(20.dp))
             Text(
                 text = "Find My Meal\nRecipes",
                 style = MaterialTheme.typography.h3, textAlign = TextAlign.Center
@@ -46,6 +51,7 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                     .padding(0.dp, 50.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
+                Spacer(modifier = Modifier.height(20.dp))
                 IconButton(modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.White),
@@ -65,7 +71,7 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                         init = "All"
                         navController.navigate(route = AppScreens.RecipesScreen.name) }) {
                     Text(
-                        text = "Show Recipes",
+                        text = "My Recipes",
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.h5
                     )
@@ -84,6 +90,32 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                         style = MaterialTheme.typography.h5
                     )
                 }
+                Spacer(modifier = Modifier.height(10.dp))
+
+                IconButton(modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White),
+                    onClick = {navController.navigate(route = AppScreens.AddRecipesScreen.name)}) {
+                    Text(
+                        text = "Add Recipe",
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.h5
+                    )
+
+                }
+                Spacer(modifier = Modifier.height(10.dp))
+
+                IconButton(modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White),
+                    onClick = {navController.navigate(route = AppScreens.FavoriteScreen.name)}) {
+                    Text(
+                        text = "My Favorites",
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.h5
+                    )
+                }
+
             }
         }
     }
