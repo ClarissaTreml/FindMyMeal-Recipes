@@ -1,12 +1,7 @@
 package com.example.findmymeal_recipes.screens.recipes
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,7 +11,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
-import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.ui.theme.BgColor2
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.AddRecipe
@@ -47,7 +42,7 @@ fun AddRecipesScreen(navController: NavController,
             {
                 Text(
                     text = "Add your Recipes",
-                    style = MaterialTheme.typography.h4,
+                    style = MaterialTheme.typography.h1,
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(20.dp))

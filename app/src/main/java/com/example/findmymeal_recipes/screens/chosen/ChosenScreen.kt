@@ -1,15 +1,9 @@
 package com.example.findmymeal_recipes.screens.chosen
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +16,7 @@ import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.models.getRecipes
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
-import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.ui.theme.BgColor2
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 import com.example.findmymeal_recipes.viewmodels.FavoritesViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
@@ -58,7 +52,7 @@ fun ChosenScreen(navController: NavController,
             {
                 Text(
                     text = "Recipes",
-                    style = MaterialTheme.typography.h4,
+                    style = MaterialTheme.typography.h1,
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(20.dp))

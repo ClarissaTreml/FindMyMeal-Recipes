@@ -1,6 +1,5 @@
 package com.example.findmymeal_recipes.screens.shoppinglist
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,9 +13,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
-import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.ui.theme.BgColor2
 import com.example.findmymeal_recipes.viewmodels.ShoppingListViewModel
 import com.example.findmymeal_recipes.widgets.TopAppBarWidget
 
@@ -43,7 +41,7 @@ fun ShoppingListScreen(
             {
                 Text(
                     text = "Shopping List",
-                    style = MaterialTheme.typography.h4,
+                    style = MaterialTheme.typography.h1,
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(20.dp))

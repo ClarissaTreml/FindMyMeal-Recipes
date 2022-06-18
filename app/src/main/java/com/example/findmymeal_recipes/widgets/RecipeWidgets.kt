@@ -29,6 +29,7 @@ import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.screens.detail.addToShoppingList
 import com.example.findmymeal_recipes.ui.theme.BackColor
+import com.example.findmymeal_recipes.ui.theme.FrontColor
 import com.example.findmymeal_recipes.ui.theme.Header
 
 var init: String? = "All"
@@ -237,7 +238,7 @@ fun RecipeCards2(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(BackColor),
+                    .background(Header),
             ) {
                 Row(horizontalArrangement = Arrangement.End) {
                     IconButton(
