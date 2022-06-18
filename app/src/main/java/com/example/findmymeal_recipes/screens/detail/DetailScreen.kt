@@ -42,8 +42,7 @@ fun DetailScreen(
                     .height(200.dp)
                     .padding(20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-            )
-            {
+            ) {
                 Text(
                     text = "Recipe Details",
                     style = MaterialTheme.typography.h1,
@@ -57,8 +56,8 @@ fun DetailScreen(
                     shoppingIngredient = viewModelShopping.shoppingIngredients,
                     onAddToShoppingList = { recipe ->
                         viewModelShopping.addShoppingIngredient(recipe)
-                    })
-
+                    }
+                )
             }
         }
     }
@@ -76,22 +75,11 @@ fun Content(
             onAddToShoppingList = onAddToShoppingList
         )
     }
-
-    /*Button(onClick = {
-        addToShoppingList(
-            recipe = recipe,
-            shoppingIngredient = shoppingIngredient,
-            onAddToShoppingList = onAddToShoppingList
-        )
-    }) {
-        Text(text = "Add Ingredients To Shopping List")
-    }*/
 }
 
 fun filterRecipe(recipeId: String?, recipes: List<Recipe>): Recipe {
     return recipes.filter { recipe -> recipe.id == recipeId }[0]
 }
-
 
 fun addToShoppingList(
     recipe: Recipe,
@@ -101,5 +89,4 @@ fun addToShoppingList(
         if (!shoppingIngredient.contains(recipe.ingredients[i]))
             onAddToShoppingList(recipe.ingredients[i])
     }
-
 }

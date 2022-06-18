@@ -19,8 +19,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -28,6 +30,7 @@ import com.example.findmymeal_recipes.R
 import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.screens.detail.addToShoppingList
+import com.example.findmymeal_recipes.ui.theme.DarkRed
 import com.example.findmymeal_recipes.ui.theme.Header
 
 var init: String? = "All"
@@ -199,8 +202,7 @@ fun RecipeCards2(
         onClick = { cardFace = cardFace.next },
         front = {
             Box(
-                modifier = Modifier
-                    .fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center,
             ) {
                 Image(
@@ -217,18 +219,54 @@ fun RecipeCards2(
             }
         },
         back = {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Header),
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .background(Header)
             ) {
-                Row(horizontalArrangement = Arrangement.End) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .width(300.dp)
+                        .padding(20.dp, 0.dp))
+                {
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = recipe.name,
+                        style = MaterialTheme.typography.h4,
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Row() {
+                        Text(
+                            text = recipe.difficulty,
+                            style = MaterialTheme.typography.h3
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+
+                        Text(
+                            text = recipe.category,
+                            style = MaterialTheme.typography.h3
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(5.dp))
+
+                    Text(
+                        text = recipe.description,
+                        style = MaterialTheme.typography.h5
+                    )
+                }
+                Column(modifier = Modifier.padding(0.dp, 15.dp)) {
                     IconButton(
                         onClick = { onItemClick(recipe.id) }) {
                         Image(
                             painterResource(R.drawable.fork),
                             contentScale = ContentScale.Crop,
-                            contentDescription = "Fork"
+                            contentDescription = "Fork",
+                            modifier = Modifier.size(30.dp)
                         )
                     }
                     IconButton(
@@ -248,40 +286,8 @@ fun RecipeCards2(
                         )
                     }
                 }
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        text = recipe.name,
-                        style = MaterialTheme.typography.h6,
-                    )
-                    Spacer(modifier = Modifier.height(2.dp))
-                    Row() {
-                        Text(
-                            text = recipe.difficulty,
-                            style = MaterialTheme.typography.subtitle1
-                        )
-                        Spacer(modifier = Modifier.width(10.dp))
-
-                        Text(
-                            text = recipe.category,
-                            style = MaterialTheme.typography.subtitle1
-                        )
-                        Spacer(modifier = Modifier.width(10.dp))
-
-                        Text(
-                            text = recipe.duration,
-                            style = MaterialTheme.typography.subtitle1
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(2.dp))
-
-                    Text(
-                        text = recipe.description,
-                        style = MaterialTheme.typography.body1
-                    )
-                }
-
             }
+
         },
     )
 }
@@ -298,7 +304,7 @@ fun FavoriteIcon(
             Icon(
                 Icons.Default.Favorite,
                 contentDescription = "FavoriteClicked",
-                tint = Color.Cyan
+                tint = Color.Yellow
             )
         }
     } else {
@@ -306,7 +312,7 @@ fun FavoriteIcon(
             Icon(
                 Icons.Default.FavoriteBorder,
                 contentDescription = "FavoriteNotClicked",
-                tint = Color.Cyan
+                tint = Color.Yellow
             )
         }
     }
@@ -323,6 +329,7 @@ fun DetailRecipeCard(
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
+
         IconButton(
             onClick = { onEditClick(recipe.id) },
         ) {
@@ -337,13 +344,13 @@ fun DetailRecipeCard(
                 rememberScrollState()
             )
         ) {
-
-
             Text(
                 text = recipe.name,
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.h4,
             )
-            Spacer(modifier = Modifier.height(2.dp))
+
+            Spacer(modifier = Modifier.height(20.dp))
+
             Row() {
                 Text(
                     text = recipe.difficulty,
@@ -402,14 +409,16 @@ fun ViewIngredients(
     Column(
         modifier = Modifier
             .height(140.dp)
-            .width(300.dp)
+            .width(250.dp)
     ) {
-        LazyColumn(modifier = Modifier.width(500.dp)) {
+        LazyColumn(verticalArrangement = Arrangement.spacedBy((-20).dp)) {
             items(ingredients) { ingredient ->
-                IconButton(onClick = { onDeleteIngredient(ingredient) }) {
+                IconButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = { onDeleteIngredient(ingredient) }) {
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Icon(Icons.Default.Delete, contentDescription = "Delete Ingredient")
-                        Text(text = ingredient, style = MaterialTheme.typography.h2)
+                        Text(text = ingredient, style = MaterialTheme.typography.subtitle1)
                     }
                 }
             }
@@ -540,8 +549,12 @@ fun EditRecipe(
     onNavigateClick: (String) -> Unit = {},
 ) {
 
-    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.verticalScroll(rememberScrollState())
+    )
+    {
         //var id by remember { mutableStateOf("") }
         var name by remember { mutableStateOf(oldRecipe.name) }
         var images by remember { mutableStateOf(oldRecipe.images) }
@@ -554,20 +567,45 @@ fun EditRecipe(
 
         /*OutlinedTextField(value = id, onValueChange = { id = oldRecipe.id },
             label = { Text(text = "id") })*/
-        OutlinedTextField(value = name, onValueChange = { name = it },
-            label = { Text(text = "name") })
-        OutlinedTextField(value = images, onValueChange = { images = it },
-            label = { Text(text = "images") })
-        OutlinedTextField(value = difficulty, onValueChange = { difficulty = it },
-            label = { Text(text = "difficulty") })
-        OutlinedTextField(value = description, onValueChange = { description = it },
-            label = { Text(text = "description") })
-        OutlinedTextField(value = duration, onValueChange = { duration = it },
-            label = { Text(text = "duration") })
-        OutlinedTextField(value = category, onValueChange = { category = it },
-            label = { Text(text = "category") })
+        OutlinedTextField(
+            modifier = Modifier.width(500.dp),
+            value = name,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { name = it },
+            label = { Text(text = "name", style = MaterialTheme.typography.h2) })
+        OutlinedTextField(
+            modifier = Modifier.width(500.dp),
+            value = images,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { images = it },
+            label = { Text(text = "images", style = MaterialTheme.typography.h2) })
+        OutlinedTextField(
+            modifier = Modifier.width(500.dp),
+            value = difficulty,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { difficulty = it },
+            label = { Text(text = "difficulty", style = MaterialTheme.typography.h2) })
+        OutlinedTextField(
+            modifier = Modifier.width(500.dp),
+            value = description,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { description = it },
+            label = { Text(text = "description", style = MaterialTheme.typography.h2) })
+        OutlinedTextField(
+            modifier = Modifier.width(500.dp),
+            value = duration,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { duration = it },
+            label = { Text(text = "duration", style = MaterialTheme.typography.h2) })
+        OutlinedTextField(
+            modifier = Modifier.width(500.dp),
+            value = category,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { category = it },
+            label = { Text(text = "category", style = MaterialTheme.typography.h2) })
 
         OutlinedTextField(
+            modifier = Modifier.width(500.dp),
             value = ingredient.lowercase(),
             onValueChange = { value ->
                 ingredient = value.lowercase()
@@ -579,49 +617,51 @@ fun EditRecipe(
                     Icon(imageVector = Icons.Default.Add, contentDescription = "addIngredient")
                 }
             },
-
-            label = { Text(text = "Ingredient") },
-            placeholder = { Text(text = "Enter your ingredient") },
+            label = { Text(text = "Ingredient", style = MaterialTheme.typography.h2) },
+            placeholder = {
+                Text(
+                    text = "Enter your ingredient",
+                    style = MaterialTheme.typography.h2
+                )
+            },
         )
 
         //ViewIngredients(oldIngredient)
-        Text(text = "added: ")
-        ViewIngredients(
-            ingredients = ingredients,
-            onDeleteIngredient = onDeleteIngredient
-        )
+        Column(modifier = Modifier.width(500.dp)) {
+            Text(text = "added: ", style = MaterialTheme.typography.h2)
+            ViewIngredients(
+                ingredients = ingredients,
+                onDeleteIngredient = onDeleteIngredient
+            )
+        }
 
-
-        OutlinedTextField(value = steps, onValueChange = { steps = it },
-            label = { Text(text = "steps") })
+        OutlinedTextField(modifier = Modifier.width(500.dp),
+            value = steps,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { steps = it },
+            label = { Text(text = "steps", style = MaterialTheme.typography.h2) })
 
         Button(
             modifier = Modifier.padding(16.dp),
+            colors = ButtonDefaults.buttonColors(Header),
             onClick = {
                 if (name.isNotEmpty() && images.isNotEmpty()
                     && difficulty.isNotEmpty() && description.isNotEmpty() &&
                     duration.isNotEmpty() && category.isNotEmpty() &&
                     steps.isNotEmpty()
                 ) {
-
                     val newRecipe = Recipe(
                         oldRecipe.id, name, images, difficulty,
                         description, duration, category, (oldIngredient + ingredients), steps
                     )
-
                     onDeleteClickRecipe(oldRecipe)
                     onAddClickRecipe(newRecipe)
                     onNavigateClick("")
-
                 }
-
-
             }) {
-
-            Text(text = "Edit")
+            Text(text = "Edit", style = MaterialTheme.typography.h3)
         }
     }
-
 }
 
 @Composable
@@ -680,86 +720,8 @@ fun TopAppBarWidget(navController: NavController) {
             IconButton(modifier = Modifier
                 .padding(0.dp, 12.dp),
                 onClick = { navController.navigate(route = AppScreens.FavoriteScreen.name) }) {
-                Icon(imageVector = Icons.Default.Favorite, contentDescription = "My Favorites")
+                Icon(imageVector = Icons.Default.Favorite, contentDescription = "My Favorites", tint = Color.Yellow)
             }
-
-        }
-
-    }
-}
-
-
-/*
-@Composable
-fun AddRecipeTest(onAddClick: (Recipe) -> Unit = {}) {
-
-    //var ingredient by remember { mutableStateListOf<String>() }
-
-    //OutlinedTextField(value = ingredient, onValueChange = {value -> ingredient = ingredient})
-
-
-    //val ingredient by remember { mutableStateOf(mutableListOf<String>(TextFieldValue)) }
-    //var ingredient by remember { mutableStateListOf<String>() }
-
-    val data = remember {
-        mutableStateListOf<String>()
-    }
-
-    LazyColumn() {
-        items(items = ingredient) { ing,index ->
-            OutlinedTextField(
-                value = ing.,
-                leadingIcon = {
-                    IconButton(onClick = {
-                        val newIngredient = Recipe(
-                            id, name,
-                            images, difficulty, description, duration, category,
-                            ingredient, steps
-                        )
-                        onAddClick(newIngredient)
-                    }) {
-                        Icon(imageVector = Icons.Default.Add, contentDescription = "addIngredient")
-                    }
-                },
-                //trailingIcon = { Icon(imageVector = Icons.Default.Add, contentDescription = null) },
-                onValueChange = {
-
-                                value -> ing[index] = value
-                },
-                label = { Text(text = "Ingredient") },
-                placeholder = { Text(text = "Enter your ingredient") },
-            )
         }
     }
-
-
-
-
-    //var text by remember { mutableStateOf("") }
-    TextField(
-        value = text,
-        onValueChange = {
-            onValueChange(it)
-        },
-        leadingIcon = {
-            VectorIcon(imageVector = Icons.Default.Email)
-        },
-        modifier = inputModifier.border(
-            BorderStroke(
-                width = 4.dp,
-                brush = Brush.horizontalGradient(listOf(Purple200, Purple500))
-            ),
-            shape = RoundedCornerShape(50)
-        ),
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        ),
-        textStyle = inputTextStyle
-    )
-
-
 }
-
-*/

@@ -44,31 +44,40 @@ fun ShoppingListScreen(
                     style = MaterialTheme.typography.h1,
                     textAlign = TextAlign.Center
                 )
-                Spacer(modifier = Modifier.height(20.dp))
 
-                Column() {
-                    Content(
-                        shoppingIngredients = viewModelShopping.shoppingIngredients,
-                        onCheckIngredient = {ingredient -> viewModelShopping.removeShoppingIngredient(ingredient)}
-                        )
-                }
+                Icon(Icons.Default.ShoppingCart, contentDescription = "Shopping Cart", modifier = Modifier.size(40.dp))
+
+                Content(
+                    shoppingIngredients = viewModelShopping.shoppingIngredients,
+                    onCheckIngredient = { ingredient ->
+                        viewModelShopping.removeShoppingIngredient(
+                            ingredient)
+                    })
             }
         }
     }
 }
-
 
 @Composable
 fun Content(
     shoppingIngredients: List<String>,
     onCheckIngredient: (String) -> Unit = {},
 ) {
-
-    LazyColumn() {
-        items(items = shoppingIngredients) { ingredient ->
-            IconButton(onClick = { onCheckIngredient(ingredient) }) {
-                Icon(Icons.Default.Check, contentDescription = "Check Ingredient")
-                Text(text = ingredient)
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(90.dp, 20.dp, 0.dp, 0.dp),
+    ) {
+        LazyColumn(verticalArrangement = Arrangement.spacedBy((-20).dp)) {
+            items(items = shoppingIngredients) { ingredient ->
+                IconButton(modifier = Modifier.fillMaxWidth(),
+                    onClick = { onCheckIngredient(ingredient) }) {
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        Icon(Icons.Default.CheckCircle, contentDescription = "Check Ingredient")
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(text = ingredient)
+                    }
+                }
             }
         }
     }

@@ -29,7 +29,7 @@ val Typography = Typography(
     h1 = TextStyle(
         fontFamily = Dancing,
         fontWeight = FontWeight.ExtraBold,
-        fontSize = 40.sp
+        fontSize = 50.sp
     ),
     h2 = TextStyle(
         fontFamily = Comfortaa_light,
@@ -45,18 +45,23 @@ val Typography = Typography(
         fontFamily = Comfortaa_semiBold,
         fontWeight = FontWeight.ExtraBold,
         fontSize = 16.sp,
+    ),
+    h5 = TextStyle(
+        fontFamily = Comfortaa_light,
+        fontWeight = FontWeight.Bold,
+        fontSize = 13.sp,
     )
 
-    /* Other default text styles to override
-    button = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.W500,
-        fontSize = 14.sp
-    ),
-    caption = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
-    )
-    */
+        /* Other default text styles to override
+        button = TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.W500,
+            fontSize = 14.sp
+        ),
+        caption = TextStyle(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Normal,
+            fontSize = 12.sp
+        )
+        */
 )
