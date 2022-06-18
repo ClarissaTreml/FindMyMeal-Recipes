@@ -26,10 +26,15 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     ),
-    h1 = TextStyle(
+    caption = TextStyle(
         fontFamily = Dancing,
         fontWeight = FontWeight.ExtraBold,
         fontSize = 50.sp
+    ),
+    h1 = TextStyle(
+        fontFamily = Dancing,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 40.sp
     ),
     h2 = TextStyle(
         fontFamily = Comfortaa_light,
@@ -51,7 +56,6 @@ val Typography = Typography(
         fontWeight = FontWeight.Bold,
         fontSize = 13.sp,
     )
-
         /* Other default text styles to override
         button = TextStyle(
             fontFamily = FontFamily.Default,

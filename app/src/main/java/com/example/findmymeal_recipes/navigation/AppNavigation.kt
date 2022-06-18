@@ -58,27 +58,35 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
         }
 
         composable(route = AppScreens.RecipesScreen.name) {
-            RecipesScreen(navController = navController, viewModel = recipeViewModel,
-            viewModelFavorites = favoritesViewModel)
+            RecipesScreen(
+                navController = navController, viewModel = recipeViewModel,
+                viewModelFavorites = favoritesViewModel
+            )
         }
 
         composable(route = AppScreens.ShoppingListScreen.name) {
-            ShoppingListScreen(navController = navController, viewModelShopping = shoppingListViewModel)
+            ShoppingListScreen(
+                navController = navController,
+                viewModelShopping = shoppingListViewModel
+            )
         }
 
         composable(route = AppScreens.ChosenScreen.name) {
-            ChosenScreen(navController = navController, viewModelChosen = ingredientsViewModel,
-            viewModelRecipe = recipeViewModel, viewModelShopping = shoppingListViewModel)
+            ChosenScreen(
+                navController = navController, viewModelChosen = ingredientsViewModel,
+                viewModelRecipe = recipeViewModel
+            )
         }
 
         composable(route = AppScreens.FavoriteScreen.name) {
-            FavoriteScreen(navController = navController, viewModelFavorite = favoritesViewModel,
-                viewModelRecipes = recipeViewModel)
+            FavoriteScreen(
+                navController = navController, viewModelFavorite = favoritesViewModel,
+                viewModelRecipes = recipeViewModel
+            )
         }
 
-
         composable(route = AppScreens.AddRecipesScreen.name) {
-            AddRecipesScreen(navController = navController, viewModel = recipeViewModel, viewModelIngredients = ingredientsViewModel)
+            AddRecipesScreen(navController = navController, viewModel = recipeViewModel)
         }
 
         composable(
@@ -91,7 +99,6 @@ fun AppNavigation(navController: NavHostController = rememberNavController()) {
                 navController = navController,
                 recipeId = backStackEntry.arguments?.getString("recipeId"),
                 viewModel = recipeViewModel,
-                viewModelIngredients = ingredientsViewModel
             )
         }
     }

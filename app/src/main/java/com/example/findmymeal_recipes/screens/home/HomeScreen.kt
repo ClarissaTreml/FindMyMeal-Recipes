@@ -8,15 +8,15 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.findmymeal_recipes.navigation.AppScreens
-import com.example.findmymeal_recipes.ui.theme.*
+import com.example.findmymeal_recipes.ui.theme.BgColor
+import com.example.findmymeal_recipes.ui.theme.Header
 import com.example.findmymeal_recipes.widgets.init
 
 @Preview(showBackground = true)
@@ -39,7 +39,7 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
             Spacer(modifier = Modifier.height(80.dp))
             Text(
                 text = "Find My Meal\nRecipes",
-                style = MaterialTheme.typography.h1,
+                style = MaterialTheme.typography.caption,
                 textAlign = TextAlign.Center,
             )
 
@@ -131,7 +131,7 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                 Card(
                     shape = RoundedCornerShape(corner = CornerSize(10.dp)),
                     elevation = 6.dp
-                ){
+                ) {
                     IconButton(modifier = Modifier
                         .fillMaxWidth()
                         .background(Header),
@@ -146,6 +146,17 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                     }
                 }
             }
+        }
+        Column(
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "©️ Created By Amina Hussein, Clarissa Treml, Jasmine Yilmaz",
+                style = MaterialTheme.typography.h4,
+                fontSize = 10.sp
+            )
+            Spacer(modifier = Modifier.height(15.dp))
         }
     }
 }

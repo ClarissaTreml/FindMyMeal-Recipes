@@ -35,7 +35,7 @@ fun getRecipes(): List<Recipe> {
                 "apricot jam",
                 "whipped cream"
             ),
-            steps = "Ingredients: \n" +
+            steps = "Ingredients: \n\n" +
                     "130 g dark chocolate couverture (min. 55% cocoa)\n" +
                     "1 vanilla pod\n" +
                     "150 g melted butter\n" +
@@ -46,16 +46,16 @@ fun getRecipes(): List<Recipe> {
                     "200g Apricot jam\n" +
                     "200g granulated sugar\n" +
                     "150g dark chocolate coating (min. 55% cocoa)\n" +
-                    "Unsweetened whipped cream for garnish\n" +
-                    "Preparation: \n" +
-                    "1: Preheat the oven to 170 °C. Line the bottom of the springform pan with baking paper, grease and the sides and dust with a little flour. For the chocolate dough, melt the couverture over a hot water bath and then let it cool down a bit.\n" +
-                    "2: Slit the vanilla bean lengthwise and scrape out the pulp. Beat the softened butter with the powdered sugar and vanilla pulp using a hand mixer fitted with a whisk attachment until fluffy.\n" +
-                    "3: Separate the eggs. Add the egg yolks to the butter mixture one at a time. Now gradually add the melted chocolate coating. Beat the egg whites with the caster sugar until stiff, then fold onto the butter and chocolate mixture. Sift the flour over the mixture, then fold in the flour and whisk the egg whites.\n" +
-                    "4: Pour the mixture into the springform pan, smooth the top and bake in the oven (center) for 10 to 15 minutes, leaving the oven door open a finger's width. Then close the oven and bake the cake for about 50 minutes more.\n" +
-                    "5: Remove the cake from the oven and loosen the sides of the springform pan. Carefully transfer the cake to a cake rack lined with baking paper and let it cool for about 20 minutes. Only then remove the baking paper, turn the cake over and let it cool on the cake rack.\n" +
-                    "6: Cut the cake in half horizontally. Heat the jam and stir until smooth. Spread the top of both halves of the cake with the jam and slide them over each other. Spread the sides with jam as well.\n" +
-                    "7: To make the glaze, place the caster sugar in a saucepan with 125 ml of water and boil over high heat for about 5 minutes. Remove the sugar syrup from the heat and allow to cool slightly. Coarsely chop the couverture, gradually add it to the syrup and stir until there is a thick liquid (see tip).\n" +
-                    "8: Pour all the lukewarm glaze over the surface of the cake at once, spreading it quickly with a palette. Allow the glaze to set for a few hours. Serve the Sacher cake garnished with unsweetened whipped cream.\n"
+                    "Unsweetened whipped cream for garnish\n\n" +
+                    "Preparation: \n\n" +
+                    "1: Preheat the oven to 170 °C. Line the bottom of the springform pan with baking paper, grease and the sides and dust with a little flour. For the chocolate dough, melt the couverture over a hot water bath and then let it cool down a bit.\n\n" +
+                    "2: Slit the vanilla bean lengthwise and scrape out the pulp. Beat the softened butter with the powdered sugar and vanilla pulp using a hand mixer fitted with a whisk attachment until fluffy.\n\n" +
+                    "3: Separate the eggs. Add the egg yolks to the butter mixture one at a time. Now gradually add the melted chocolate coating. Beat the egg whites with the caster sugar until stiff, then fold onto the butter and chocolate mixture. Sift the flour over the mixture, then fold in the flour and whisk the egg whites.\n\n" +
+                    "4: Pour the mixture into the springform pan, smooth the top and bake in the oven (center) for 10 to 15 minutes, leaving the oven door open a finger's width. Then close the oven and bake the cake for about 50 minutes more.\n\n" +
+                    "5: Remove the cake from the oven and loosen the sides of the springform pan. Carefully transfer the cake to a cake rack lined with baking paper and let it cool for about 20 minutes. Only then remove the baking paper, turn the cake over and let it cool on the cake rack.\n\n" +
+                    "6: Cut the cake in half horizontally. Heat the jam and stir until smooth. Spread the top of both halves of the cake with the jam and slide them over each other. Spread the sides with jam as well.\n\n" +
+                    "7: To make the glaze, place the caster sugar in a saucepan with 125 ml of water and boil over high heat for about 5 minutes. Remove the sugar syrup from the heat and allow to cool slightly. Coarsely chop the couverture, gradually add it to the syrup and stir until there is a thick liquid (see tip).\n\n" +
+                    "8: Pour all the lukewarm glaze over the surface of the cake at once, spreading it quickly with a palette. Allow the glaze to set for a few hours. Serve the Sacher cake garnished with unsweetened whipped cream."
         ),
         Recipe(
             id = "2",
@@ -77,18 +77,18 @@ fun getRecipes(): List<Recipe> {
                 "egg",
                 "butter"
             ),
-            steps = "Ingredients: \n" +
+            steps = "Ingredients: \n\n" +
                     "1 ½ cups all-purpose flour\n" +
                     "3 ½ teaspoons baking powder\n" +
                     "¼ teaspoon salt, or more to taste\n" +
                     "1 tablespoon white sugar\n" +
                     "1 ¼ cups milk\n" +
                     "1 egg\n" +
-                    "3 tablespoons butter, melted\n" +
-                    "Preparation\n" +
-                    "1: In a large bowl, sift together the flour, baking powder, salt and sugar. " +
+                    "3 tablespoons butter, melted\n\n" +
+                    "Preparation:\n\n" +
+                    "1: In a large bowl, sift together the flour, baking powder, salt and sugar." +
                     "Make a well in the center and pour in the milk, egg and melted butter; " +
-                    "mix until smooth. \n" +
+                    "mix until smooth. \n\n" +
                     "2: Heat a lightly oiled griddle or frying pan over medium-high heat. " +
                     "Pour or scoop the batter onto the griddle, using approximately 1/4 cup for each" +
                     " pancake. Brown on both sides and serve hot."
@@ -114,18 +114,18 @@ fun getRecipes(): List<Recipe> {
                 "vegetable stock",
                 "water"
             ),
-            steps = "Ingredients: \n" +
+            steps = "Ingredients: \n\n" +
                     "1 onion (finely chopped)\n" +
                     "1 large stick of celery\n" +
                     "2 potatoes (chopped)\n" +
                     "2 carrots\n" +
                     "1 vegetable stock cube\n" +
-                    "3 cups broccoli\n" +
-                    "Preparation: \n" +
-                    "1. In a large saucepan with a lid, steam sauté the onion in a small amount of water for 5 minutes on a medium heat. If it begins to stick, just add a bit more water and keep stirring." +
-                    "2. Add the celery, potatoes, carrot, stock cube, and water to the pan and bring to the boil." +
-                    "3. Reduce the heat and cook, covered, for 10 minutes, stirring now and then. The potato should be just tender." +
-                    "4. Add the broccoli and cook for a further 10 minutes, stirring occasionally." +
+                    "3 cups broccoli\n\n" +
+                    "Preparation: \n\n" +
+                    "1. In a large saucepan with a lid, steam sauté the onion in a small amount of water for 5 minutes on a medium heat. If it begins to stick, just add a bit more water and keep stirring.\n\n" +
+                    "2. Add the celery, potatoes, carrot, stock cube, and water to the pan and bring to the boil.\n\n" +
+                    "3. Reduce the heat and cook, covered, for 10 minutes, stirring now and then. The potato should be just tender.\n\n" +
+                    "4. Add the broccoli and cook for a further 10 minutes, stirring occasionally.\n\n" +
                     "5. Serve"
         ),
         Recipe(
@@ -145,18 +145,18 @@ fun getRecipes(): List<Recipe> {
                 "pecans",
                 "pomegranate seeds"
             ),
-            steps = "Ingredients: \n" +
+            steps = "Ingredients: \n\n" +
                     "1 tb coconut oil\n" +
                     "1 large apple\n" +
                     "1/2 tb cinnamon\n" +
                     "1/4 cup pecans\n" +
                     "1 cup oats, 2 cups almond milk\n" +
-                    "1/4 cup pomegranate seeds (optional)\n" +
-                    "Preparation: \n" +
-                    "1. Heat coconut oil in a medium sized saucepan over medium heat.\n" +
-                    "2. Add in the apples (cut into small chunks) and saute for 2-3 minutes. Stir in the cinnamon.\n" +
-                    "3. Add in the pecans, oats, almond milk. Give it a stir and let it cook for 5-7 minutes, stirring constantly during the cooking process.\n" +
-                    "4. Ladle into bowls and top them off with pomegranate seeds (or other fruit) and nuts.\n" +
+                    "1/4 cup pomegranate seeds (optional)\n\n" +
+                    "Preparation: \n\n" +
+                    "1. Heat coconut oil in a medium sized saucepan over medium heat.\n\n" +
+                    "2. Add in the apples (cut into small chunks) and saute for 2-3 minutes. Stir in the cinnamon.\n\n" +
+                    "3. Add in the pecans, oats, almond milk. Give it a stir and let it cook for 5-7 minutes, stirring constantly during the cooking process.\n\n" +
+                    "4. Ladle into bowls and top them off with pomegranate seeds (or other fruit) and nuts.\n\n" +
                     "5. Serve"
         ),
         Recipe(
@@ -178,19 +178,19 @@ fun getRecipes(): List<Recipe> {
                 "spices",
                 "lemon"
             ),
-            steps = "Ingredients: \n" +
+            steps = "Ingredients: \n\n" +
                     "1 tb olive oil\n" +
                     "1 white onion (peeled and diced) \n" +
                     "2 carrots (diced) \n" +
                     "1 litre vegetable stock \n" +
                     "165g red lentils (rinsed) \n" +
                     "spices \n" +
-                    "zest and juice of 1 lemon\n" +
-                    "Preparation: \n" +
-                    "1. Sauté the veggies in olice oil.\n" +
-                    "2. Stir in the vegetable stock, lentils and spices. Then cover and cook for 15 minutes, stirring occasionally, until the lentils are completely tender.\n" +
-                    "3. Blend the soup (optional).\n" +
-                    "4. Seasons with lemon zest and juice. Taste and season the soup with a generous pinch or two of fine sea salt and black pepper, as needed.\n" +
+                    "zest and juice of 1 lemon\n\n" +
+                    "Preparation: \n\n" +
+                    "1. Sauté the veggies in olice oil.\n\n" +
+                    "2. Stir in the vegetable stock, lentils and spices. Then cover and cook for 15 minutes, stirring occasionally, until the lentils are completely tender.\n\n" +
+                    "3. Blend the soup (optional).\n\n" +
+                    "4. Seasons with lemon zest and juice. Taste and season the soup with a generous pinch or two of fine sea salt and black pepper, as needed.\n\n" +
                     "5. Serve"
         ),
         Recipe(
@@ -211,23 +211,22 @@ fun getRecipes(): List<Recipe> {
                 "biscotti",
                 "cocoa"
             ),
-            steps = "Ingredients: \n" +
+            steps = "Ingredients: \n\n" +
                     "4 eggs\n" +
                     "100g powdered sugar\n" +
                     "500g mascarpone\n" +
                     "125ml coffee\n" +
                     "60pcs. biscotti\n" +
-                    "6 tablespoons cocoa for sprinkling\n" +
-                    "Preparation\n" +
-                    "1: To make the tiramisu, start by separating the yolks and egg whites and placing them in separate bowls.\n" +
-                    "2: Beat the egg whites with a hand mixer or food processor until stiff.\n" +
-                    "3: Then beat the yolks in the other bowl with the powdered sugar until fluffy.\n" +
-                    "4: Next, stir the mascarpone into the yolk mixture and then fold in the snow.\n" +
-                    "5: Fill the coffee in a shallow bowl or plate and briefly soak the biscotti in it, one after the other.\n" +
-                    "Then alternate layers of biscotti and mascarpone mixture in a mold - finish with the mascarpone cream.\n" +
-                    "Now place the tiramisu in the refrigerator for at least 2.5 - 3 hours.\n" +
-                    "Before serving, sprinkle with cocoa and garnish with fresh berries if desired.\n" +
-                    "\n"
+                    "6 tablespoons cocoa for sprinkling\n\n" +
+                    "Preparation:\n\n" +
+                    "1: To make the tiramisu, start by separating the yolks and egg whites and placing them in separate bowls.\n\n" +
+                    "2: Beat the egg whites with a hand mixer or food processor until stiff.\n\n" +
+                    "3: Then beat the yolks in the other bowl with the powdered sugar until fluffy.\n\n" +
+                    "4: Next, stir the mascarpone into the yolk mixture and then fold in the snow.\n\n" +
+                    "5: Fill the coffee in a shallow bowl or plate and briefly soak the biscotti in it, one after the other.\n\n" +
+                    "Then alternate layers of biscotti and mascarpone mixture in a mold - finish with the mascarpone cream.\n\n" +
+                    "Now place the tiramisu in the refrigerator for at least 2.5 - 3 hours.\n\n" +
+                    "Before serving, sprinkle with cocoa and garnish with fresh berries if desired."
         ),
         Recipe(
             id = "7",
@@ -245,16 +244,21 @@ fun getRecipes(): List<Recipe> {
                 "olive oil",
                 "green pepper",
             ),
-            steps = "Ingredients: \n" +
-                    "4 medium sized potatoes, 4 eggs, 1 white onion, 1tbs salt, and oliveoil, 1 green pepper (optional)" +
-                    "\n" +
-                    "1. Peel and cut the potatoes in thin slices.\n" +
-                    "2. Cut the onions and the green pepper into cubes.\n" +
-                    "3. Stir eggs in a bowl with a tbs of salt.\n" +
-                    "4. Caramelize the onions in a pan with a little oil.\n" +
-                    "5. Then add the green pepper.\n" +
-                    "6. Then add the eggs.\n" +
-                    "7. Put in with the lid on, in the oven for about 30 minutes at 180°C\n"
+            steps = "Ingredients: \n\n" +
+                    "4 medium sized potatoes\n " +
+                    "4 eggs\n" +
+                    "1 white onion\n" +
+                    "1tbs salt\n" +
+                    "olive oil\n" +
+                    "1 green pepper (optional)\n\n" +
+                    "Preparation:\n\n" +
+                    "1. Peel and cut the potatoes in thin slices.\n\n" +
+                    "2. Cut the onions and the green pepper into cubes.\n\n" +
+                    "3. Stir eggs in a bowl with a tbs of salt.\n\n" +
+                    "4. Caramelize the onions in a pan with a little oil.\n\n" +
+                    "5. Then add the green pepper.\n\n" +
+                    "6. Then add the eggs.\n\n" +
+                    "7. Put in with the lid on, in the oven for about 30 minutes at 180°C."
         ),
 
         Recipe(
@@ -274,16 +278,20 @@ fun getRecipes(): List<Recipe> {
                 "pepper",
                 "garlic",
             ),
-            steps = "Ingredients: \n" +
-                    "2 slices of toast, 2 eggs, salt, pepper, and olive oil" +
-                    "\n" +
-                    "1. Put both slices of toast in the toaster for 4 min\n" +
-                    "2. Peal the avocado and cut it into slices.\n" +
-                    "3. With a bit of olive oil fry two eggs.\n" +
-                    "4. Meanwhile rub the garlic on the toast.\n" +
-                    "5. Place the avocado slices on both toast.\n" +
-                    "6. Place the eggs on the toasts.\n" +
-                    "7. Season it with salt and pepper.\n"
+            steps = "Ingredients: \n\n" +
+                    "2 slices of toast\n" +
+                    "2 eggs\n" +
+                    "salt\n" +
+                    "pepper\n" +
+                    "olive oil\n\n" +
+                    "Preparation:\n\n" +
+                    "1. Put both slices of toast in the toaster for 4 min\n\n" +
+                    "2. Peal the avocado and cut it into slices.\n\n" +
+                    "3. With a bit of olive oil fry two eggs.\n\n" +
+                    "4. Meanwhile rub the garlic on the toast.\n\n" +
+                    "5. Place the avocado slices on both toast.\n\n" +
+                    "6. Place the eggs on the toasts.\n\n" +
+                    "7. Season it with salt and pepper."
         )
     )
 }

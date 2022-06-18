@@ -66,14 +66,13 @@ fun FlipCard(
     ) {
         if (rotation.value <= 90f) {
             Box(
-                Modifier//.width(250.dp).height(300.dp)
+                Modifier
             ) {
                 front()
             }
         } else {
             Box(
                 Modifier
-                    //.width(250.dp).height(300.dp)
                     .graphicsLayer {
                         if (axis == RotationAxis.AxisX) {
                             rotationX = 180f //Ansonsten Spiegelverkehrt

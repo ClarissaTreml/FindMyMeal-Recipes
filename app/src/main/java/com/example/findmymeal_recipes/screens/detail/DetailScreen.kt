@@ -1,7 +1,10 @@
 package com.example.findmymeal_recipes.screens.detail
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,7 +15,6 @@ import androidx.navigation.NavController
 import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
-import com.example.findmymeal_recipes.ui.theme.BgColor2
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.viewmodels.ShoppingListViewModel
 import com.example.findmymeal_recipes.widgets.DetailRecipeCard
@@ -69,12 +71,10 @@ fun Content(
     shoppingIngredient: List<String>,
     onAddToShoppingList: (String) -> Unit = {}
 ) {
-    Column {
-        DetailRecipeCard(
-            recipe = recipe, onEditClick = onEditClick, shoppingIngredient = shoppingIngredient,
-            onAddToShoppingList = onAddToShoppingList
-        )
-    }
+    DetailRecipeCard(
+        recipe = recipe, onEditClick = onEditClick, shoppingIngredient = shoppingIngredient,
+        onAddToShoppingList = onAddToShoppingList
+    )
 }
 
 fun filterRecipe(recipeId: String?, recipes: List<Recipe>): Recipe {

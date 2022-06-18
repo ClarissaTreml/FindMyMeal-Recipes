@@ -19,8 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -30,8 +28,8 @@ import com.example.findmymeal_recipes.R
 import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.screens.detail.addToShoppingList
-import com.example.findmymeal_recipes.ui.theme.DarkRed
 import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.ui.theme.ButtonColor
 
 var init: String? = "All"
 var difficulty: String? = null
@@ -156,7 +154,7 @@ fun RecipeCards(
             onDeleteOfFavorites = onDeleteOfFavorites,
             favoriteIcon = favoriteIcon,
             favorite = favorite
-        ) //, favorite = favorite, favoriteIcon = favoriteIcon)
+        )
     } else if (init == "All") {
         RecipeCards2(
             recipe = recipe,
@@ -166,7 +164,7 @@ fun RecipeCards(
             onDeleteOfFavorites = onDeleteOfFavorites,
             favoriteIcon = favoriteIcon,
             favorite = favorite
-        )//, favorite = favorite, favoriteIcon = favoriteIcon)
+        )
     } else if (recipe.category.lowercase() == (category?.lowercase() ?: category)) {
         RecipeCards2(
             recipe = recipe,
@@ -176,10 +174,9 @@ fun RecipeCards(
             onDeleteOfFavorites = onDeleteOfFavorites,
             favoriteIcon = favoriteIcon,
             favorite = favorite
-        )//, favorite = favorite, favoriteIcon = favoriteIcon)
+        )
     }
 }
-
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -219,16 +216,18 @@ fun RecipeCards2(
             }
         },
         back = {
-            Row(modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .background(Header)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .background(Header)
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .width(300.dp)
-                        .padding(20.dp, 0.dp))
+                        .padding(20.dp, 0.dp)
+                )
                 {
                     Spacer(modifier = Modifier.height(8.dp))
 
@@ -287,7 +286,6 @@ fun RecipeCards2(
                     }
                 }
             }
-
         },
     )
 }
@@ -329,15 +327,18 @@ fun DetailRecipeCard(
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
-
-        IconButton(
-            onClick = { onEditClick(recipe.id) },
-        ) {
-            Icon(
-                imageVector = Icons.Default.Edit,
-                contentDescription = "Edit Button"
-            )
+        Column(modifier = Modifier.padding(160.dp, 0.dp)) {
+            IconButton(
+                onClick = { onEditClick(recipe.id) },
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Edit Button",
+                    modifier = Modifier.size(30.dp)
+                )
+            }
         }
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.verticalScroll(
@@ -347,56 +348,68 @@ fun DetailRecipeCard(
             Text(
                 text = recipe.name,
                 style = MaterialTheme.typography.h4,
+                fontSize = 20.sp
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(15.dp))
 
             Row() {
                 Text(
                     text = recipe.difficulty,
-                    style = MaterialTheme.typography.subtitle1
+                    style = MaterialTheme.typography.h3,
+                    fontSize = 16.sp
                 )
                 Spacer(modifier = Modifier.width(10.dp))
 
                 Text(
                     text = recipe.category,
-                    style = MaterialTheme.typography.subtitle1
-                )
-                Spacer(modifier = Modifier.width(10.dp))
-
-                Text(
-                    text = recipe.duration,
-                    style = MaterialTheme.typography.subtitle1
+                    style = MaterialTheme.typography.h3,
+                    fontSize = 16.sp
                 )
             }
+            Spacer(modifier = Modifier.width(10.dp))
 
-            Spacer(modifier = Modifier.height(2.dp))
+            Text(
+                text = recipe.duration,
+                style = MaterialTheme.typography.h5,
+                fontSize = 16.sp
+            )
+            Spacer(modifier = Modifier.height(10.dp))
 
             Text(
                 text = recipe.description,
-                style = MaterialTheme.typography.body1
+                style = MaterialTheme.typography.h5,
+                fontSize = 16.sp
             )
+
+            Spacer(modifier = Modifier.height(10.dp))
 
             Text(
                 text = recipe.steps,
-                style = MaterialTheme.typography.body1
+                style = MaterialTheme.typography.h5,
+                fontSize = 16.sp
             )
+            Spacer(modifier = Modifier.height(10.dp))
+
             val interactionSource = remember { MutableInteractionSource() }
             val isPressed by interactionSource.collectIsPressedAsState()
             Button(
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Yellow),
                 onClick = {
                     addToShoppingList(
                         recipe = recipe,
                         shoppingIngredient = shoppingIngredient,
                         onAddToShoppingList = onAddToShoppingList
                     )
-
                 },
                 interactionSource = interactionSource
             ) {
-                Text(if (isPressed) "Added to Shopping List" else "Add Ingredients To Shopping List")
+                Text(
+                    if (isPressed) "Added to Shopping List" else "Add Ingredients To Shopping List",
+                    style = MaterialTheme.typography.h3
+                )
             }
+            Spacer(modifier = Modifier.height(15.dp))
         }
     }
 }
@@ -450,36 +463,86 @@ fun AddRecipe(
         var ingredient by remember { mutableStateOf("") }
         var steps by remember { mutableStateOf("") }
 
-        OutlinedTextField(value = id,
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
+            value = id,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { value -> id = value },
-            label = { Text(text = "id", style = MaterialTheme.typography.h2) })
-        OutlinedTextField(value = name,
+            label = { Text(text = "id", style = MaterialTheme.typography.h2, color = ButtonColor) })
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
+            value = name,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { value -> name = value },
-            label = { Text(text = "name", style = MaterialTheme.typography.h2) })
-        OutlinedTextField(value = images,
+            label = {
+                Text(
+                    text = "name",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
+            value = images,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { value -> images = value },
-            label = { Text(text = "images", style = MaterialTheme.typography.h2) })
-        OutlinedTextField(value = difficulty,
+            label = {
+                Text(
+                    text = "images",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
+            value = difficulty,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { value -> difficulty = value },
-            label = { Text(text = "difficulty", style = MaterialTheme.typography.h2) })
-        OutlinedTextField(value = description,
+            label = {
+                Text(
+                    text = "difficulty",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
+            value = description,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { value -> description = value },
-            label = { Text(text = "description", style = MaterialTheme.typography.h2) })
-        OutlinedTextField(value = duration,
+            label = {
+                Text(
+                    text = "description",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
+            value = duration,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { value -> duration = value },
-            label = { Text(text = "duration", style = MaterialTheme.typography.h2) })
-        OutlinedTextField(value = category,
+            label = {
+                Text(
+                    text = "duration",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
+            value = category,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { value -> category = value },
-            label = { Text(text = "category", style = MaterialTheme.typography.h2) })
-
+            label = {
+                Text(
+                    text = "category",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
         OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
             value = ingredient,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { value ->
@@ -493,7 +556,13 @@ fun AddRecipe(
                 }
             },
 
-            label = { Text(text = "Ingredient", style = MaterialTheme.typography.h2) },
+            label = {
+                Text(
+                    text = "Ingredient",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            },
             placeholder = {
                 Text(
                     text = "Enter your ingredient",
@@ -507,11 +576,19 @@ fun AddRecipe(
             onDeleteIngredient = onDeleteIngredient
         )
 
-        OutlinedTextField(value = steps,
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
+            value = steps,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { value -> steps = value },
-            label = { Text(text = "steps", style = MaterialTheme.typography.h2) })
-
+            label = {
+                Text(
+                    text = "steps",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            }
+        )
         Button(
             modifier = Modifier.padding(16.dp),
             colors = ButtonDefaults.buttonColors(Header),
@@ -548,7 +625,6 @@ fun EditRecipe(
     onDeleteIngredient: (String) -> Unit = {},
     onNavigateClick: (String) -> Unit = {},
 ) {
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -568,43 +644,86 @@ fun EditRecipe(
         /*OutlinedTextField(value = id, onValueChange = { id = oldRecipe.id },
             label = { Text(text = "id") })*/
         OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
             modifier = Modifier.width(500.dp),
             value = name,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { name = it },
-            label = { Text(text = "name", style = MaterialTheme.typography.h2) })
+            label = {
+                Text(
+                    text = "name",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
         OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
             modifier = Modifier.width(500.dp),
             value = images,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { images = it },
-            label = { Text(text = "images", style = MaterialTheme.typography.h2) })
+            label = {
+                Text(
+                    text = "images",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
         OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
             modifier = Modifier.width(500.dp),
             value = difficulty,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { difficulty = it },
-            label = { Text(text = "difficulty", style = MaterialTheme.typography.h2) })
+            label = {
+                Text(
+                    text = "difficulty",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
         OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
             modifier = Modifier.width(500.dp),
             value = description,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { description = it },
-            label = { Text(text = "description", style = MaterialTheme.typography.h2) })
+            label = {
+                Text(
+                    text = "description",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
         OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
             modifier = Modifier.width(500.dp),
             value = duration,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { duration = it },
-            label = { Text(text = "duration", style = MaterialTheme.typography.h2) })
+            label = {
+                Text(
+                    text = "duration",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
         OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
             modifier = Modifier.width(500.dp),
             value = category,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { category = it },
-            label = { Text(text = "category", style = MaterialTheme.typography.h2) })
+            label = {
+                Text(
+                    text = "category",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
 
         OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
             modifier = Modifier.width(500.dp),
             value = ingredient.lowercase(),
             onValueChange = { value ->
@@ -617,7 +736,13 @@ fun EditRecipe(
                     Icon(imageVector = Icons.Default.Add, contentDescription = "addIngredient")
                 }
             },
-            label = { Text(text = "Ingredient", style = MaterialTheme.typography.h2) },
+            label = {
+                Text(
+                    text = "Ingredient",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            },
             placeholder = {
                 Text(
                     text = "Enter your ingredient",
@@ -626,7 +751,6 @@ fun EditRecipe(
             },
         )
 
-        //ViewIngredients(oldIngredient)
         Column(modifier = Modifier.width(500.dp)) {
             Text(text = "added: ", style = MaterialTheme.typography.h2)
             ViewIngredients(
@@ -635,11 +759,19 @@ fun EditRecipe(
             )
         }
 
-        OutlinedTextField(modifier = Modifier.width(500.dp),
+        OutlinedTextField(
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = ButtonColor),
+            modifier = Modifier.width(500.dp),
             value = steps,
             textStyle = MaterialTheme.typography.h4,
             onValueChange = { steps = it },
-            label = { Text(text = "steps", style = MaterialTheme.typography.h2) })
+            label = {
+                Text(
+                    text = "steps",
+                    style = MaterialTheme.typography.h2,
+                    color = ButtonColor
+                )
+            })
 
         Button(
             modifier = Modifier.padding(16.dp),
@@ -707,7 +839,6 @@ fun TopAppBarWidget(navController: NavController) {
                 .padding(0.dp, 12.dp)
                 .width(98.dp),
                 onClick = { navController.navigate(route = AppScreens.ShoppingListScreen.name) }) {
-                //Icon(imageVector = Icons.Default.List, contentDescription = "Shopping List" )
                 Text(text = "Shopping List", style = MaterialTheme.typography.h3)
             }
 
@@ -720,7 +851,11 @@ fun TopAppBarWidget(navController: NavController) {
             IconButton(modifier = Modifier
                 .padding(0.dp, 12.dp),
                 onClick = { navController.navigate(route = AppScreens.FavoriteScreen.name) }) {
-                Icon(imageVector = Icons.Default.Favorite, contentDescription = "My Favorites", tint = Color.Yellow)
+                Icon(
+                    imageVector = Icons.Default.Favorite,
+                    contentDescription = "My Favorites",
+                    tint = Color.Yellow
+                )
             }
         }
     }

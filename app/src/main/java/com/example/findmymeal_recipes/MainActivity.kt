@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.findmymeal_recipes.navigation.AppNavigation
-import com.example.findmymeal_recipes.screens.home.HomeScreen
 import com.example.findmymeal_recipes.ui.theme.FindMyMealRecipesTheme
 import com.example.findmymeal_recipes.widgets.init
 

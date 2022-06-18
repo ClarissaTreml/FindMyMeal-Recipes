@@ -56,8 +56,8 @@ fun RecipesScreen(
                     recipe = viewModel.recipes,
                     onItemClick = { recipeId -> navController.navigate(route = AppScreens.DetailScreen.name + "/$recipeId") },
                     onDeleteClickRecipe = { recipe -> viewModel.removeRecipe(recipe) },
-                    onAddRecipeToFavorite = {recipe -> viewModelFavorites.addFavorite(recipe)},
-                    onDeleteOfFavorites = {recipe -> viewModelFavorites.removeFavorite(recipe)},
+                    onAddRecipeToFavorite = { recipe -> viewModelFavorites.addFavorite(recipe) },
+                    onDeleteOfFavorites = { recipe -> viewModelFavorites.removeFavorite(recipe) },
                     favorite = { recipe -> viewModelFavorites.isFavorite(recipe = recipe) },
                     favoriteIcon = true
                 )
@@ -73,12 +73,9 @@ fun Content(
     onDeleteClickRecipe: (Recipe) -> Unit = {},
     onAddRecipeToFavorite: (Recipe) -> Unit = {},
     onDeleteOfFavorites: (Recipe) -> Unit = {},
-    //favorite: Boolean = false,
     favorite: @Composable (Recipe) -> Boolean = { false },
     favoriteIcon: Boolean,
-    ) {
-    //FilterRecipe(recipe = recipe[0])
-
+) {
 
     LazyColumn {
         items(items = recipe) { recipe ->
@@ -86,8 +83,8 @@ fun Content(
                 recipe = recipe,
                 onItemClick = onItemClick,
                 onDeleteClickRecipe = onDeleteClickRecipe,
-                onAddRecipeToFavorite = {onAddRecipeToFavorite(recipe)},
-                onDeleteOfFavorites = {onDeleteOfFavorites(recipe)},
+                onAddRecipeToFavorite = { onAddRecipeToFavorite(recipe) },
+                onDeleteOfFavorites = { onDeleteOfFavorites(recipe) },
                 favorite = favorite(recipe),
                 favoriteIcon = favoriteIcon
             )

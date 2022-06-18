@@ -15,16 +15,15 @@ import androidx.navigation.NavController
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.screens.detail.filterRecipe
 import com.example.findmymeal_recipes.ui.theme.BgColor
-import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.EditRecipe
 import com.example.findmymeal_recipes.widgets.TopAppBarWidget
 
 @Composable
-fun EditRecipesScreen(navController: NavController,
-                      viewModel: RecipeViewModel = viewModel(),
-                      recipeId: String? = "0",
-                      viewModelIngredients: ChoseIngredientsViewModel = viewModel()
+fun EditRecipesScreen(
+    navController: NavController,
+    viewModel: RecipeViewModel = viewModel(),
+    recipeId: String? = "0",
 ) {
 
     val oldRecipe = filterRecipe(recipeId = recipeId, recipes = viewModel.getAllRecipes())
@@ -55,7 +54,6 @@ fun EditRecipesScreen(navController: NavController,
                 )
                 Spacer(modifier = Modifier.height(20.dp))
 
-
                 EditRecipe(
                     onAddClickIngredient = { ingredient -> viewModel.addIngredientsRecipe(ingredient) },
                     ingredients = viewModel.ingredientsRecipe,
@@ -63,8 +61,12 @@ fun EditRecipesScreen(navController: NavController,
                     oldRecipe = oldRecipe,
                     onDeleteClickRecipe = { oldRecipe -> viewModel.removeRecipe(oldRecipe) },
                     oldIngredient = oldIngredient,
-                    onDeleteIngredient = { ingredient -> viewModel.removeIngredientsRecipe(ingredient) },
-                    onNavigateClick = {navController.navigate(route = AppScreens.RecipesScreen.name)}
+                    onDeleteIngredient = { ingredient ->
+                        viewModel.removeIngredientsRecipe(
+                            ingredient
+                        )
+                    },
+                    onNavigateClick = { navController.navigate(route = AppScreens.RecipesScreen.name) }
                 )
                 viewModel.clearIngredientsList()
             }

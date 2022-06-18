@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -19,9 +18,8 @@ import com.example.findmymeal_recipes.models.Ingredients
 import com.example.findmymeal_recipes.models.getIngredients
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
-import com.example.findmymeal_recipes.ui.theme.BgColor2
 import com.example.findmymeal_recipes.ui.theme.Header
-import com.example.findmymeal_recipes.ui.theme.four
+import com.example.findmymeal_recipes.ui.theme.ButtonColor
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 import com.example.findmymeal_recipes.widgets.TopAppBarWidget
 
@@ -57,7 +55,6 @@ fun IngredientsScreen(
                     ingredientList = getIngredients(),
                     onAddClick = { ingredient -> viewModel.addIngredient(ingredient) },
                     onDeleteClick = { ingredient -> viewModel.removeIngredient(ingredient) },
-                    //isClicked = { ingredient -> viewModel.isClicked(ingredient) },
                     isColored = { ingredient -> viewModel.isClicked(ingredient) },
                 )
             }
@@ -77,9 +74,10 @@ fun Content(
         Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(modifier = Modifier
-            .height(450.dp)
-            .width(250.dp),
+        Column(
+            modifier = Modifier
+                .height(450.dp)
+                .width(250.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -93,7 +91,7 @@ fun Content(
                         elevation = 5.dp,
                         backgroundColor = Color.White,
 
-                    ) {
+                        ) {
                         Click(
                             isColored = isColored(ingredient),
                             onAddClick = { ingredient -> onAddClick(ingredient) },
@@ -109,13 +107,13 @@ fun Content(
             onClick = { navController.navigate(route = AppScreens.ChosenScreen.name) },
             colors = ButtonDefaults.buttonColors(Header),
         ) {
-            Text(text = "Find Me",
+            Text(
+                text = "Find Me",
                 style = MaterialTheme.typography.h3
             )
         }
     }
 }
-
 
 @Composable
 fun Click(
@@ -128,18 +126,19 @@ fun Click(
     if (isColored) {
         IconButton(
             onClick = { onDeleteClick(ingredient) },
-            Modifier.background(four)
+            Modifier.background(ButtonColor)
         ) {
-            Text(text = ingredient.ingredient,
-            style = MaterialTheme.typography.h2
-           )
+            Text(
+                text = ingredient.ingredient,
+                style = MaterialTheme.typography.h2
+            )
         }
     } else {
         IconButton(
             onClick = { onAddClick(ingredient) },
-            //Modifier.background(Color.Blue)
         ) {
-            Text(text = ingredient.ingredient,
+            Text(
+                text = ingredient.ingredient,
                 style = MaterialTheme.typography.h2
             )
         }
