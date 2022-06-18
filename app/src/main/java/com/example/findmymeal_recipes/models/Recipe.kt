@@ -4,7 +4,7 @@ data class Recipe(
     val id: String,
     val name: String,
     val images: String,
-    val difficulty: String, //Stars //Numbers(as String)
+    val difficulty: String,
     val description: String,
     val duration: String,
     val category: String,

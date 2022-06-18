@@ -53,7 +53,7 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                     Text(
                         text = "Choose Ingredients",
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h5
+                        style = MaterialTheme.typography.h4
                     )
                 }
                 Spacer(modifier = Modifier.height(10.dp))
@@ -67,7 +67,7 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                     Text(
                         text = "My Recipes",
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h5
+                        style = MaterialTheme.typography.h4
                     )
                 }
 
@@ -80,7 +80,7 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                     Text(
                         text = "Add Recipe",
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h5
+                        style = MaterialTheme.typography.h4
                     )
 
                 }
@@ -94,7 +94,7 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                     Text(
                         text = "My Favorites",
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h5
+                        style = MaterialTheme.typography.h4
                     )
                 }
 
@@ -109,7 +109,7 @@ fun HomeScreen(navController: NavController = rememberNavController()) {
                     Text(
                         text = "Shopping List",
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h5
+                        style = MaterialTheme.typography.h4
                     )
                 }
 

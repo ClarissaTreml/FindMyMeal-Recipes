@@ -19,17 +19,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.findmymeal_recipes.R
-import com.example.findmymeal_recipes.models.Ingredients
 import com.example.findmymeal_recipes.models.Recipe
 import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.screens.detail.addToShoppingList
-import com.example.findmymeal_recipes.ui.theme.BackColor
-import com.example.findmymeal_recipes.ui.theme.FrontColor
 import com.example.findmymeal_recipes.ui.theme.Header
 
 var init: String? = "All"
@@ -40,117 +38,101 @@ var category: String? = null
 fun FilterRecipe(
     onScreenClick: (String) -> Unit = {},
 ) {
-    var expanded by remember { mutableStateOf(false) }
     var difficultyExpanded by remember { mutableStateOf(false) }
     var categoryExpanded by remember { mutableStateOf(false) }
 
-
-    Box() {
+    Column(modifier = Modifier.width(130.dp)) {
         IconButton(modifier = Modifier
-            .width(120.dp),onClick = { expanded = true }) {
-            Row(modifier = Modifier
-                .width(100.dp)) {
-                Text(text = "Filter")
-                Icon(Icons.Default.MoreVert, contentDescription = "Filter")
+            .width(130.dp), onClick = { difficultyExpanded = true }) {
+            Row() {
+                Text(text = "by Difficulty", style = MaterialTheme.typography.h2)
+                Icon(
+                    Icons.Default.MoreVert,
+                    contentDescription = "Filter by Difficulty"
+                )
             }
-
-
         }
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            IconButton(modifier = Modifier
-                .width(120.dp),onClick = { difficultyExpanded = true }) {
-                Row() {
-                    Text(text = "by Difficulty")
-                    Icon(Icons.Default.MoreVert, contentDescription = "Filter by Difficulty")
-                }
-
-
+        DropdownMenu(
+            expanded = difficultyExpanded,
+            onDismissRequest = { difficultyExpanded = false }
+        ) {
+            DropdownMenuItem(onClick = {
+                difficulty = "Beginner"
+                init = null
+                category = null
+                onScreenClick("")
+            }) {
+                Text(text = "Beginner", style = MaterialTheme.typography.h2)
             }
             Divider()
-            DropdownMenu(
-                expanded = difficultyExpanded,
-                onDismissRequest = { difficultyExpanded = false }) {
-
-                DropdownMenuItem(onClick = {
-                    difficulty = "Beginner"
-                    init = null
-                    category = null
-                    onScreenClick("")
-                }) {
-                    Text(text = "Beginner")
-
-                }
-                Divider()
-                DropdownMenuItem(onClick = {
-                    difficulty = "Advanced"
-                    init = null
-                    category = null
-                    onScreenClick("")
-                }) {
-                    Text(text = "Advanced")
-                }
-                Divider()
-                DropdownMenuItem(onClick = {
-                    difficulty = "Pro"
-                    init = null
-                    category = null
-                    onScreenClick("")
-                }) {
-                    Text(text = "Pro")
-                }
+            DropdownMenuItem(onClick = {
+                difficulty = "Advanced"
+                init = null
+                category = null
+                onScreenClick("")
+            }) {
+                Text(text = "Advanced", style = MaterialTheme.typography.h2)
             }
-            IconButton(modifier = Modifier
-                .width(120.dp),onClick = { categoryExpanded = true }) {
-                Row() {
-                    Text(text = "by Category")
-                    Icon(Icons.Default.MoreVert, contentDescription = "Filter by Category")
-                }
-
-
+            Divider()
+            DropdownMenuItem(onClick = {
+                difficulty = "Pro"
+                init = null
+                category = null
+                onScreenClick("")
+            }) {
+                Text(text = "Pro", style = MaterialTheme.typography.h2)
             }
-            DropdownMenu(
-                expanded = categoryExpanded,
-                onDismissRequest = { categoryExpanded = false }) {
-                DropdownMenuItem(onClick = {
-                    category = "Breakfast"
-                    init = null
-                    difficulty = null
-                    onScreenClick("")
-                }) {
-                    Text(text = "Breakfast")
-                }
-                Divider()
-                DropdownMenuItem(onClick = {
-                    category = "Lunch"
-                    init = null
-                    difficulty = null
-                    onScreenClick("")
-                }) {
-                    Text(text = "Lunch")
-                }
-                Divider()
-                DropdownMenuItem(onClick = {
-                    category = "Dinner"
-                    init = null
-                    difficulty = null
-                    onScreenClick("")
-                }) {
-                    Text(text = "Dinner")
-                }
-                Divider()
-                DropdownMenuItem(onClick = {
-                    category = "Dessert"
-                    init = null
-                    difficulty = null
-                    onScreenClick("")
-                }) {
-                    Text(text = "Dessert")
-                }
+        }
+        Divider()
+        IconButton(modifier = Modifier
+            .width(130.dp), onClick = { categoryExpanded = true }) {
+            Row() {
+                Text(text = "by Category", style = MaterialTheme.typography.h2)
+                Icon(Icons.Default.MoreVert, contentDescription = "Filter by Category")
             }
-
+        }
+        DropdownMenu(
+            expanded = categoryExpanded,
+            onDismissRequest = { categoryExpanded = false }) {
+            DropdownMenuItem(onClick = {
+                category = "Breakfast"
+                init = null
+                difficulty = null
+                onScreenClick("")
+            }) {
+                Text(text = "Breakfast", style = MaterialTheme.typography.h2)
+            }
+            Divider()
+            DropdownMenuItem(onClick = {
+                category = "Lunch"
+                init = null
+                difficulty = null
+                onScreenClick("")
+            }) {
+                Text(text = "Lunch", style = MaterialTheme.typography.h2)
+            }
+            Divider()
+            DropdownMenuItem(onClick = {
+                category = "Dinner"
+                init = null
+                difficulty = null
+                onScreenClick("")
+            }) {
+                Text(text = "Dinner", style = MaterialTheme.typography.h2)
+            }
+            Divider()
+            DropdownMenuItem(onClick = {
+                category = "Dessert"
+                init = null
+                difficulty = null
+                onScreenClick("")
+            }) {
+                Text(text = "Dessert", style = MaterialTheme.typography.h2)
+            }
         }
     }
 }
+
 
 @Composable
 fun RecipeCards(
@@ -313,7 +295,11 @@ fun FavoriteIcon(
 ) {
     if (favorite) {
         IconButton(onClick = { onDeleteOfFavorites(recipe) }) {
-            Icon(Icons.Default.Favorite, contentDescription = "FavoriteClicked", tint = Color.Cyan)
+            Icon(
+                Icons.Default.Favorite,
+                contentDescription = "FavoriteClicked",
+                tint = Color.Cyan
+            )
         }
     } else {
         IconButton(onClick = { onAddRecipeToFavorite(recipe) }) {
@@ -332,9 +318,11 @@ fun DetailRecipeCard(
     shoppingIngredient: List<String>,
     onAddToShoppingList: (String) -> Unit = {}
 ) {
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .fillMaxHeight()) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+    ) {
         IconButton(
             onClick = { onEditClick(recipe.id) },
         ) {
@@ -344,11 +332,11 @@ fun DetailRecipeCard(
             )
         }
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.verticalScroll(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.verticalScroll(
                 rememberScrollState()
             )
         ) {
-
 
 
             Text(
@@ -388,20 +376,22 @@ fun DetailRecipeCard(
             )
             val interactionSource = remember { MutableInteractionSource() }
             val isPressed by interactionSource.collectIsPressedAsState()
-            Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),onClick = {
-                addToShoppingList(
-                    recipe = recipe,
-                    shoppingIngredient = shoppingIngredient,
-                    onAddToShoppingList = onAddToShoppingList
-                )
+            Button(
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Cyan),
+                onClick = {
+                    addToShoppingList(
+                        recipe = recipe,
+                        shoppingIngredient = shoppingIngredient,
+                        onAddToShoppingList = onAddToShoppingList
+                    )
 
-            }, interactionSource = interactionSource) {
+                },
+                interactionSource = interactionSource
+            ) {
                 Text(if (isPressed) "Added to Shopping List" else "Add Ingredients To Shopping List")
             }
         }
     }
-
-
 }
 
 @Composable
@@ -409,20 +399,23 @@ fun ViewIngredients(
     ingredients: List<String> = listOf(),
     onDeleteIngredient: (String) -> Unit = {},
 ) {
-    Column(modifier = Modifier
-        .height(120.dp)
-        .width(200.dp)) {
-        LazyColumn {
+    Column(
+        modifier = Modifier
+            .height(140.dp)
+            .width(300.dp)
+    ) {
+        LazyColumn(modifier = Modifier.width(500.dp)) {
             items(ingredients) { ingredient ->
                 IconButton(onClick = { onDeleteIngredient(ingredient) }) {
-                    Icon(Icons.Default.Delete, contentDescription = "Delete Ingredient")
-                    Text(text = ingredient)
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        Icon(Icons.Default.Delete, contentDescription = "Delete Ingredient")
+                        Text(text = ingredient, style = MaterialTheme.typography.h2)
+                    }
                 }
             }
         }
     }
 }
-
 
 @Composable
 fun AddRecipe(
@@ -431,11 +424,13 @@ fun AddRecipe(
     onSaveClickRecipe: (Recipe) -> Unit = {},
     onDeleteIngredient: (String) -> Unit = {},
     onNavigateClick: (String) -> Unit = {},
+) {
 
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
-
-    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-
         var id by remember { mutableStateOf("") }
         var name by remember { mutableStateOf("") }
         var images by remember { mutableStateOf("") }
@@ -446,23 +441,38 @@ fun AddRecipe(
         var ingredient by remember { mutableStateOf("") }
         var steps by remember { mutableStateOf("") }
 
-        OutlinedTextField(value = id, onValueChange = { value -> id = value },
-            label = { Text(text = "id") })
-        OutlinedTextField(value = name, onValueChange = { value -> name = value },
-            label = { Text(text = "name") })
-        OutlinedTextField(value = images, onValueChange = { value -> images = value },
-            label = { Text(text = "images") })
-        OutlinedTextField(value = difficulty, onValueChange = { value -> difficulty = value },
-            label = { Text(text = "difficulty") })
-        OutlinedTextField(value = description, onValueChange = { value -> description = value },
-            label = { Text(text = "description") })
-        OutlinedTextField(value = duration, onValueChange = { value -> duration = value },
-            label = { Text(text = "duration") })
-        OutlinedTextField(value = category, onValueChange = { value -> category = value },
-            label = { Text(text = "category") })
+        OutlinedTextField(value = id,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { value -> id = value },
+            label = { Text(text = "id", style = MaterialTheme.typography.h2) })
+        OutlinedTextField(value = name,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { value -> name = value },
+            label = { Text(text = "name", style = MaterialTheme.typography.h2) })
+        OutlinedTextField(value = images,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { value -> images = value },
+            label = { Text(text = "images", style = MaterialTheme.typography.h2) })
+        OutlinedTextField(value = difficulty,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { value -> difficulty = value },
+            label = { Text(text = "difficulty", style = MaterialTheme.typography.h2) })
+        OutlinedTextField(value = description,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { value -> description = value },
+            label = { Text(text = "description", style = MaterialTheme.typography.h2) })
+        OutlinedTextField(value = duration,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { value -> duration = value },
+            label = { Text(text = "duration", style = MaterialTheme.typography.h2) })
+        OutlinedTextField(value = category,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { value -> category = value },
+            label = { Text(text = "category", style = MaterialTheme.typography.h2) })
 
         OutlinedTextField(
             value = ingredient,
+            textStyle = MaterialTheme.typography.h4,
             onValueChange = { value ->
                 ingredient = value.lowercase()
             },
@@ -474,8 +484,13 @@ fun AddRecipe(
                 }
             },
 
-            label = { Text(text = "Ingredient") },
-            placeholder = { Text(text = "Enter your ingredient") },
+            label = { Text(text = "Ingredient", style = MaterialTheme.typography.h2) },
+            placeholder = {
+                Text(
+                    text = "Enter your ingredient",
+                    style = MaterialTheme.typography.h2
+                )
+            },
         )
 
         ViewIngredients(
@@ -483,11 +498,14 @@ fun AddRecipe(
             onDeleteIngredient = onDeleteIngredient
         )
 
-        OutlinedTextField(value = steps, onValueChange = { value -> steps = value },
-            label = { Text(text = "steps") })
+        OutlinedTextField(value = steps,
+            textStyle = MaterialTheme.typography.h4,
+            onValueChange = { value -> steps = value },
+            label = { Text(text = "steps", style = MaterialTheme.typography.h2) })
 
         Button(
             modifier = Modifier.padding(16.dp),
+            colors = ButtonDefaults.buttonColors(Header),
             onClick = {
                 if (id.isNotEmpty() && name.isNotEmpty() && images.isNotEmpty()
                     && difficulty.isNotEmpty() && description.isNotEmpty() &&
@@ -498,18 +516,16 @@ fun AddRecipe(
                         id, name, images, difficulty,
                         description, duration, category, ingredients, steps
                     )
-
                     onSaveClickRecipe(newRecipe)
                     onNavigateClick("")
-
                 }
-
             }) {
-
-            Text(text = "Add")
+            Text(
+                text = "Add",
+                style = MaterialTheme.typography.h3,
+            )
         }
     }
-
 }
 
 @Composable
@@ -609,8 +625,8 @@ fun EditRecipe(
 }
 
 @Composable
-fun TopAppBarWidget(navController: NavController){
-    TopAppBar( backgroundColor = Header, elevation = 9.dp, modifier = Modifier.height(60.dp)) {
+fun TopAppBarWidget(navController: NavController) {
+    TopAppBar(backgroundColor = Header, elevation = 9.dp, modifier = Modifier.height(60.dp)) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -619,14 +635,18 @@ fun TopAppBarWidget(navController: NavController){
         ) {
             IconButton(modifier = Modifier
                 .padding(0.dp, 12.dp),
-                onClick = {navController.navigate(route = AppScreens.HomeScreen.name)}) {
+                onClick = { navController.navigate(route = AppScreens.HomeScreen.name) }) {
                 Icon(imageVector = Icons.Default.Home, contentDescription = "Home Screen")
             }
             IconButton(modifier = Modifier
                 .padding(0.dp, 12.dp)
                 .width(60.dp),
                 onClick = { navController.navigate(route = AppScreens.RecipesScreen.name) }) {
-                Text(text = "Recipes", modifier = Modifier.fillMaxWidth())
+                Text(
+                    text = "Recipes",
+                    modifier = Modifier.fillMaxWidth(),
+                    style = MaterialTheme.typography.h3
+                )
             }
 
             Spacer(modifier = Modifier.width(10.dp))
@@ -635,7 +655,11 @@ fun TopAppBarWidget(navController: NavController){
                 .padding(0.dp, 12.dp)
                 .width(80.dp),
                 onClick = { navController.navigate(route = AppScreens.IngredientsScreen.name) }) {
-                Text(text = "Ingredients", modifier = Modifier.fillMaxWidth())
+                Text(
+                    text = "Ingredients",
+                    modifier = Modifier.fillMaxWidth(),
+                    style = MaterialTheme.typography.h3
+                )
             }
             Spacer(modifier = Modifier.width(10.dp))
 
@@ -644,18 +668,18 @@ fun TopAppBarWidget(navController: NavController){
                 .width(98.dp),
                 onClick = { navController.navigate(route = AppScreens.ShoppingListScreen.name) }) {
                 //Icon(imageVector = Icons.Default.List, contentDescription = "Shopping List" )
-                Text(text = "Shopping List")
+                Text(text = "Shopping List", style = MaterialTheme.typography.h3)
             }
 
             IconButton(modifier = Modifier
                 .padding(0.dp, 12.dp),
-                onClick = {navController.navigate(route = AppScreens.AddRecipesScreen.name)}) {
+                onClick = { navController.navigate(route = AppScreens.AddRecipesScreen.name) }) {
                 Icon(imageVector = Icons.Default.AddCircle, contentDescription = "Add Recipe")
             }
 
             IconButton(modifier = Modifier
                 .padding(0.dp, 12.dp),
-                onClick = { navController.navigate(route = AppScreens.FavoriteScreen.name)}) {
+                onClick = { navController.navigate(route = AppScreens.FavoriteScreen.name) }) {
                 Icon(imageVector = Icons.Default.Favorite, contentDescription = "My Favorites")
             }
 
@@ -663,7 +687,6 @@ fun TopAppBarWidget(navController: NavController){
 
     }
 }
-
 
 
 /*

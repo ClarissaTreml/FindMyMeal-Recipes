@@ -29,7 +29,6 @@ fun RecipesScreen(
 ) {
     Scaffold(topBar = {
         TopAppBarWidget(navController = navController)
-
     }) {
         Surface(
             color = BgColor, modifier = Modifier
@@ -49,7 +48,6 @@ fun RecipesScreen(
                     style = MaterialTheme.typography.h1,
                     textAlign = TextAlign.Center
                 )
-
                 FilterRecipe(onScreenClick = {
                     navController.navigate(route = AppScreens.RecipesScreen.name)
                 })

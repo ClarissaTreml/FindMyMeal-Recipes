@@ -45,6 +45,7 @@ fun AddRecipesScreen(navController: NavController,
                     style = MaterialTheme.typography.h1,
                     textAlign = TextAlign.Center
                 )
+
                 Spacer(modifier = Modifier.height(20.dp))
 
                 AddRecipe(onAddClickIngredient = { ingredient -> viewModel.addIngredientsRecipe(ingredient) },

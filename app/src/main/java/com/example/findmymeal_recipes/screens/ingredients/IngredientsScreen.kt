@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -20,6 +21,7 @@ import com.example.findmymeal_recipes.navigation.AppScreens
 import com.example.findmymeal_recipes.ui.theme.BgColor
 import com.example.findmymeal_recipes.ui.theme.BgColor2
 import com.example.findmymeal_recipes.ui.theme.Header
+import com.example.findmymeal_recipes.ui.theme.four
 import com.example.findmymeal_recipes.viewmodels.ChoseIngredientsViewModel
 import com.example.findmymeal_recipes.widgets.TopAppBarWidget
 
@@ -41,14 +43,12 @@ fun IngredientsScreen(
                     .fillMaxWidth()
                     .height(200.dp)
                     .padding(20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
             )
             {
                 Text(
                     text = "Choose your Ingredients",
                     style = MaterialTheme.typography.h1,
                     textAlign = TextAlign.Center
-
                 )
                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -77,20 +77,22 @@ fun Content(
         Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Column(modifier = Modifier
             .height(450.dp)
-            .width(250.dp)) {
+            .width(250.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
             LazyColumn() {
                 items(ingredientList) { ingredient ->
                     Card(
                         modifier = Modifier
-                            .width(130.dp)
+                            .width(170.dp)
                             .height(40.dp)
                             .padding(0.dp, 0.dp, 0.dp, 10.dp),
                         elevation = 5.dp,
-                        backgroundColor = Color.White
+                        backgroundColor = Color.White,
+
                     ) {
                         Click(
                             isColored = isColored(ingredient),
@@ -100,19 +102,18 @@ fun Content(
                         )
                     }
                 }
-
             }
-
         }
         Spacer(modifier = Modifier.height(25.dp))
         Button(
             onClick = { navController.navigate(route = AppScreens.ChosenScreen.name) },
             colors = ButtonDefaults.buttonColors(Header),
         ) {
-            Text(text = "Find Me")
+            Text(text = "Find Me",
+                style = MaterialTheme.typography.h3
+            )
         }
     }
-
 }
 
 
@@ -127,16 +128,20 @@ fun Click(
     if (isColored) {
         IconButton(
             onClick = { onDeleteClick(ingredient) },
-            Modifier.background(Color.Green)
+            Modifier.background(four)
         ) {
-            Text(text = ingredient.ingredient)
+            Text(text = ingredient.ingredient,
+            style = MaterialTheme.typography.h2
+           )
         }
     } else {
         IconButton(
             onClick = { onAddClick(ingredient) },
             //Modifier.background(Color.Blue)
         ) {
-            Text(text = ingredient.ingredient)
+            Text(text = ingredient.ingredient,
+                style = MaterialTheme.typography.h2
+            )
         }
     }
     Spacer(modifier = Modifier.width(10.dp))
