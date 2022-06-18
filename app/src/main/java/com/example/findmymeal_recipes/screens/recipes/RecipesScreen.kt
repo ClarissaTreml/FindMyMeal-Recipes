@@ -1,5 +1,6 @@
 package com.example.findmymeal_recipes.screens.recipes
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,6 +20,7 @@ import com.example.findmymeal_recipes.viewmodels.RecipeViewModel
 import com.example.findmymeal_recipes.widgets.FilterRecipe
 import com.example.findmymeal_recipes.widgets.RecipeCards
 import com.example.findmymeal_recipes.widgets.TopAppBarWidget
+import com.example.findmymeal_recipes.widgets.init
 
 @Composable
 fun RecipesScreen(
@@ -43,11 +45,18 @@ fun RecipesScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
             )
             {
-                Text(
-                    text = "Your Recipes",
-                    style = MaterialTheme.typography.h1,
-                    textAlign = TextAlign.Center
-                )
+                IconButton(modifier = Modifier
+                    .fillMaxWidth().height(60.dp),
+                    onClick = {
+                        init = "All"
+                        navController.navigate(route = AppScreens.RecipesScreen.name)
+                    }) {
+                    Text(
+                        text = "My Recipes",
+                        style = MaterialTheme.typography.h1,
+                        textAlign = TextAlign.Center
+                    )
+                }
                 FilterRecipe(onScreenClick = {
                     navController.navigate(route = AppScreens.RecipesScreen.name)
                 })
